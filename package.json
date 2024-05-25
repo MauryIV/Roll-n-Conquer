@@ -1,0 +1,22 @@
+{
+    "name": "Roll-n-Conquer",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js",
+        "seed": "node utils seed.js",
+        "dev": "node nodemon server.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "bcrypt": "^5.1.1",
+        "graphql": "^16.8.1",
+        "mongoose": "^8.4.0"
+    },
+    "devDependencies": {
+        "nodemon": "^3.1.0"
+    }
+}
