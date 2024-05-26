@@ -7,13 +7,6 @@ var validateEmail = function (email) {
 
 const userSchema = new Schema(
   {
-    id: {
-      type: String,
-      required: true,
-      unique: true,
-      // create and id colomn with a defalt value of uuid
-      default: uuid.v1
-    },
     username: {
       type: String,
       required: true,
