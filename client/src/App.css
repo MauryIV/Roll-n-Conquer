@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 80vh;
     background-color: #2F243A;
   }
   
@@ -69,6 +69,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     max-width: 600px;
     margin: 2rem auto;
+    margin-bottom: 250px;
   }
   
   h1 {
@@ -111,7 +112,7 @@
     padding: 0; 
     display: flex; 
     align-items: center; 
-    justify-content: center; 
+    justify-content: center;
   }
 
 .signup-form-container {
@@ -122,9 +123,9 @@
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    max-height: auto;
+    height: auto;
     margin: 2rem auto;
+    margin-bottom: 250px;
   }
   
   .signup-form-container h1 {
@@ -195,11 +196,13 @@
   /* Roll CSS */
   .dice-roller {
     text-align: center;
-    margin-top: 50px;
+    height: 100vh;
+    background-color: #603696;
   }
   
   .dice-type-selector {
     margin-bottom: 20px;
+    margin-top: 250px;
   }
   
   .roll-dice-container {
@@ -287,10 +290,3 @@ header {
   
   
   
-
-  /* COLOR PALETTE */
-  /* 16DF9F GREEN */
-  /* 3F2951 PURPLE */
-  /* 0075A2 LIGHT BLUE */
-  /* AB73AB PINK */
-  /* 1C2D5E DARK BLUE */
