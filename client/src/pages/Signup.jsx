@@ -1,7 +1,5 @@
-// src/SignupForm.js
 import React, { useState } from 'react';
-import '../App.css'
-
+import '../App.css';
 
 // Placeholder validation functions
 // const validateEmail = (email) => {
@@ -52,6 +50,7 @@ function SignupForm() {
   };
 
   return (
+    <div className='signup-form-background'>
     <div className="signup-form-container">
       <h1>Sign Up</h1>
       <form className="form" onSubmit={handleFormSubmit}>
@@ -86,6 +85,7 @@ function SignupForm() {
           <p>{errorMessage}</p>
         </div>
       )}
+    </div>
     </div>
   );
 }

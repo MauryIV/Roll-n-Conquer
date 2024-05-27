@@ -14,7 +14,7 @@ const App = () => {
   return (
     <>
     <Header />
-    <main style={{backgroundColor: 'blue'}}>
+    <main>
         <Outlet />
     </main>
     <Footer />
