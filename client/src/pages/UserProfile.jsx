@@ -4,6 +4,7 @@ import '../App.css'
 
 const UserProfile = ({ user }) => {
   return (
+    <div className='user-profile-background'>
     <div className="user-profile-container">
       <h1>User Profile</h1>
       <div className="stats">
@@ -24,6 +25,7 @@ const UserProfile = ({ user }) => {
           {/* <p>{user.largestSpread}</p> */}
         </div>
       </div>
+    </div>
     </div>
   );
 };
