@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 const diceSchema = new Schema(
   {
-    dicezise: {
+    dicesize: {
       type: Number,
       required: true,
       unique: true,
