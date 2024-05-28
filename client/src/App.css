@@ -6,6 +6,7 @@
     align-items: center;
     height: 80vh;
     background-color: #2F243A;
+    animation: shake 0.5s ease-in-out;
   }
   
   .login-form {
@@ -70,6 +71,7 @@
     max-width: 600px;
     margin: 2rem auto;
     margin-bottom: 250px;
+    animation: fadeIn 1s ease-in-out; /* Add animation here */
   }
   
   h1 {
@@ -126,6 +128,7 @@
     height: auto;
     margin: 2rem auto;
     margin-bottom: 250px;
+    animation: fadeIn 1s ease-in-out; /* Add animation here */
   }
   
   .signup-form-container h1 {
@@ -198,6 +201,7 @@
     text-align: center;
     height: 89vh;
     background-color: #603696;
+    animation: pulse 1s ease-in-out infinite; /* Adjust the duration and timing as needed */
   }
   
   .dice-type-selector {
@@ -369,6 +373,88 @@ header {
     background-color: #0DAB76;
     color: white;
   }
+
+/* src/App.css */
+.main-container {
+    padding: 20px;
+  }
+  
+  .content-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .main-content {
+    flex: 3;
+    padding-right: 20px;
+  }
+  
+  .leaderboard-container {
+    flex: 1;
+    max-width: 300px; /* Adjust this value as needed */
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10px;
+  }
   
   
+  
+  
+
+/* src/components/Leaderboard.css */
+.leaderboard {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  th, td {
+    padding: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f4f4f4;
+  }
+  
+
+
+
+
+  
+  
+  /* Define the keyframes for the fade-in animation */
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px); /* Slight upward movement */
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0); /* Reset the movement */
+    }
+  }
+
+  @keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-3px); }
+    100% { transform: translateX(0); }
+  }
+
+
+  /* Define the keyframes for the pulse animation */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
   
