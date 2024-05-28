@@ -1,44 +1,60 @@
 import React, { useState } from 'react';
-import '../App.css'
+import '../App.css';
 
 const DiceRoller = () => {
   const [diceType, setDiceType] = useState(6);
   const [rolling, setRolling] = useState(false);
-  const [result, setResult] = useState(null);
-  const [rollingAnimation, setAnimate] = useState("")
+  const [rollingAnimation, setAnimate] = useState("");
+  const [numFlash, setNumFlash] = useState("‽");
 
   const rollDice = () => {
     if (rolling) return;
-    const rolledNumber = Math.floor(Math.random() * diceType) + 1;
     setRolling(true);
-    setResult(null);
-    setAnimate("roll-animation")
+    setAnimate("roll-animation");
+    
+    let interval = setInterval(() => {
+      setNumFlash(Math.floor(Math.random() * diceType) + 1);
+    }, 72);
 
     setTimeout(() => {
+      clearInterval(interval);
       setRolling(false);
-      setResult(rolledNumber);
-      setAnimate("")
+      setAnimate("");
     }, 6000);
   };
+  
+  const diceNums = {
+    4: { position: 'absolute', top: `${43.5 + (rolling ? 4 : 0)}%`, left: '48.75%', transform: 'translate(-50%, -50%) rotate(25deg)', zIndex: '1', color: 'white', padding: '10px' },
+    6: { position: 'absolute', top: `${46 + (rolling ? 5 : 0)}%`, left: '49%', transform: 'translate(-50%, -50%)', zIndex: '1', color: 'white' },
+    8: { position: 'absolute', top: `${45.5 + (rolling ? 5 : 0)}%`, left: '50%', transform: 'translate(-50%, -50%)', zIndex: '1', color: 'white' },
+    10: { position: 'absolute', top: `${44.5 + (rolling ? 4 : 0)}%`, left: '50.25%', transform: 'translate(-50%, -50%)', zIndex: '1', color: 'white' },
+    12: { position: 'absolute', top: `${45.75 + (rolling ? 5 : 0)}%`, left: '50.25%', transform: 'translate(-50%, -50%)', zIndex: '1', color: 'white' },
+    20: { position: 'absolute', top: `${45.75 + (rolling ? 5 : 0)}%`, left: '50%', transform: 'translate(-50%, -50%)', zIndex: '1', color: 'white' },
+    100: { position: 'absolute', top: `${45.5 + (rolling ? 5 : 0)}%`, left: '50%', transform: 'translate(-50%, -50%)', zIndex: '1', color: 'white' },    
+  }
 
   return (
     <div className="dice-roller">
       <h1>Dice Roller</h1>
       <div className="dice-type-selector">
         <label>Select Dice Type: </label>
-        <select value={diceType} onChange={(e) => setDiceType(Number(e.target.value))}>
+        <select value={diceType} disabled={rolling} onChange={(e) => {
+            setDiceType(Number(e.target.value));
+            setNumFlash("‽");
+        }}>
+          <option value={4}>D4</option>
           <option value={6}>D6</option>
+          <option value={8}>D8</option>
+          <option value={10}>D10</option>
+          <option value={12}>D12</option>
           <option value={20}>D20</option>
           <option value={100}>D100</option>
         </select>
       </div>
       <div className={`roll-dice-container ${rollingAnimation}`}>
         <img src={`../src/assets/svgs/sharpAlt2/d${diceType} sharp alt 2.svg`} alt={`D${diceType}`} className={`dice`} />
-        {rolling ? (
-          <div className="rolling"></div>
-        ) : (
-          <div className="result">{result}</div>
-        )}
+        <div style={diceNums[diceType]}>{numFlash}</div>
+        {diceType === 4 && <div style={{ position: 'absolute', top: `${43.75 + (rolling ? 4 : 0)}%`, left: '51.75%', transform: 'translate(-50%, -50%) rotate(-30deg)', zIndex: '1', color: 'white' }}>{numFlash}</div>}
       </div>
       <button onClick={rollDice} disabled={rolling}>Roll Dice</button>
     </div>
