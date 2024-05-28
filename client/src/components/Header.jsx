@@ -55,7 +55,7 @@ function Navigation() {
 function Header() {
   return (
     <header>
-      <h2 className='text-center'>Roll N Konquer</h2>
+      <h1 className='text-center'>Roll N Konquer</h1>
       <Navigation />
     </header>
   );
