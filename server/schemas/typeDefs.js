@@ -3,14 +3,17 @@ const typeDefs = `
         _id: ID!
         username: String!
         password: String!
+        // do we need first and last name?
         firstname: String!
         lastname: String!
         email: String!
         wins: Int
         losses: Int
         ties: Int
+        // will streak be win only or win /losses
         streak: String
         difference: Int
+        // where do we create friendslist sub from?
         friendslist: [freinds]
     }
     type Dice {
@@ -23,7 +26,7 @@ const typeDefs = `
         user: User
     }
     type Query {
-        
+        me(userid: ID!): User
     }
     type Mutation {
         login(email: String!, password: String!): Auth
