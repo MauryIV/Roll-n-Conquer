@@ -24,13 +24,13 @@ const DiceRoller = () => {
   };
   
   const diceNums = {
-    4: { position: 'absolute', top: `${43.5 + (rolling ? 4 : 0)}%`, left: '48.75%', transform: 'translate(-50%, -50%) rotate(25deg)', zIndex: '1', color: 'white', padding: '10px' },
-    6: { position: 'absolute', top: `${46 + (rolling ? 5 : 0)}%`, left: '49%', transform: 'translate(-50%, -50%)', zIndex: '1', color: 'white' },
-    8: { position: 'absolute', top: `${45.5 + (rolling ? 5 : 0)}%`, left: '50%', transform: 'translate(-50%, -50%)', zIndex: '1', color: 'white' },
-    10: { position: 'absolute', top: `${44.5 + (rolling ? 4 : 0)}%`, left: '50.25%', transform: 'translate(-50%, -50%)', zIndex: '1', color: 'white' },
-    12: { position: 'absolute', top: `${45.75 + (rolling ? 5 : 0)}%`, left: '50.25%', transform: 'translate(-50%, -50%)', zIndex: '1', color: 'white' },
-    20: { position: 'absolute', top: `${45.75 + (rolling ? 5 : 0)}%`, left: '50%', transform: 'translate(-50%, -50%)', zIndex: '1', color: 'white' },
-    100: { position: 'absolute', top: `${45.5 + (rolling ? 5 : 0)}%`, left: '50%', transform: 'translate(-50%, -50%)', zIndex: '1', color: 'white' },    
+    4: { position: 'absolute', top: `${60.5 + (rolling ? -14 : 0)}%`, left: `${37.75 + (rolling ? 11 : 0)}%`, transform: 'translate(-50%, -50%) rotate(25deg)', zIndex: '1', color: 'white', padding: '10px' },
+    6: { position: 'absolute', top: `${63 + (rolling ? -12.5 : 0)}%`, left: `${38 + (rolling ? 11.5 : 0)}%`, transform: 'translate(-50%, -50%)', zIndex: '1', color: 'white' },
+    8: { position: 'absolute', top: `${62.75 + (rolling ? -13 : 0)}%`, left: `${38.5 + (rolling ? 11.5 : 0)}%`, transform: 'translate(-50%, -50%)', zIndex: '1', color: 'white' },
+    10: { position: 'absolute', top: `${61.5 + (rolling ? -13.5 : 0)}%`, left: `${38.55 + (rolling ? 11.5 : 0)}%`, transform: 'translate(-50%, -50%)', zIndex: '1', color: 'white' },
+    12: { position: 'absolute', top: `${63 + (rolling ? -12.25 : 0)}%`, left: `${38.65 + (rolling ? 11.5 : 0)}%`, transform: 'translate(-50%, -50%)', zIndex: '1', color: 'white' },
+    20: { position: 'absolute', top: `${63 + (rolling ? -12.25 : 0)}%`, left: `${38.5 + (rolling ? 11.5 : 0)}%`, transform: 'translate(-50%, -50%)', zIndex: '1', color: 'white' },
+    100: { position: 'absolute', top: `${62 + (rolling ? -12.5 : 0)}%`, left: `${38.5 + (rolling ? 11.5 : 0)}%`, transform: 'translate(-50%, -50%)', zIndex: '1', color: 'white' },       
   }
 
   return (
@@ -54,7 +54,7 @@ const DiceRoller = () => {
       <div className={`roll-dice-container ${rollingAnimation}`}>
         <img src={`../src/assets/svgs/sharpAlt2/d${diceType} sharp alt 2.svg`} alt={`D${diceType}`} className={`dice`} />
         <div style={diceNums[diceType]}>{numFlash}</div>
-        {diceType === 4 && <div style={{ position: 'absolute', top: `${43.75 + (rolling ? 4 : 0)}%`, left: '51.75%', transform: 'translate(-50%, -50%) rotate(-30deg)', zIndex: '1', color: 'white' }}>{numFlash}</div>}
+        {diceType === 4 && <div style={{ position: 'absolute', top: `${60.75 + (rolling ? -14 : 0)}%`, left: `${39.5 + (rolling ? 12.25 : 0)}%`, transform: 'translate(-50%, -50%) rotate(-30deg)', zIndex: '1', color: 'white' }}>{numFlash}</div>}
       </div>
       <button onClick={rollDice} disabled={rolling}>Roll Dice</button>
     </div>
