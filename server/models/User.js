@@ -12,8 +12,6 @@ const userSchema = new Schema(
       required: true,
       unique: true
     },
-    firstname: { type: String, required: true },
-    lastname: { type: String, required: true },
     email: {
       type: String,
       required: true,
@@ -25,10 +23,10 @@ const userSchema = new Schema(
     wins: { type: Number, default: 0 },
     losses: { type: Number, default: 0 },
     ties: { type: Number, default: 0 },
-    streak: { type: String, default: 'win' },
+    streak: { type: String },
     difference: { type: Number, default: 0 },
     // friendslist needs investigation
-    friendslist: [{ type: Schema.Types.ObjectId, ref: 'User' }]
+    friendslist: [{ type: Schema.Types.ObjectId, ref: 'Friends' }]
   },
   {
     toJSON: { virtuals: true },
