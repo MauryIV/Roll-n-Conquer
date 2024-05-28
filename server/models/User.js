@@ -25,6 +25,7 @@ const userSchema = new Schema(
     wins: { type: Number, default: 0 },
     losses: { type: Number, default: 0 },
     ties: { type: Number, default: 0 },
+    streak: { type: String, default: 'win' },
     difference: { type: Number, default: 0 },
     // friendslist needs investigation
     friendslist: [{ type: Schema.Types.ObjectId, ref: 'User' }]
