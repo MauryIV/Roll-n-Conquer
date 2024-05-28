@@ -31,7 +31,7 @@ const DiceRoller = () => {
         </select>
       </div>
       <div className="roll-dice-container">
-        <img src={`dice${diceType}.png`} alt={`D${diceType}`} className="dice" />
+        <img src={`../assets/images/dice-${diceType}.png`} alt={`D${diceType}`} className="dice" />
         {rolling ? (
           <div className="rolling">Rolling...</div>
         ) : (
