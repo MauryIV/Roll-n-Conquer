@@ -9,7 +9,7 @@ import UserProfile from './pages/UserProfile';
 import Roll from './pages/Roll';
 import SignupForm from './pages/Signup';
 import Error from './pages/Error';
-import Leaderboard from './components/Leaderboard';
+
 
 const router = createBrowserRouter([
     {
