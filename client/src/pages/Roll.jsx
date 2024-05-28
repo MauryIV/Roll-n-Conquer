@@ -5,18 +5,20 @@ const DiceRoller = () => {
   const [diceType, setDiceType] = useState(6);
   const [rolling, setRolling] = useState(false);
   const [result, setResult] = useState(null);
+  const [rollingAnimation, setAnimate] = useState("")
 
   const rollDice = () => {
     if (rolling) return;
-
     const rolledNumber = Math.floor(Math.random() * diceType) + 1;
     setRolling(true);
     setResult(null);
+    setAnimate("roll-animation")
 
     setTimeout(() => {
       setRolling(false);
       setResult(rolledNumber);
-    }, 2000);
+      setAnimate("")
+    }, 6000);
   };
 
   return (
@@ -30,10 +32,10 @@ const DiceRoller = () => {
           <option value={100}>D100</option>
         </select>
       </div>
-      <div className="roll-dice-container">
-        <img src={`../assets/images/dice-${diceType}.png`} alt={`D${diceType}`} className="dice" />
+      <div className={`roll-dice-container ${rollingAnimation}`}>
+        <img src={`../src/assets/svgs/sharpAlt2/d${diceType} sharp alt 2.svg`} alt={`D${diceType}`} className={`dice`} />
         {rolling ? (
-          <div className="rolling">Rolling...</div>
+          <div className="rolling"></div>
         ) : (
           <div className="result">{result}</div>
         )}
