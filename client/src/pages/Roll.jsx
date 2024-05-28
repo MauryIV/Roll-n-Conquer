@@ -18,7 +18,7 @@ const DiceRoller = () => {
       setRolling(false);
       setResult(rolledNumber);
       setAnimate("")
-    }, 10000);
+    }, 6000);
   };
 
   return (
