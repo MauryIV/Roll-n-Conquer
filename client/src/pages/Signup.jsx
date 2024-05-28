@@ -52,7 +52,7 @@ function SignupForm() {
   return (
     <div className='signup-form-background'>
     <div className="signup-form-container">
-      <h1>Sign Up</h1>
+      <h1>Randoms Welcomed!</h1>
       <form className="form" onSubmit={handleFormSubmit}>
         <input
           value={email}

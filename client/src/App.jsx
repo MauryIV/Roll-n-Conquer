@@ -18,9 +18,9 @@ const App = () => {
             <Outlet />
           </div>
           {location.pathname !== '/' && (
-            <div className="leaderboard-container">
+            <div className="card">
               <Leaderboard />
-            </div>
+             </div>
           )}
         </div>
       </main>
