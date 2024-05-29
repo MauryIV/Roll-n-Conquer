@@ -1,81 +1,79 @@
 /* DICE ANIMATION */
 .roll-animation {
-  animation: dice-roll1 6s ease-in-out;
+  animation: dice-roll 6s ease-in-out;
 }
 
-@keyframes dice-roll1 {
+@keyframes dice-roll {
   0% {
     transform: translateX(0);
   }
-  1% {
-    transform: translate(-60%, -20%) rotate(290deg);
-  }
-  2% {
-    transform: translate(-25%, -60%) rotate(-245deg);
-  }
-  3% {
-    transform: translate(45%, 80%) rotate(210deg);
-  }
-  4% {
-    transform: translate(60%, -60%) rotate(-190deg);
-  }
-  5% {
-    transform: translate(22%, 80%) rotate(170deg);
-  }
-  6% {
-    transform: translate(-10%, -60%) rotate(-160deg);
-  }
   7% {
-    transform: translate(-45%, 80%) rotate(30deg);
+    transform: translate(-37%, -83%) rotate(180deg);
   }
-  8% {
-    transform: translate(-60%, 60%) rotate(-95deg);
+  13% {
+    transform: translate(62%, 22%) rotate(-360deg);
   }
-  9% {
-    transform: translate(-40%, -60%) rotate(110deg);
-  }
-  12% {
-    transform: translate(-25%, 78%) rotate(15deg);
-  }
-  17% {
-    transform: translate(30%, -60%) rotate(-65deg);
+  21% {
+    transform: translate(-44%, -55%) rotate(540deg);
   }
   20% {
-    transform: translate(60%, 0%) rotate(-50deg);
+    transform: translate(25%, 75%) rotate(-720deg);
   }
   25% {
-    transform: translate(45%, -60%) rotate(220deg);
+    transform: translate(-89%, -17%) rotate(900deg);
   }
-  32% {
-    transform: translate(10%, 78%) rotate(-180deg);
+  30% {
+    transform: translate(78%, -34%) rotate(-1080deg);
+  }
+  35% {
+    transform: translate(-13%, 41%) rotate(1260deg);
   }
   40% {
-    transform: translate(-10%, -60%) rotate(94deg);
+    transform: translate(50%, -67%) rotate(-1440deg);
+  }
+  45% {
+    transform: translate(-61%, 93%) rotate(1620deg);
   }
   50% {
-    transform: translate(-25%, 78%) rotate(-900deg);
+    transform: translate(19%, -79%) rotate(-1800deg);
+  }
+  55% {
+    transform: translate(-82%, 13%) rotate(1980deg);
+  }
+  60% {
+    transform: translate(37%, 54%) rotate(-2160deg);
+  }
+  65% {
+    transform: translate(-70%, -44%) rotate(2340deg);
   }
   70% {
-    transform: translate(-60%, 30%) rotate(720deg);
+    transform: translate(93%, -1%) rotate(-2520deg);
+  }
+  75% {
+    transform: translate(-25%, 33%) rotate(2700deg);
+  }
+  80% {
+    transform: translate(54%, -67%) rotate(-2880deg);
   }
   85% {
-    transform: translate(-20%, -60%) rotate(-540deg);
+    transform: translate(-81%, 89%) rotate(3060deg);
+  }
+  90% {
+    transform: translate(10%, -77%) rotate(-3240deg);
+  }
+  95% {
+    transform: translate(-47%, 56%) rotate(3420deg);
   }
   100% {
-    transform: translate(0%, 0%) rotate(360deg);
+    transform: translate(0%, 0%) rotate(-3600deg);
   }
 }
 
 .dice {
   position: relative;
 
-  width: auto; /* Adjust size according to your dice images */
+  width: auto;
   height: 150px;
-}
-
-.result {
-  font-size: 2rem;
-  margin-top: 10px;
 }
 
 .rolling {

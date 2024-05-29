@@ -1,9 +1,9 @@
 /* DICE ANIMATION */
 .roll-animation {
-  animation: dice-roll1 6s ease-in-out;
+  animation: dice-roll 6s ease-in-out;
 }
 
-@keyframes dice-roll1 {
+@keyframes dice-roll {
   0% {
     transform: translateX(0);
   }
@@ -69,13 +69,8 @@
 .dice {
   position: relative;
 
-  width: 150px; /* Adjust size according to your dice images */
+  width: auto;
   height: 150px;
-}
-
-.result {
-  font-size: 2rem;
-  margin-top: 10px;
 }
 
 .rolling {

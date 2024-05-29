@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import '../../App.css';
-import { Roll1, Roll2 } from './style';
+import { Roll1, Roll2, Roll3 } from './style';
 
-const themes = [Roll1, Roll2];
+const themes = [Roll1, Roll2, Roll3];
 
 const DiceRoller = () => {
   const [diceType, setDiceType] = useState(6);
