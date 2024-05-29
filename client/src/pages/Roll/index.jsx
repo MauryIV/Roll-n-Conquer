@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import '../../App.css';
-import { Roll1, Roll2, Roll3 } from './style';
+import React, { useState, useEffect } from "react";
+import "../../App.css";
+import { roll1, roll2, roll3, roll4 } from "./style";
 
-const themes = [Roll1, Roll2, Roll3];
+const themes = [roll1, roll2, roll3, roll4];
 
 const DiceRoller = () => {
   const [diceType, setDiceType] = useState(6);
@@ -12,7 +12,7 @@ const DiceRoller = () => {
 
   const loadRandomTheme = () => {
     const randomTheme = themes[Math.floor(Math.random() * themes.length)];
-    const styleElement = document.createElement('style');
+    const styleElement = document.createElement("style");
     styleElement.textContent = randomTheme;
     document.head.appendChild(styleElement);
   };
@@ -25,7 +25,7 @@ const DiceRoller = () => {
     if (rolling) return;
     setRolling(true);
     setAnimate("roll-animation");
-    
+
     let interval = setInterval(() => {
       setNumFlash(Math.floor(Math.random() * diceType) + 1);
     }, 72);
@@ -36,26 +36,60 @@ const DiceRoller = () => {
       setAnimate("");
     }, 6000);
   };
-  
+
   const diceNums = {
-    4: { position: 'absolute', top: `${60.5 + (rolling ? -14 : 0)}%`, left: `${37.75 + (rolling ? 11 : 0)}%`, transform: 'translate(-50%, -50%) rotate(25deg)', zIndex: '1', color: 'white', padding: '10px' },
-    6: { position: 'absolute', top: `${63 + (rolling ? -12.5 : 0)}%`, left: `${38 + (rolling ? 11.5 : 0)}%`, transform: 'translate(-50%, -50%)', zIndex: '1', color: 'white' },
-    8: { position: 'absolute', top: `${62.75 + (rolling ? -13 : 0)}%`, left: `${38.5 + (rolling ? 11.5 : 0)}%`, transform: 'translate(-50%, -50%)', zIndex: '1', color: 'white' },
-    10: { position: 'absolute', top: `${61.5 + (rolling ? -13.5 : 0)}%`, left: `${38.55 + (rolling ? 11.5 : 0)}%`, transform: 'translate(-50%, -50%)', zIndex: '1', color: 'white' },
-    12: { position: 'absolute', top: `${63 + (rolling ? -12.25 : 0)}%`, left: `${38.65 + (rolling ? 11.5 : 0)}%`, transform: 'translate(-50%, -50%)', zIndex: '1', color: 'white' },
-    20: { position: 'absolute', top: `${63 + (rolling ? -12.25 : 0)}%`, left: `${38.5 + (rolling ? 11.5 : 0)}%`, transform: 'translate(-50%, -50%)', zIndex: '1', color: 'white' },
-    100: { position: 'absolute', top: `${62 + (rolling ? -12.5 : 0)}%`, left: `${38.5 + (rolling ? 11.5 : 0)}%`, transform: 'translate(-50%, -50%)', zIndex: '1', color: 'white' },       
-  }
+    4: {
+      paddingBottom: "40px",
+      paddingRight: "13px",
+      paddingLeft: "5px",
+      transform: "rotate(28deg)",
+      zIndex: "100",
+      color: "white",
+    },
+    6: {
+      paddingTop: "12px",
+      paddingRight: "15px",
+      zIndex: "100",
+      color: "white",
+    },
+    8: {
+      zIndex: "100",
+      color: "white",
+    },
+    10: {
+      paddingBottom: "22px",
+      paddingLeft: "3px",
+      zIndex: "100",
+      color: "white",
+    },
+    12: {
+      paddingLeft: "3px",
+      zIndex: "100",
+      color: "white",
+    },
+    20: {
+      zIndex: "100",
+      color: "white",
+    },
+    100: {
+      zIndex: "100",
+      color: "white",
+    },
+  };
 
   return (
     <div className="dice-roller">
       <h1>Dice Roller</h1>
       <div className="dice-type-selector">
         <label>Select Dice Type: </label>
-        <select value={diceType} disabled={rolling} onChange={(e) => {
+        <select
+          value={diceType}
+          disabled={rolling}
+          onChange={(e) => {
             setDiceType(Number(e.target.value));
             setNumFlash("‽");
-        }}>
+          }}
+        >
           <option value={4}>D4</option>
           <option value={6}>D6</option>
           <option value={8}>D8</option>
@@ -66,11 +100,30 @@ const DiceRoller = () => {
         </select>
       </div>
       <div className={`roll-dice-container ${rollingAnimation}`}>
-        <img src={`../src/assets/svgs/sharpAlt2/d${diceType} sharp alt 2.svg`} alt={`D${diceType}`} className={`dice`} />
-        <div style={diceNums[diceType]}>{numFlash}</div>
-        {diceType === 4 && <div style={{ position: 'absolute', top: `${60.75 + (rolling ? -14 : 0)}%`, left: `${39.5 + (rolling ? 12.25 : 0)}%`, transform: 'translate(-50%, -50%) rotate(-30deg)', zIndex: '1', color: 'white' }}>{numFlash}</div>}
+        <img
+          src={`../src/assets/svgs/sharpAlt2/d${diceType}.svg`}
+          alt={`D${diceType}`}
+          className={`dice`}
+        />
+        <div className="dice-number" style={diceNums[diceType]}>{numFlash}</div>
+        {diceType === 4 && (
+          <div
+            className="dice-number"
+            style={{
+              paddingBottom: "32px",
+              paddingLeft: "21px",
+              transform: "rotate(-38deg)",
+              zIndex: "100",
+              color: "white",
+            }}
+          >
+            {numFlash}
+          </div>
+        )}
       </div>
-      <button onClick={rollDice} disabled={rolling}>Roll Dice</button>
+      <button onClick={rollDice} disabled={rolling}>
+        Roll Dice
+      </button>
     </div>
   );
 };
