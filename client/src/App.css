@@ -6,16 +6,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80vh;
+  height: 100vh;
   background-color: #2f243a;
   animation: shake 0.5s ease-in-out;
+  
 }
 
 .login-form {
   background: #0dab76;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0px -5px 10px 5px rgb(126, 56, 224, .2), 
+              0px 5px 25px rgb(255, 255, 255, .2); /*Glowing shadow effect for the container*/
+  margin-bottom: 250px;
 }
 
 .form-group {
@@ -123,10 +126,12 @@ h1 {
     background-color: #0dab76;
     padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Glowing shadow effect for the container */
+    box-shadow: inset 0px -5px 10px 5px rgb(126, 56, 224, .15), 
+              0px 5px 25px rgb(255, 255, 255, .2); /*Glowing shadow effect for the container*/
     height: auto;
     margin: 2rem auto;
     margin-bottom: 250px;
+    border-color: black;
     animation: fadeIn 1s ease-in-out;
   }
   
@@ -147,7 +152,7 @@ h1 {
     padding: 0.75rem;
     border: 1px solid #ccc;
     border-radius: 4px;
-    background-color: #48acf0; /* Glowing background color for input fields */
+    background-color: #26c5da; /* Glowing background color for input fields */
     box-shadow: 0 0 10px rgba(13, 171, 118, 0.5); /* Glowing shadow effect for input fields */
   }
   
@@ -199,136 +204,7 @@ h1 {
   width: 100%;
 }
 
-/* Roll CSS */
-.dice-roller {
-  text-align: center;
-  height: 89vh;
-  background-color: #603696;
-  animation: pulse 2s ease-in-out 3 alternate; /* Adjust the duration and timing as needed */
-}
 
-.dice-type-selector {
-  margin-bottom: 20px;
-  margin-top: 15px;
-}
-
-.roll-dice-container {
-  height: 55vh;
-  margin-left: 10%;
-  margin-right: 10%;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* DICE ANIMATION */
-.roll-animation {
-  animation: dice-roll1 6s ease-in-out;
-}
-
-@keyframes dice-roll1 {
-  0% {
-    transform: translateX(0);
-  }
-  .5%{
-    transform: scale(3.0);
-  }
-  1% {
-    transform: translate(-60%, -20%) rotate(290deg);
-  }
-  2% {
-    transform: translate(-25%, -60%) rotate(-245deg);
-  }
-  3% {
-    transform: translate(45%, 80%) rotate(210deg);
-  }
-  4% {
-    transform: translate(60%, -60%) rotate(-190deg);
-  }
-  5% {
-    transform: translate(22%, 80%) rotate(170deg);
-  }
-  6% {
-    transform: translate(-10%, -60%) rotate(-160deg);
-  }
-  7% {
-    transform: translate(-45%, 80%) rotate(30deg);
-  }
-  8% {
-    transform: translate(-60%, 60%) rotate(-95deg);
-  }
-  9% {
-    transform: translate(-40%, -60%) rotate(110deg);
-  }
-  12% {
-    transform: translate(-25%, 78%) rotate(15deg);
-  }
-  17% {
-    transform: translate(30%, -60%) rotate(-65deg);
-  }
-  20% {
-    transform: translate(60%, 0%) rotate(-50deg);
-  }
-  25% {
-    transform: translate(45%, -60%) rotate(220deg);
-  }
-  32% {
-    transform: translate(10%, 78%) rotate(-180deg);
-  }
-  40% {
-    transform: translate(-10%, -60%) rotate(94deg);
-  }
-  50% {
-    transform: translate(-25%, 78%) rotate(-900deg);
-  }
-  70% {
-    transform: translate(-60%, 30%) rotate(720deg);
-  }
-  85% {
-    transform: translate(-20%, -60%) rotate(-540deg);
-  }
-  100% {
-    transform: translate(0%, 0%) rotate(360deg);
-  }
-}
-
-.dice {
-  position: relative;
-
-  width: 150px; /* Adjust size according to your dice images */
-  height: 150px;
-}
-
-.result {
-  font-size: 2rem;
-  margin-top: 10px;
-}
-
-.rolling {
-  font-size: 2rem;
-  margin-top: 10px;
-  color: blue;
-}
-
-button {
-  font-size: 1rem;
-  background-color: #007bff;
-  padding: 10px;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-button:active {
-  transform: scale(0.9);
-}
 
 /* Header and Navigation CSS */
 header {
@@ -350,7 +226,9 @@ header h1 {
     color: #0dab76;
     letter-spacing: 100px;
     font-family: "Vast Shadow", serif;
-    text-shadow: 0 0 10px #0dab76, 0 0 10px #0dab76, 0 0 20px #0dab76, 0 0 15px #0dab76, 0 0 5px #0dab76, 0 0 25px #0dab76, 0 0 25px #0dab76;
+    text-shadow: 0 2px 1px #0dab76, 
+                 0 3px 2px #007bff, 
+                 0 5px 3px #0dab76;
   }
   
 
@@ -371,11 +249,16 @@ nav {
 }
 
 .nav-link {
-  color: #0dab76;
+  color: rgb(131, 82, 194, .15);
   padding: 0.5rem 1rem;
   border-radius: 4px;
   transition: background-color 0.3s, color 0.3s;
-  text-shadow: 0 0 5px #007bff, 0 0 2px #007bff, 0 0 1px #007bff, 0 0 2px #007bff, 0 0 3px #007bff, 0 0 5px #007bff, 0 0 5px #007bff;
+  text-shadow: 
+               0 1px .5px #0dab76,
+               0 1.5px 1px #007bff; 
+               /* 0 2px 2px #0dab76; */
+  font-family: "Vast Shadow", serif;
+  letter-spacing: 2px;
 
 }
 
@@ -386,13 +269,17 @@ nav {
 
 .nav-link.active {
   background-color: #0dab76;
-  color: white;
+  text-decoration-line: overline underline;
+  text-decoration-style: double;
+  text-decoration-thickness: 1px;
+  text-decoration-color: #0dab76;
 }
 
 /* src/App.css */
 .main-container {
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
   /* padding: 20px; */
 }
 
@@ -413,7 +300,7 @@ nav {
   border: 1px solid #ddd;
   max-height: 100vh;
   /* padding: 10px; */
-  margin-left: 1px; /* Space between main content and leaderboard */
+  margin-left: 1px; 
 }
 
 /* src/components/Leaderboard.css */
@@ -424,6 +311,7 @@ nav {
   background-color: #f9f9f9;
   /* width: 50%; */
   margin-left: 100px;
+  
 }
 
 .leaderboard h2 {

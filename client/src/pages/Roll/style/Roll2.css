@@ -1,0 +1,140 @@
+/* Roll CSS */
+.dice-roller {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  background-color: #603696;
+  /* animation: pulse 2s ease-in-out 3 alternate; Adjust the duration and timing as needed */
+}
+
+.dice-type-selector {
+  margin-bottom: 20px;
+  margin-top: 15px;
+}
+
+.roll-dice-container {
+  width: auto;
+  height: auto;
+  margin-top: 20%;
+  margin-bottom: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dice-wrapper {
+  position: relative;
+  width: auto;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dice {
+  width: auto;
+  height: 200px;
+}
+
+.dice-number {
+  position: static;
+  font-size: 2rem;
+  z-index: 2;
+  color: white;
+}
+
+.rolling {
+  font-size: 2rem;
+  margin-top: 10px;
+  color: blue;
+}
+
+button {
+  font-size: 1rem;
+  background-color: green;
+  padding: 10px;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+button:active {
+  transform: scale(0.9);
+}
+
+/* DICE ANIMATION */
+.roll-animation {
+  animation: dice-roll 6s ease-in-out;
+}
+
+@keyframes dice-roll {
+  0% {
+    transform: translateX(0);
+  }
+  7% {
+    transform: translate(-37%, -83%) rotate(180deg);
+  }
+  13% {
+    transform: translate(62%, 22%) rotate(-360deg);
+  }
+  21% {
+    transform: translate(-44%, -55%) rotate(540deg);
+  }
+  20% {
+    transform: translate(25%, 75%) rotate(-720deg);
+  }
+  25% {
+    transform: translate(-89%, -17%) rotate(900deg);
+  }
+  30% {
+    transform: translate(78%, -34%) rotate(-1080deg);
+  }
+  35% {
+    transform: translate(-13%, 41%) rotate(1260deg);
+  }
+  40% {
+    transform: translate(50%, -67%) rotate(-1440deg);
+  }
+  45% {
+    transform: translate(-61%, 93%) rotate(1620deg);
+  }
+  50% {
+    transform: translate(19%, -79%) rotate(-1800deg);
+  }
+  55% {
+    transform: translate(-82%, 13%) rotate(1980deg);
+  }
+  60% {
+    transform: translate(37%, 54%) rotate(-2160deg);
+  }
+  65% {
+    transform: translate(-70%, -44%) rotate(2340deg);
+  }
+  70% {
+    transform: translate(93%, -1%) rotate(-2520deg);
+  }
+  75% {
+    transform: translate(-25%, 33%) rotate(2700deg);
+  }
+  80% {
+    transform: translate(54%, -67%) rotate(-2880deg);
+  }
+  85% {
+    transform: translate(-81%, 89%) rotate(3060deg);
+  }
+  90% {
+    transform: translate(10%, -77%) rotate(-3240deg);
+  }
+  95% {
+    transform: translate(-47%, 56%) rotate(3420deg);
+  }
+  100% {
+    transform: translate(0%, 0%) rotate(-3600deg);
+  }
+}
