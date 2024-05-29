@@ -1,11 +1,25 @@
-import React, { useState } from 'react';
-import '../App.css';
+import React, { useState, useEffect } from 'react';
+import '../../App.css';
+import { Roll1, Roll2 } from './style';
+
+const themes = [Roll1, Roll2];
 
 const DiceRoller = () => {
   const [diceType, setDiceType] = useState(6);
   const [rolling, setRolling] = useState(false);
   const [rollingAnimation, setAnimate] = useState("");
   const [numFlash, setNumFlash] = useState("‽");
+
+  const loadRandomTheme = () => {
+    const randomTheme = themes[Math.floor(Math.random() * themes.length)];
+    const styleElement = document.createElement('style');
+    styleElement.textContent = randomTheme;
+    document.head.appendChild(styleElement);
+  };
+
+  useEffect(() => {
+    loadRandomTheme();
+  }, []);
 
   const rollDice = () => {
     if (rolling) return;
