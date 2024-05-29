@@ -231,6 +231,9 @@ h1 {
   0% {
     transform: translateX(0);
   }
+  .5%{
+    transform: scale(3.0);
+  }
   1% {
     transform: translate(-60%, -20%) rotate(290deg);
   }
