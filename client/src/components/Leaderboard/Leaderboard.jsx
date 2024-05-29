@@ -1,6 +1,7 @@
 // src/Leaderboard.js
 import React, { useState, useEffect } from 'react';
-import '../App.css'
+import '../../App.css';
+import './leaderboard.css'
 
 const Leaderboard = () => {
   const [diceRolls, setDiceRolls] = useState([]);

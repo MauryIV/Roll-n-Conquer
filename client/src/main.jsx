@@ -4,10 +4,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // import '@fortawesome/fontawesome-free/css/all.css'
 import App from './App';
 import Dice from './pages/Landing';
-import Login from './pages/Login';
-import UserProfile from './pages/UserProfile';
+import Login from './pages/Login/Login';
+import UserProfile from './pages/UserProfile/UserProfile';
 import Roll from './pages/Roll';
-import SignupForm from './pages/Signup';
+import SignupForm from './pages/Signup/Signup';
 import Error from './pages/Error';
 
 
