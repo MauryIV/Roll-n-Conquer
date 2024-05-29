@@ -1,5 +1,6 @@
-import Roll1 from './Roll1.css?inline';
-import Roll2 from './Roll2.css?inline';
-import Roll3 from './Roll3.css?inline';
+import roll1 from './roll1.css?inline';
+import roll2 from './roll2.css?inline';
+import roll3 from './roll3.css?inline';
+import roll4 from './roll4.css?inline';
 
-export { Roll1, Roll2, Roll3 };
+export { roll1, roll2, roll3, roll4 };
