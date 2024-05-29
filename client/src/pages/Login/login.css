@@ -1,0 +1,50 @@
+/* LoginForm CSS */
+.login-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #2f243a;
+    animation: shake 0.5s ease-in-out;
+    
+  }
+  
+  .login-form {
+    background: #0dab76;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: inset 0px -5px 10px 5px rgb(126, 56, 224, .2), 
+                0px 5px 25px rgb(255, 255, 255, .2); /*Glowing shadow effect for the container*/
+    margin-bottom: 250px;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid black;
+    border-radius: 4px;
+    background-color: #48acf0;
+  }
+  
+  .login-button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #603696;
+    color: #0dab76;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .login-button:hover {
+    background-color: #48acf0;
+  }
