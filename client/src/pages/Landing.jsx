@@ -39,7 +39,7 @@ const Dice = () => {
       <div key={index} className="dice-wrapper">
         <motion.img
           src={src}
-          className="dice"
+          className="homedice"
           initial={{
             x: isEven ? -100 : window.innerWidth + 100,
             y: isEven ? window.innerHeight + 100 : -100,

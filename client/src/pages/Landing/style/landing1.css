@@ -3,8 +3,8 @@
   text-align: center;
   height: 89vh;
   background-color: #603696;
-  /* animation: pulse 2s ease-in-out 3 alternate; Adjust the duration and timing as needed */
-}
+  
+} */
 
 .dice-type-selector {
   margin-bottom: 20px;
@@ -90,7 +90,7 @@
   }
 }
 
-.dice {
+.homedice {
   position: relative;
   width: 150px;
   height: 150px;
