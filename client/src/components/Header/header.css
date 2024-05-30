@@ -1,68 +1,86 @@
 /* Header and Navigation CSS */
 header {
-    background-color: #282c34;
-    color: #0dab76;
-    padding: 1rem;
-    text-align: center;
-    border-bottom: 2px solid #0dab76;
-    margin: 0;
-    padding: 0;
-    
-  }
-  
+  background-color: #282c34;
+  color: #0dab76;
+  padding: 1rem;
+  text-align: center;
+  border-bottom: 2px solid #0dab76;
+  margin: 0;
+  padding: 0;
+}
+
+header h1 {
+  margin: 0;
+  font-weight: 200;
+  font-style: normal;
+  font-size: xx-large;
+  color: #0dab76;
+  letter-spacing: 100px;
+  font-family: "Vast Shadow", serif;
+  text-shadow: 0 2px 1px #0dab76, 0 3px 2px #007bff, 0 5px 3px #0dab76;
+}
+
+nav {
+  margin-top: 1rem;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-item {
+  margin: 0 1rem;
+}
+
+.nav-link {
+  color: rgb(131, 82, 194, 0.15);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+  text-shadow: 0 1px 0.5px #0dab76, 0 1.5px 1px #007bff;
+  /* 0 2px 2px #0dab76; */
+  font-family: "Vast Shadow", serif;
+  letter-spacing: 2px;
+}
+
+.nav-link:hover {
+  background-color: #0dab76;
+  color: white;
+}
+
+.nav-link.active {
+  background-color: #0dab76;
+  text-decoration-line: overline underline;
+  text-decoration-style: double;
+  text-decoration-thickness: 1px;
+  text-decoration-color: #0dab76;
+}
+
+@media (max-width: 790px) {
   header h1 {
-      margin: 0;
-      font-weight: 200;
-      font-style: normal;
-      font-size: xx-large;
-      color: #0dab76;
-      letter-spacing: 100px;
-      font-family: "Vast Shadow", serif;
-      text-shadow: 0 2px 1px #0dab76, 
-                   0 3px 2px #007bff, 
-                   0 5px 3px #0dab76;
-    }
-    
-  
-  nav {
-    margin-top: 1rem;
+    letter-spacing: 80px;
   }
-  
-  .nav {
-    display: flex;
-    justify-content: center;
-    list-style: none;
-    padding: 0;
-    margin: 0;
+}
+
+@media (max-width: 675px) {
+  header h1 {
+    letter-spacing: 60px;
   }
-  
-  .nav-item {
-    margin: 0 1rem;
+}
+
+@media (max-width: 555px) {
+  header h1 {
+    letter-spacing: 40px;
   }
-  
-  .nav-link {
-    color: rgb(131, 82, 194, .15);
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    transition: background-color 0.3s, color 0.3s;
-    text-shadow: 
-                 0 1px .5px #0dab76,
-                 0 1.5px 1px #007bff; 
-                 /* 0 2px 2px #0dab76; */
-    font-family: "Vast Shadow", serif;
-    letter-spacing: 2px;
-  
+}
+
+@media (max-width: 435px) {
+  header h1 {
+    letter-spacing: 20px;
   }
-  
-  .nav-link:hover {
-    background-color: #0dab76;
-    color: white;
-  }
-  
-  .nav-link.active {
-    background-color: #0dab76;
-    text-decoration-line: overline underline;
-    text-decoration-style: double;
-    text-decoration-thickness: 1px;
-    text-decoration-color: #0dab76;
-  }
+}
+

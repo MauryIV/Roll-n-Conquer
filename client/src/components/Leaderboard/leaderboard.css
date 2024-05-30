@@ -1,31 +1,38 @@
 /* src/components/Leaderboard.css */
 .leaderboard {
-    text-align: center;
-    padding: 10px;
-    border: 1px solid #ddd;
-    background-color: #f9f9f9;
-    width: auto;
-    height: 100%;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  width: auto;
+  height: 100%;
+}
+
+.leaderboard h2 {
+  font-family: "Jacquard 12", system-ui;
+  color: #0dab76;
+  justify-content: center;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th,
+td {
+  height: 100%;
+  border: 1px solid #ddd;
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+@media (max-width: 500px) {
+  .leaderboard {
+    width: 140px;
+    font-size: 0.7em;
   }
-  
-  .leaderboard h2 {
-      font-family: "Jacquard 12", system-ui;
-      color: #0dab76;
-      justify-content: center;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-  }
-  
-  th,
-  td {
-    height: 100%;
-    border: 1px solid #ddd;
-  }
-  
-  th {
-    background-color: #f4f4f4;
-  }
+}

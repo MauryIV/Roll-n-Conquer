@@ -136,3 +136,28 @@ button:active {
     transform: translate(0%, 0%) rotate(360deg);
   }
 }
+
+@media (max-width: 500px) {
+  .dice {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@media (max-width: 500px) {
+  .dice-number {
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 500px) {
+  .dice-type-selector {
+    padding-bottom: 50px;
+  }
+}
+
+@media (max-width: 500px) {
+  .die-btn {
+    margin-top: 50px;
+  }
+}
