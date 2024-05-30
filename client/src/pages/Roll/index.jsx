@@ -121,7 +121,7 @@ const DiceRoller = () => {
           </div>
         )}
       </div>
-      <button onClick={rollDice} disabled={rolling}>
+      <button className="die-btn" onClick={rollDice} disabled={rolling}>
         Roll Dice
       </button>
     </div>
