@@ -1,10 +1,10 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
-import { Outlet } from 'react-router-dom';
-import Leaderboard from './components/Leaderboard/Leaderboard';
-import './App.css';
+import React from "react";
+import { useLocation } from "react-router-dom";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import { Outlet } from "react-router-dom";
+import Leaderboard from "./components/Leaderboard/Leaderboard";
+import "./App.css";
 
 const App = () => {
   const location = useLocation();
@@ -16,12 +16,12 @@ const App = () => {
         <div className="content-container">
           <div className="main-content">
             <Outlet />
+            {location.pathname !== "/" && (
+              <div className="card">
+                <Leaderboard />
+              </div>
+            )}
           </div>
-          {location.pathname !== '/' && (
-            <div className="card">
-              <Leaderboard />
-             </div>
-          )}
         </div>
       </main>
       <Footer />
