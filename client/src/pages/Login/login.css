@@ -3,10 +3,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     background-color: #2f243a;
     animation: shake 0.5s ease-in-out;
-    
+    padding: 10%;
+    height: auto;
+    width: 100%;
   }
   
   .login-form {
