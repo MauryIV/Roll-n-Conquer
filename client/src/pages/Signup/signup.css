@@ -1,12 +1,13 @@
 /* Signup Form CSS */
 .signup-form-background {
     background-color: #48acf0;
-    height: 100vh;
     margin: 0;
-    padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 10%;
+    height: auto;
+    width: 100%;
   }
   
   .signup-form-container {

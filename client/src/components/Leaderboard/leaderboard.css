@@ -4,28 +4,26 @@
     padding: 10px;
     border: 1px solid #ddd;
     background-color: #f9f9f9;
-    /* width: 50%; */
-    margin-left: 100px;
-    
+    width: auto;
+    height: 100%;
   }
   
   .leaderboard h2 {
       font-family: "Jacquard 12", system-ui;
       color: #0dab76;
+      justify-content: center;
   }
   
   table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
-    
   }
   
   th,
   td {
-    padding: 8px;
+    height: 100%;
     border: 1px solid #ddd;
-    
   }
   
   th {
