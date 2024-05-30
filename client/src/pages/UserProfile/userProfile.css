@@ -1,0 +1,55 @@
+/* UserProfile CSS */
+.user-profile-background {
+    background-color: #0dab76;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .user-profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #48acf0;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 2rem auto;
+    margin-bottom: 250px;
+    animation: fadeIn 1s ease-in-out; /* Add animation here */
+  }
+  
+  h1 {
+    margin-bottom: 2rem;
+  }
+  
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+  }
+  
+  .stat-item {
+    background: #2f243a;
+    padding: 1rem;
+    margin: 0.5rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    flex-basis: 45%;
+    color: white;
+  }
+  
+  .stat-item h2 {
+    margin-bottom: 0.5rem;
+  }
+  
+  .stat-item p {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }

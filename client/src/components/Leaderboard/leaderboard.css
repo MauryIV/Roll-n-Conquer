@@ -1,0 +1,33 @@
+/* src/components/Leaderboard.css */
+.leaderboard {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    /* width: 50%; */
+    margin-left: 100px;
+    
+  }
+  
+  .leaderboard h2 {
+      font-family: "Jacquard 12", system-ui;
+      color: #0dab76;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    
+  }
+  
+  th,
+  td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    
+  }
+  
+  th {
+    background-color: #f4f4f4;
+  }
