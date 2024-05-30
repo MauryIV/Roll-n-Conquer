@@ -1,20 +1,25 @@
 const { User, Dice } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
+
 const resolvers = {
   Query: {
     me: async (parent, { userId }) => {
       const userData = await User.findOne({ _id: userId });
-      if (!user) {
+      if (!userData) {
         throw new AuthenticationError("Not logged in");
       }
       return userData;
+    },
+    pickDice: async (parent, { dice }) => {
+      const diceData = await Dice.findAll({dicesize: dice });
+      return diceData;
     }
   },
   // added mutations login, adduser and 
   Mutation: {
     // for login do we use email or username?
-    login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
+    login: async (parent, { username, password }) => {
+      const user = await User.findOne({ username });
       if (!user) {
         throw new AuthenticationError("Incorrect credentials");
       }
@@ -39,7 +44,7 @@ const resolvers = {
       return user;
     },
     // TODO: username or email?
-    recordLost: async (parent, { username, losses }) => {
+    recordLoss: async (parent, { username, losses }) => {
       const user = await User.findOneAndUpdate(
         { username },
         { $inc: { losses } }
@@ -62,10 +67,6 @@ const resolvers = {
       );
       return user;
     },
-    pickDice: async (parent, { dicesize, diceimage }) => {
-      const dice = await Dice.findOne({ dicesize, diceimage });
-      return dice;
-    }
   }
 };
 

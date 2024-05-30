@@ -1,8 +1,7 @@
 [
   {
     "username": "john_doe",
-    "firstname": "John",
-    "lastname": "Doe",
+    "password": "1234",
     "email": "john.doe@example.com",
     "wins": 10,
     "losses": 5,
@@ -12,8 +11,7 @@
   },
   {
     "username": "jane_smith",
-    "firstname": "Jane",
-    "lastname": "Smith",
+    "password": "1234",
     "email": "jane.smith@example.com",
     "wins": 15,
     "losses": 3,
@@ -23,8 +21,7 @@
   },
   {
     "username": "bob_jones",
-    "firstname": "Bob",
-    "lastname": "Jones",
+    "password": "1234",
     "email": "bob.jones@example.com",
     "wins": 8,
     "losses": 10,
@@ -34,8 +31,7 @@
   },
   {
     "username": "alice_wonder",
-    "firstname": "Alice",
-    "lastname": "Wonder",
+    "password": "1234",
     "email": "alice.wonder@example.com",
     "wins": 5,
     "losses": 15,
@@ -45,8 +41,7 @@
   },
   {
     "username": "charlie_brown",
-    "firstname": "Charlie",
-    "lastname": "Brown",
+    "password": "1234",
     "email": "charlie.brown@example.com",
     "wins": 20,
     "losses": 5,
@@ -56,8 +51,7 @@
   },
   {
     "username": "daisy_johnson",
-    "firstname": "Daisy",
-    "lastname": "Johnson",
+    "password": "1234",
     "email": "daisy.johnson@example.com",
     "wins": 7,
     "losses": 7,
@@ -67,8 +61,7 @@
   },
   {
     "username": "edward_snow",
-    "firstname": "Edward",
-    "lastname": "Snow",
+    "password": "1234",
     "email": "edward.snow@example.com",
     "wins": 12,
     "losses": 6,
@@ -78,8 +71,7 @@
   },
   {
     "username": "frank_castle",
-    "firstname": "Frank",
-    "lastname": "Castle",
+    "password": "1234",
     "email": "frank.castle@example.com",
     "wins": 14,
     "losses": 3,
@@ -89,8 +81,7 @@
   },
   {
     "username": "grace_hopper",
-    "firstname": "Grace",
-    "lastname": "Hopper",
+    "password": "1234",
     "email": "grace.hopper@example.com",
     "wins": 9,
     "losses": 10,
@@ -100,8 +91,7 @@
   },
   {
     "username": "henry_ford",
-    "firstname": "Henry",
-    "lastname": "Ford",
+    "password": "1234",
     "email": "henry.ford@example.com",
     "wins": 11,
     "losses": 4,
@@ -111,8 +101,7 @@
   },
   {
     "username": "isabel_allen",
-    "firstname": "Isabel",
-    "lastname": "Allen",
+    "password": "1234",
     "email": "isabel.allen@example.com",
     "wins": 18,
     "losses": 2,
@@ -122,8 +111,7 @@
   },
   {
     "username": "jack_sparrow",
-    "firstname": "Jack",
-    "lastname": "Sparrow",
+    "password": "1234",
     "email": "jack.sparrow@example.com",
     "wins": 3,
     "losses": 12,

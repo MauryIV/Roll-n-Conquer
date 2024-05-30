@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+
 const diceSchema = new Schema(
   {
     dicesize: {
@@ -18,4 +19,5 @@ const diceSchema = new Schema(
   }
 );
 const Dice = model('Dice', diceSchema);
+
 module.exports = Dice;
