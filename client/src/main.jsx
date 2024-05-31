@@ -4,10 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // import '@fortawesome/fontawesome-free/css/all.css'
 import App from './App';
 import Dice from './pages/Landing';
-import Login from './pages/Login/Login';
 import UserProfile from './pages/UserProfile/UserProfile';
 import Roll from './pages/Roll';
-import SignupForm from './pages/Signup/Signup';
+import SigninForm from './pages/SigninForm';
 import Error from './pages/Error';
 
 
@@ -22,10 +21,6 @@ const router = createBrowserRouter([
                 element: <Dice />,
             },
             {
-                path: '/login',
-                element: <Login />,
-            },
-            {
                 path: '/profile',
                 element: <UserProfile />,
             },
@@ -34,8 +29,8 @@ const router = createBrowserRouter([
                 element: <Roll />,
             },
             {
-                path: '/signup',
-                element: <SignupForm />,
+                path: '/signin',
+                element: <SigninForm />,
             },
         ],
     },
