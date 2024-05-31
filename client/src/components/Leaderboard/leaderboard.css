@@ -1,18 +1,19 @@
-/* src/components/Leaderboard.css */
 .leaderboard {
   text-align: center;
   padding: 10px;
   border: 1px solid #ddd;
-  background-color: #f9f9f9;
-  width: auto;
-  height: 100%;
+  
 }
+
+
+
 
 .header {
   background-color: #0dab76;
   padding: 20px;
-  border: 2px solid black; /* Add border styling */
+  border: 2px solid black; 
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6); /* Add 3D border effect */
+  text-transform: uppercase;
 }
 
 

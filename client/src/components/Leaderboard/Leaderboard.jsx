@@ -52,7 +52,6 @@ const Leaderboard = () => {
     <div className="leaderboard">
       <div className="header">
         <h1 className="glowing-header">🎲 Leaderboard 🎲</h1>
-        <h1 className="glowing-header">🎲 🎲</h1>
       </div>
       <table>
         <thead>
