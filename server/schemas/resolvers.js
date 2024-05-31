@@ -15,6 +15,7 @@ const resolvers = {
       return diceData;
     }
   },
+  
   // added mutations login, adduser and 
   Mutation: {
     // for login do we use email or username?
@@ -30,11 +31,13 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    addUser: async (parent, args) => {
-      const user = await User.create(args);
+
+    addUser: async (parent, { username, email, password }) => {
+      const user = await User.create({ username, email, password });
       const token = signToken(user);
       return { token, user };
     },
+
     // TODO: username or email?
     recordWin: async (parent, { username, wins }) => {
       const user = await User.findOneAndUpdate(
@@ -43,6 +46,7 @@ const resolvers = {
       );
       return user;
     },
+
     // TODO: username or email?
     recordLoss: async (parent, { username, losses }) => {
       const user = await User.findOneAndUpdate(
@@ -51,6 +55,7 @@ const resolvers = {
       );
       return user;
     },
+
     // TODO: username or email?
     recordTie: async (parent, { username, ties }) => {
       const user = await User.findOneAndUpdate(
@@ -59,6 +64,7 @@ const resolvers = {
       );
       return user;
     },
+
     // TODO: username or email?
     recordGap: async (parent, { username, difference }) => {
       const user = await User.findOneAndUpdate(
