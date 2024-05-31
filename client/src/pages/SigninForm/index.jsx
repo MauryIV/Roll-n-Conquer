@@ -5,8 +5,6 @@ import "../../App.css";
 
 import { loginSignup1 } from "./style";
 
-const signinStatus = true
-
 const themes = [loginSignup1];
 
 const loadRandomTheme = () => {
@@ -21,6 +19,7 @@ const SigninForm = () => {
     loadRandomTheme();
   }, []);
 
+  const [signupForm, setSignupForm] = useState(false);
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -83,49 +82,13 @@ const SigninForm = () => {
     setPassword("");
   };
 
+  const toggleSignupForm = () => {
+    setSignupForm(!signupForm); // Toggle the signupForm state
+  };
+
   return (
     <div className="auth-container">
-      {signinStatus ? (
-        <div className="login-form-container">
-          <h1>Welcome back Rando!</h1>
-          <form onSubmit={handleLoginForm} className="login-form">
-            <div className="form-group">
-              <label htmlFor="username">Username:</label>
-              <input
-                type="text"
-                id="username"
-                onChange={handleInputChange}
-                onBlur={handleInputBlur}
-                placeholder="Username"
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="password">Password:</label>
-              <input
-                type="password"
-                id="password"
-                value={password}
-                onChange={handleInputChange}
-                onBlur={handleInputBlur}
-                placeholder="Password"
-                required
-              />
-            </div>
-            <button type="submit" className="login-button">
-              Login
-            </button>
-            <button type="submit" className="signup-button">
-              Signup?
-            </button>
-          </form>
-          {errorMessage && (
-            <div className="error-text">
-              <p>{errorMessage}</p>
-            </div>
-          )}
-        </div>
-      ) : (
+      {signupForm ? (
         <div className="signup-form-background">
           <div className="signup-form-container">
             <h1>Randoms Welcomed!</h1>
@@ -157,7 +120,10 @@ const SigninForm = () => {
                 placeholder="Password"
                 required
               />
-              <button type="submit">Signup!</button>
+              <button type="submit" className="signup-button">Signup!</button>
+              <button type="submit" className="login-button" onClick={toggleSignupForm}>
+              Signup Already?
+            </button>
             </form>
             {errorMessage && (
               <div className="error-text">
@@ -165,6 +131,46 @@ const SigninForm = () => {
               </div>
             )}
           </div>
+        </div>
+      ) : (
+        <div className="login-form-container">
+          <h1>Welcome back Rando!</h1>
+          <form onSubmit={handleLoginForm} className="login-form">
+            <div className="form-group">
+              <label htmlFor="username">Username:</label>
+              <input
+                type="text"
+                id="username"
+                onChange={handleInputChange}
+                onBlur={handleInputBlur}
+                placeholder="Username"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">Password:</label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={handleInputChange}
+                onBlur={handleInputBlur}
+                placeholder="Password"
+                required
+              />
+            </div>
+            <button type="submit" className="login-button">
+              Login
+            </button>
+            <button type="submit" className="signup-button" onClick={toggleSignupForm}>
+              Signup?
+            </button>
+          </form>
+          {errorMessage && (
+            <div className="error-text">
+              <p>{errorMessage}</p>
+            </div>
+          )}
         </div>
       )}
     </div>
