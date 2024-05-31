@@ -1,5 +1,7 @@
 /* UserProfile CSS */
 .user-profile-background {
+  /* I added position relative to make the friends button stick in the top right because it has position absolute */
+  position: relative;
   background: linear-gradient(45deg, #0dab76, #603696, #80d6ff);
   background-size: 400% 400%;
   animation: gradientFlow 5s ease-in-out infinite;
@@ -25,6 +27,7 @@
 }
   
 .user-profile-container {
+  
   display: grid;
   grid-template-columns: 1fr 2fr 1fr; /* Custom column template */
   grid-template-rows: 2fr 1fr 3fr; /* Custom row template */

@@ -29,7 +29,7 @@ const FriendListModal = () => {
     return (
         <>
             {/* Button trigger modal */}
-            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" className="btn btn-primary modal-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Friends
             </button>
 
@@ -37,7 +37,7 @@ const FriendListModal = () => {
             <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" ref={myModalRef}>
                 <div className="modal-dialog modal-dialog-centered">
                     <div className="modal-content">
-                        <div className="modal-header">
+                        <div className="modal-header" id="modal-custom">
                             <h1 className="modal-title fs-5" id="exampleModalLabel">Your Friends</h1>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
