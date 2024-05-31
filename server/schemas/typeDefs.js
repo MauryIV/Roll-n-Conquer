@@ -9,7 +9,7 @@ const typeDefs = `
         ties: Int
         streak: Int
         difference: Int
-        friendslist: [String]
+        friendslist: [friendsList]
     }
     type Dice {
         _id: ID!
@@ -21,14 +21,17 @@ const typeDefs = `
         user: User
     }
 
+    type friendsList {
+        username: String
+    }
+
     type Query {
         me(userId: ID!): User
         pickDice(dicesize: Int, diceimage: String): Dice
     }
     type Mutation {
         login(username: String!, password: String!): Auth
-        addUser(username: String!, firstname: String!, 
-            lastname: String!, email: String!, password: String!): Auth
+        addUser(username: String!, email: String!, password: String!): Auth
         recordWin(username: String!, wins: Int): User
         recordLoss(username: String!, losses: Int): User
         recordTie(username: String!, ties: Int): User
