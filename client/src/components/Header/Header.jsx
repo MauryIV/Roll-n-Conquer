@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-// import { signinStatus } from '../../utils/auth';
+import Auth from '../../utils/auth';
 import '../../App.css';
 import './header.css';
 
@@ -34,12 +34,22 @@ function Navigation() {
           </Link>
         </li>
         <li className='nav-item'>
+          {Auth.loggedIn() ? (
+            <Link 
+              to='/' 
+              className='nav-link' 
+              onClick={Auth.logout}
+            >
+              Signout
+            </Link>
+          ) : (
           <Link 
             to='/signin' 
             className={currentPage === '/signin' ? 'nav-link active' : 'nav-link'}
           >
             Signin
           </Link>
+          )}
         </li>
       </ul>
     </nav>
