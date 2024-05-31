@@ -2,12 +2,17 @@
 import React from 'react';
 import '../../App.css';
 import './userProfile.css';
+import FriendListModal from '../../components/FriendList/FriendList';
 
 const UserProfile = ({ user }) => {
   return (
+    <>
+    
     <div className='user-profile-background'>
+    
     <div className="user-profile-container">
       <h1>User Profile</h1>
+      <FriendListModal />
       <div className="stats">
         <div className="stat-item">
           <h2>W / L</h2>
@@ -28,6 +33,7 @@ const UserProfile = ({ user }) => {
       </div>
     </div>
     </div>
+    </>
   );
 };
 
