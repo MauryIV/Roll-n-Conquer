@@ -9,6 +9,7 @@ const DiceRoller = () => {
   const [rolling, setRolling] = useState(false);
   const [rollingAnimation, setAnimate] = useState("");
   const [numFlash, setNumFlash] = useState("‽");
+  const [finalResult, setFinalResult] = useState(null);
 
   const loadRandomTheme = () => {
     const randomTheme = themes[Math.floor(Math.random() * themes.length)];
@@ -34,8 +35,14 @@ const DiceRoller = () => {
       clearInterval(interval);
       setRolling(false);
       setAnimate("");
+      const finalRoll = Math.floor(Math.random() * diceType) + 1;
+      setNumFlash(finalRoll);
+      // Use this for the Current users roll value to be passed into the challenge roll
+      setFinalResult(finalRoll);
     }, 6000);
   };
+
+  console.log(finalResult);
 
   const diceNums = {
     4: {
