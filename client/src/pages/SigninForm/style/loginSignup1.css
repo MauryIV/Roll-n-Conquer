@@ -1,0 +1,120 @@
+/* Signup Form CSS */
+.signup-form-background {
+  background-color: #48acf0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10%;
+  height: auto;
+  width: 100%;
+}
+
+.signup-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #0dab76;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: inset 0px -5px 10px 5px rgb(126, 56, 224, 0.15),
+    0px 5px 25px rgb(255, 255, 255, 0.2); /*Glowing shadow effect for the container*/
+  height: auto;
+  margin: 2rem auto;
+  margin-bottom: 250px;
+  border-color: black;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.signup-form-container h1 {
+  margin-bottom: 2rem;
+
+  text-shadow: 0 0 5px #603696; /* Glowing shadow effect for the text */
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.form input {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #26c5da; /* Glowing background color for input fields */
+  box-shadow: 0 0 10px rgba(13, 171, 118, 0.5); /* Glowing shadow effect for input fields */
+}
+
+.form button {
+  padding: 0.75rem;
+  background-color: #2f243a;
+  color: #0dab76;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(13, 171, 118, 0.5); /* Glowing shadow effect for the button */
+}
+
+.form button:hover {
+  background-color: #0056b3;
+  box-shadow: 0 0 20px rgba(13, 171, 118, 0.8); /* Increase shadow on hover for stronger glow */
+}
+
+.error-text {
+  color: red;
+  margin-top: 1rem;
+}
+
+/* LoginForm CSS */
+.login-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2f243a;
+  animation: shake 0.5s ease-in-out;
+  padding: 10%;
+  height: auto;
+  width: 100%;
+}
+
+.login-form {
+  background: #0dab76;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: inset 0px -5px 10px 5px rgb(126, 56, 224, 0.2),
+    0px 5px 25px rgb(255, 255, 255, 0.2); /*Glowing shadow effect for the container*/
+  margin-bottom: 250px;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid black;
+  border-radius: 4px;
+  background-color: #48acf0;
+}
+
+.login-button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #603696;
+  color: #0dab76;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  background-color: #48acf0;
+}
