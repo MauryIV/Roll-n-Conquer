@@ -8,10 +8,30 @@
   height: 100%;
 }
 
-.leaderboard h2 {
+.header {
+  background-color: #0dab76;
+  padding: 20px;
+  border: 2px solid black; /* Add border styling */
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6); /* Add 3D border effect */
+}
+
+
+.header h1 {
+  color: white;
   font-family: "Jacquard 12", system-ui;
-  color: #0dab76;
-  justify-content: center;
+  font-size: 36px;
+  margin: 0;
+  animation: glow 1.5s infinite alternate; /* Add a glow effect animation */
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #0dab76, 0 0 20px #0dab76, 0 0 30px #0dab76;
+  }
+  
+  to {
+    text-shadow: 0 0 20px #0dab76, 0 0 30px #0dab76, 0 0 40px #0dab76;
+  }
 }
 
 table {
@@ -20,19 +40,50 @@ table {
   margin-top: 10px;
 }
 
-th,
-td {
+th, td {
   height: 100%;
-  border: 1px solid #ddd;
+  border: 2.5px solid black;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6); 
 }
 
 th {
-  background-color: #f4f4f4;
+  background-color: #ccbebeb2;
 }
 
 @media (max-width: 500px) {
   .leaderboard {
     width: 140px;
     font-size: 0.7em;
+  }
+}
+glowing-header {
+  position: relative;
+  display: inline-block;
+}
+
+.glowing-header::before,
+.glowing-header::after {
+  content: "🎲";
+  position: absolute;
+  animation: rotateDice 5s linear infinite;
+  margin-top: 20px;
+}
+
+.glowing-header::before {
+  left: 15px;
+  top: 5px;
+}
+
+.glowing-header::after {
+  right: -25px;
+  bottom: 5px;
+}
+
+@keyframes rotateDice {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+// import { signinStatus } from '../../utils/auth';
 import '../../App.css';
 import './header.css';
 
@@ -14,14 +15,6 @@ function Navigation() {
             className={currentPage === '/' ? 'nav-link active' : 'nav-link'}
           >
             Home
-          </Link>
-        </li>
-        <li className='nav-item'>
-          <Link 
-            to='/login' 
-            className={currentPage === '/login' ? 'nav-link active' : 'nav-link'}
-          >
-            Login
           </Link>
         </li>
         <li className='nav-item'>
@@ -42,10 +35,10 @@ function Navigation() {
         </li>
         <li className='nav-item'>
           <Link 
-            to='/signup' 
-            className={currentPage === '/signup' ? 'nav-link active' : 'nav-link'}
+            to='/signin' 
+            className={currentPage === '/signin' ? 'nav-link active' : 'nav-link'}
           >
-            Signup
+            Signin
           </Link>
         </li>
       </ul>
