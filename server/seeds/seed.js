@@ -25,10 +25,14 @@ db.once('open', async () => {
       const friendusername = insertedUsers[Math.floor(Math.random() * insertedUsers.length)];
       RandomFriend.push(friendusername);
 
-      console.log("++++++++++++++++");
-      console.log(insertedUsers[0]);
-      console.log(RandomFriend);
-      console.log("++++++++++++++++");
+      // console.log("++++++++++++++++");
+      // console.log(insertedUsers[0]);
+      // console.log(RandomFriend);
+      // console.log("++++++++++++++++");
+      const addFriend = await User.findOneAndUpdate(
+          {_id: insertedUsers._id},
+          {$addToSet: { friendslist: { username: RandomFriend.username }}},
+          { new: true }).populate("friendslist");
     }
 
   // funciton to grab random friends
