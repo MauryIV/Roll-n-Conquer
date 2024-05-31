@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import '../../App.css';
 import './userProfile.css';
+import FriendListModal from '../../components/FriendList/FriendList';
 
 const UserProfile = ({ user }) => {
   useEffect(() => {
@@ -13,10 +14,11 @@ const UserProfile = ({ user }) => {
       stat.style.gridRow = `${row} / span 2`; // Make each item span multiple rows for more spread
     });
   }, []);
-
   return (
     <div className='user-profile-background'>
+      
       <div className="user-profile-container">
+      <FriendListModal />
         <h1>User Profile</h1>
         <div className="stats">
           <div className="stat-item">W / L</div>
@@ -28,5 +30,4 @@ const UserProfile = ({ user }) => {
     </div>
   );
 };
-
 export default UserProfile;

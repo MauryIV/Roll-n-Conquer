@@ -1,0 +1,15 @@
+button {
+    margin: 5px;
+};
+
+/* this is not making my modal custom :(  */
+#modal-custom {
+    background-color: aqua;
+}
+
+.modal-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px;
+}
