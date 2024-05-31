@@ -1,29 +1,36 @@
 /* UserProfile CSS */
 .user-profile-background {
-    background-color: #0dab76;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10%;
-    height: auto;
-    width: 100%;
+  background: linear-gradient(45deg, #0dab76, #603696, #80d6ff);
+  background-size: 400% 400%;
+  animation: gradientFlow 5s ease-in-out infinite;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10%;
+  height: auto;
+  width: 100%;
+}
+
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
   }
-  
-  .user-profile-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #48acf0;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    margin: 2rem auto;
-    margin-bottom: 250px;
-    animation: fadeIn 1s ease-in-out; /* Add animation here */
+  50% {
+    background-position: 100% 50%;
   }
+  100% {
+    background-position: 0% 50%;
+  }
+}
   
+.user-profile-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr; /* Custom column template */
+  grid-template-rows: 2fr 1fr 3fr; /* Custom row template */
+  gap: 20px; /* Adjust gap as needed */
+}
+
   h1 {
     margin-bottom: 2rem;
   }
@@ -36,14 +43,14 @@
   }
   
   .stat-item {
-    background: #2f243a;
-    padding: 1rem;
-    margin: 0.5rem;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    flex-basis: 45%;
-    color: white;
+    background-color: #fff; /* Adjust background color */
+    border: 1px solid #ccc; /* Adjust border style */
+    padding: 20px; /* Adjust padding */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center; /* Center text */
+    font-size: 1.2em; /* Adjust font size */
   }
   
   .stat-item h2 {

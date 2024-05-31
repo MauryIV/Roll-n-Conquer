@@ -35,7 +35,7 @@ const FriendListModal = () => {
 
             {/* Modal */}
             <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" ref={myModalRef}>
-                <div className="modal-dialog">
+                <div className="modal-dialog modal-dialog-centered">
                     <div className="modal-content">
                         <div className="modal-header">
                             <h1 className="modal-title fs-5" id="exampleModalLabel">Your Friends</h1>
@@ -43,18 +43,19 @@ const FriendListModal = () => {
                         </div>
                         <div className="modal-body">
 
-                            <div class="card">
-                                <div class="card-body row">
-                                    <div class="col">
-                                        <h2>UserName</h2>
+                            <div className="card m-1">
+                                <div className="card-body row">
+                                    <div className="col">
+                                        <h4>UserName</h4>
                                     </div>
-                                    <div class="col row">
-                                        <button type="button" className="btn btn-primary col">View Profile</button>
-                                        <button type="button" className="btn btn-danger col">Dice Battle</button>
+                                    <div className="col row">
+                                        <button type="button" className="btn btn-primary col">Profile</button>
+                                        <button type="button" className="btn btn-danger col">Battle</button>
                                     </div>
                                 </div>
                             </div>
-                            
+
+
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
