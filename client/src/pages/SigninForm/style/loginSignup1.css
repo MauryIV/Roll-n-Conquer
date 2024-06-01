@@ -174,3 +174,15 @@
     font-size: 0.8rem;
   }
 }
+
+
+/* General container style */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
