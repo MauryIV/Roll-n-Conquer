@@ -1,13 +1,19 @@
+/* Leaderboard CSS */
 .leaderboard {
   text-align: center;
   padding: 10px;
   border: 1px solid #ddd;
-  
 }
 
+@media (max-width: 500px) {
+  .leaderboard {
+    width: 140px;
+    font-size: 0.7em;
+    padding: 5px;
+  }
+}
 
-
-
+/* Header CSS */
 .header {
   background-color: #0dab76;
   padding: 20px;
@@ -15,7 +21,6 @@
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6); /* Add 3D border effect */
   text-transform: uppercase;
 }
-
 
 .header h1 {
   color: white;
@@ -29,12 +34,12 @@
   from {
     text-shadow: 0 0 10px #0dab76, 0 0 20px #0dab76, 0 0 30px #0dab76;
   }
-  
   to {
     text-shadow: 0 0 20px #0dab76, 0 0 30px #0dab76, 0 0 40px #0dab76;
   }
 }
 
+/* Table CSS */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -51,13 +56,42 @@ th {
   background-color: #ccbebeb2;
 }
 
-@media (max-width: 500px) {
-  .leaderboard {
-    width: 140px;
-    font-size: 0.7em;
+@media (max-width: 768px) {
+  th, td {
+    font-size: 0.9em;
+    padding: 8px;
+  }
+
+  .header h1 {
+    font-size: 28px;
+  }
+
+  .header {
+    padding: 15px;
   }
 }
-glowing-header {
+
+@media (max-width: 500px) {
+  th, td {
+    font-size: 0.8em;
+    padding: 6px;
+  }
+
+  table {
+    margin-top: 5px;
+  }
+
+  .header h1 {
+    font-size: 24px;
+  }
+
+  .header {
+    padding: 10px;
+  }
+}
+
+/* Glowing Header with Dice Animation */
+.glowing-header {
   position: relative;
   display: inline-block;
 }
@@ -86,5 +120,41 @@ glowing-header {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .glowing-header::before,
+  .glowing-header::after {
+    font-size: 18px;
+    margin-top: 15px;
+  }
+
+  .glowing-header::before {
+    left: 10px;
+    top: 3px;
+  }
+
+  .glowing-header::after {
+    right: -15px;
+    bottom: 3px;
+  }
+}
+
+@media (max-width: 500px) {
+  .glowing-header::before,
+  .glowing-header::after {
+    font-size: 14px;
+    margin-top: 10px;
+  }
+
+  .glowing-header::before {
+    left: 5px;
+    top: 2px;
+  }
+
+  .glowing-header::after {
+    right: -10px;
+    bottom: 2px;
   }
 }

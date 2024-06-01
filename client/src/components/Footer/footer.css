@@ -1,11 +1,46 @@
-/* footer CSS */
+/* Footer CSS */
 .footer {
-    background-color: #282c34;
-    color: #0dab76;
-    padding: 20px;
-    text-align: center;
-    position: sticky;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+  background-color: #282c34;
+  color: #0dab76;
+  padding: 20px;
+  text-align: center;
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+@media (max-width: 790px) {
+  .footer {
+    padding: 18px;
+    font-size: 16px;
   }
+}
+
+@media (max-width: 675px) {
+  .footer {
+    padding: 16px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 555px) {
+  .footer {
+    padding: 14px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 435px) {
+  .footer {
+    padding: 12px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 375px) {
+  .footer {
+    padding: 10px;
+    font-size: 11px;
+  }
+}
