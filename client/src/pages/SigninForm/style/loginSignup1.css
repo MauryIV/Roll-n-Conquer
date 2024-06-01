@@ -17,8 +17,8 @@
   background-color: #0dab76;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: inset 0px -5px 10px 5px rgb(126, 56, 224, 0.15),
-    0px 5px 25px rgb(255, 255, 255, 0.2); /*Glowing shadow effect for the container*/
+  box-shadow: inset 0px -5px 10px 5px rgba(126, 56, 224, 0.15),
+    0px 5px 25px rgba(255, 255, 255, 0.2); /* Glowing shadow effect for the container */
   height: auto;
   margin: 2rem auto;
   margin-bottom: 250px;
@@ -28,7 +28,6 @@
 
 .signup-form-container h1 {
   margin-bottom: 2rem;
-
   text-shadow: 0 0 5px #603696; /* Glowing shadow effect for the text */
 }
 
@@ -83,8 +82,8 @@
   background: #0dab76;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: inset 0px -5px 10px 5px rgb(126, 56, 224, 0.2),
-    0px 5px 25px rgb(255, 255, 255, 0.2); /*Glowing shadow effect for the container*/
+  box-shadow: inset 0px -5px 10px 5px rgba(126, 56, 224, 0.2),
+    0px 5px 25px rgba(255, 255, 255, 0.2); /* Glowing shadow effect for the container */
   margin-bottom: 250px;
 }
 
@@ -117,4 +116,61 @@
 
 .login-button:hover {
   background-color: #48acf0;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1024px) {
+  .signup-form-container, .login-form {
+    padding: 1.5rem;
+    margin-bottom: 200px;
+  }
+
+  .signup-form-container h1, .login-form h1 {
+    font-size: 1.8rem;
+  }
+
+  .form input, .form button, .login-button {
+    padding: 0.6rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .signup-form-background, .login-form-container {
+    padding: 8%;
+  }
+
+  .signup-form-container, .login-form {
+    padding: 1rem;
+    margin-bottom: 150px;
+  }
+
+  .signup-form-container h1, .login-form h1 {
+    font-size: 1.5rem;
+  }
+
+  .form input, .form button, .login-button {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .signup-form-background, .login-form-container {
+    padding: 5%;
+  }
+
+  .signup-form-container, .login-form {
+    padding: 0.75rem;
+    margin-bottom: 100px;
+  }
+
+  .signup-form-container h1, .login-form h1 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .form input, .form button, .login-button {
+    padding: 0.4rem;
+    font-size: 0.8rem;
+  }
 }

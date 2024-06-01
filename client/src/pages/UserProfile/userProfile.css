@@ -1,6 +1,5 @@
 /* UserProfile CSS */
 .user-profile-background {
-  /* I added position relative to make the friends button stick in the top right because it has position absolute */
   position: relative;
   background: linear-gradient(45deg, #0dab76, #603696, #80d6ff);
   background-size: 400% 400%;
@@ -25,42 +24,95 @@
     background-position: 0% 50%;
   }
 }
-  
+
 .user-profile-container {
-  
   display: grid;
   grid-template-columns: 1fr 2fr 1fr; /* Custom column template */
   grid-template-rows: 2fr 1fr 3fr; /* Custom row template */
   gap: 20px; /* Adjust gap as needed */
 }
 
-  h1 {
-    margin-bottom: 2rem;
+h1 {
+  margin-bottom: 2rem;
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.stat-item {
+  background-color: #fff; /* Adjust background color */
+  border: 1px solid #ccc; /* Adjust border style */
+  padding: 20px; /* Adjust padding */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center; /* Center text */
+  font-size: 1.2em; /* Adjust font size */
+}
+
+.stat-item h2 {
+  margin-bottom: 0.5rem;
+}
+
+.stat-item p {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+@media (max-width: 1024px) {
+  .user-profile-container {
+    grid-template-columns: 1fr 1fr; /* Adjust grid columns */
+    grid-template-rows: auto; /* Adjust grid rows */
+    gap: 15px; /* Adjust gap */
   }
-  
-  .stats {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    width: 100%;
-  }
-  
+
   .stat-item {
-    background-color: #fff; /* Adjust background color */
-    border: 1px solid #ccc; /* Adjust border style */
-    padding: 20px; /* Adjust padding */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center; /* Center text */
-    font-size: 1.2em; /* Adjust font size */
+    font-size: 1em; /* Adjust font size */
+    padding: 15px; /* Adjust padding */
   }
-  
-  .stat-item h2 {
-    margin-bottom: 0.5rem;
+
+  h1 {
+    font-size: 1.5rem; /* Adjust font size */
   }
-  
-  .stat-item p {
-    font-size: 1.2rem;
-    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .user-profile-background {
+    padding: 8%;
   }
+
+  .user-profile-container {
+    grid-template-columns: 1fr; /* Single column layout */
+    grid-template-rows: auto; /* Adjust grid rows */
+    gap: 10px; /* Adjust gap */
+  }
+
+  .stat-item {
+    font-size: 0.9em; /* Adjust font size */
+    padding: 10px; /* Adjust padding */
+  }
+
+  h1 {
+    font-size: 1.2rem; /* Adjust font size */
+  }
+}
+
+@media (max-width: 480px) {
+  .user-profile-background {
+    padding: 5%;
+  }
+
+  .stat-item {
+    font-size: 0.8em; /* Adjust font size */
+    padding: 8px; /* Adjust padding */
+  }
+
+  h1 {
+    font-size: 1rem; /* Adjust font size */
+    margin-bottom: 1rem; /* Adjust margin */
+  }
+}

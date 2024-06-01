@@ -6,7 +6,6 @@ header {
   text-align: center;
   border-bottom: 2px solid #0dab76;
   margin: 0;
-  padding: 0;
 }
 
 header h1 {
@@ -37,12 +36,11 @@ nav {
 }
 
 .nav-link {
-  color: rgb(131, 82, 194, 0.15);
+  color: rgba(131, 82, 194, 0.15);
   padding: 0.5rem 1rem;
   border-radius: 4px;
   transition: background-color 0.3s, color 0.3s;
   text-shadow: 0 1px 0.5px #0dab76, 0 1.5px 1px #007bff;
-  /* 0 2px 2px #0dab76; */
   font-family: "Vast Shadow", serif;
   letter-spacing: 2px;
 }
@@ -62,25 +60,61 @@ nav {
 
 @media (max-width: 790px) {
   header h1 {
+    font-size: x-large;
     letter-spacing: 80px;
+  }
+  .nav-link {
+    padding: 0.4rem 0.8rem;
   }
 }
 
 @media (max-width: 675px) {
   header h1 {
+    font-size: large;
     letter-spacing: 60px;
+  }
+  .nav-link {
+    padding: 0.3rem 0.6rem;
   }
 }
 
 @media (max-width: 555px) {
   header h1 {
+    font-size: medium;
     letter-spacing: 40px;
+  }
+  .nav-link {
+    padding: 0.2rem 0.4rem;
   }
 }
 
 @media (max-width: 435px) {
   header h1 {
+    font-size: small;
     letter-spacing: 20px;
+  }
+  .nav {
+    flex-direction: column;
+    align-items: center;
+  }
+  .nav-item {
+    margin: 0.5rem 0;
+  }
+  .nav-link {
+    padding: 0.1rem 0.2rem;
   }
 }
 
+@media (max-width: 375px) {
+  header {
+    padding: 0.5rem;
+  }
+  header h1 {
+    font-size: smaller;
+    letter-spacing: 10px;
+  }
+  .nav-link {
+    font-size: 12px;
+    padding: 0.1rem;
+  }
+}
