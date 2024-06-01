@@ -101,7 +101,10 @@ th {
   content: "🎲";
   position: absolute;
   animation: rotateDice 5s linear infinite;
-  margin-top: 20px;
+  margin-top: -10px;
+  margin-right: 5px;
+  padding-right: 10px;
+  padding-top: 5px;
 }
 
 .glowing-header::before {

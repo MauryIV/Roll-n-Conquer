@@ -52,6 +52,7 @@ const Leaderboard = () => {
     <div className="leaderboard">
       <div className="header">
         <h1 className="glowing-header">🎲 Leaderboard 🎲</h1>
+        {/* <p className="glowing-header">🎲🎲</p> */}
       </div>
       <table>
         <thead>
