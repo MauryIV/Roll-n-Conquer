@@ -15,6 +15,7 @@ export const LOGIN_USER = gql`
         streak
         difference
         friendslist {
+          _id
           username
         }
       }
@@ -30,6 +31,26 @@ export const ADD_USER = gql`
         _id
         username
         email
+      }
+    }
+  }
+`;
+
+export const ADD_FRIEND = gql`
+  mutation AddFriend($username: String!, $wins: Int, $losses: Int, $ties: Int, $streak: Int, $difference: Int) {
+    addFriend(username: $username, wins: $wins, losses: $losses, ties: $ties, streak: $streak, difference: $difference) {
+      _id
+      username
+      password
+      email
+      wins
+      losses
+      ties
+      streak
+      difference
+      friendslist {
+        _id
+        username
       }
     }
   }

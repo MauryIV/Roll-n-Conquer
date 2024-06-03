@@ -52,6 +52,14 @@ class AuthService {
     const decoded = decode(token);
     return decoded.data._id;
   }
+
+  getUsername() {
+    const token = this.getToken();
+    if (!token) return null;
+
+    const decoded = decode(token);
+    return decoded.data.username;
+  }
 }
 
 export default new AuthService();
