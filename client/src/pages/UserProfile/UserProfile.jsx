@@ -5,29 +5,35 @@ import FriendListModal from '../../components/FriendList/FriendList';
 
 const UserProfile = ({ user }) => {
   useEffect(() => {
-    // Randomly assign grid areas to stat items
-    const stats = document.querySelectorAll('.stat-item');
-    stats.forEach(stat => {
-      const row = Math.floor(Math.random() * 3) + 1;
-      const col = Math.floor(Math.random() * 3) + 1;
-      stat.style.gridColumn = `${col} / span 2`; // Make each item span multiple columns for more spread
-      stat.style.gridRow = `${row} / span 2`; // Make each item span multiple rows for more spread
-    });
+    const layouts = ['layout1', 'layout2', 'layout3', 'layout4'];
+
+    // Select a random layout
+    const randomLayout = layouts[Math.floor(Math.random() * layouts.length)];
+
+    // Apply the random layout to the stats container
+    const statsContainer = document.querySelector('.stats');
+    if (statsContainer) {
+      statsContainer.classList.remove('layout1', 'layout2', 'layout3', 'layout4');
+      statsContainer.classList.add(randomLayout);
+    }
   }, []);
+
   return (
     <div className='user-profile-background'>
-      
       <div className="user-profile-container">
-      <FriendListModal />
-        <h1>User Profile</h1>
-        <div className="stats">
-          <div className="stat-item">W / L</div>
-          <div className="stat-item">Win Streak</div>
-          <div className="stat-item">Daily Wins</div>
-          <div className="stat-item">Largest Spread</div>
+        <FriendListModal />
+        <div className="stats-container">
+          <h1 className="profile-title">User Profile</h1>
+          <div className="stats layout1">
+            <div className="stat-item stat-item1">W / L</div>
+            <div className="stat-item stat-item2">Win Streak</div>
+            <div className="stat-item stat-item3">Daily Wins</div>
+            <div className="stat-item stat-item4">Largest Spread</div>
+          </div>
         </div>
       </div>
     </div>
   );
 };
+
 export default UserProfile;
