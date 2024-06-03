@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "seed": "node seeds/seed.js",
-    "watch": "nodemon server.js"
+    "watch": "nodemon server.js && ws-server.js"
   },
   "author": "",
   "license": "ISC",
@@ -16,7 +16,8 @@
     "express": "^4.17.2",
     "graphql": "^16.6.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^7.0.2"
+    "mongoose": "^7.0.2",
+    "ws": "^8.17.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"

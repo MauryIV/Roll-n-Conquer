@@ -1,70 +1,148 @@
-import React, { useEffect } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import "../App.css";
+import DiceAnimation from "../components/DiceAnimation";
 import { landing1 } from "./Landing/style";
-import { d4bk ,d6bk ,d8bk ,d10bk ,d12bk ,d20bk } from "../assets/svgs/filledNumbered";
-import { d4wh, d6wh, d8wh, d10wh, d12wh, d20wh } from "../assets/svgs/fullNumbered";
-import { d4shpOut, d6shpOut, d8shpOut, d10shpOut, d12shpOut, d20shpOut } from "../assets/svgs/sharpAlt2";
-import { d4shpFil, d6shpFil, d8shpFil, d10shpFil, d12shpFil, d20shpFil } from "../assets/svgs/sharpAlt";
-import { d4shpFilOut, d6shpFilOut, d8shpFilOut, d10shpFilOut, d12shpFilOut, d20shpFilOut } from "../assets/svgs/sharp";
-import { d4bubOut, d6bubOut, d8bubOut, d10bubOut, d12bubOut, d20bubOut } from "../assets/svgs/realFull";
-import { d4bubHol, d6bubHol, d8bubHol, d10bubHol, d12bubHol, d20bubHol } from "../assets/svgs/outline";
-import { d4filOut, d6filOut, d8filOut, d10filOut, d12filOut, d20filOut } from "../assets/svgs/filled";
-import { d4fil, d6fil, d8fil, d10fil, d12fil, d20fil } from "../assets/svgs/filledAlt";
+import FriendListModal from "../components/TestFriendList";
+import { useMutation } from "@apollo/client";
+import { getUser, getAll } from "../utils/userQueries";
+import { ADD_FRIEND } from "../utils/mutations";
+import Auth from "../utils/auth";
+import { useRandomTheme } from "../utils/helpers";
 
 const themes = [landing1];
-const diceImages = [d4bk, d6bk, d8bk, d10bk, d12bk, d20bk, d4wh, d6wh, d8wh, d10wh, d12wh, d20wh, d4shpOut, d6shpOut, d8shpOut, d10shpOut, d12shpOut, d20shpOut, d4shpFil, d6shpFil, d8shpFil, d10shpFil, d12shpFil, d20shpFil, d4shpFilOut, d6shpFilOut, d8shpFilOut, d10shpFilOut, d12shpFilOut, d20shpFilOut, d4bubOut, d6bubOut, d8bubOut, d10bubOut, d12bubOut, d20bubOut, d4bubHol, d6bubHol, d8bubHol, d10bubHol, d12bubHol, d20bubHol, d4filOut, d6filOut, d8filOut, d10filOut, d12filOut, d20filOut, d4fil, d6fil, d8fil, d10fil, d12fil, d20fil];
 
-const Dice = () => {
+const LandingPage = () => {
+  useRandomTheme(themes);
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedFriend, setSelectedFriend] = useState(null);
+  const [challenges, setChallenges] = useState([]);
+  const [socket, setSocket] = useState(null);
+
+  const { loading: usersLoading, error: usersError, users } = getAll();
+  const { friends } = getUser();
+  const [addFriend] = useMutation(ADD_FRIEND);
+
+  const filteredUsers = users.filter((user) =>
+    user.username.includes(searchQuery)
+  );
+
+  // We are not receiving any messages though
+  // possibly parse out messages that are sent and saved to a DB
   useEffect(() => {
-    const loadRandomTheme = () => {
-      const randomTheme = themes[Math.floor(Math.random() * themes.length)];
-      const styleElement = document.createElement("style");
-      styleElement.textContent = randomTheme;
-      document.head.appendChild(styleElement);
+    const newSocket = new WebSocket("ws://localhost:8080");
+    newSocket.onopen = () => {
+      console.log("Connected to the server");
     };
-
-    loadRandomTheme();
+    newSocket.onmessage = (event) => {
+      console.log("Message received:", event.data);
+      if (event.data.startsWith("Echo: ")) {
+        const jsonStr = event.data.slice("Echo: ".length);
+        try {
+          const parsedMessage = JSON.parse(jsonStr);
+          setChallenges((prevChallenges) => [
+            ...prevChallenges,
+            {
+              from: parsedMessage.from,
+              text: parsedMessage.text,
+            },
+          ]);
+        } catch (error) {
+          console.error("Error parsing JSON:", error);
+        }
+      }
+    };
+    newSocket.onclose = () => {
+      console.log("Disconnected from the server");
+    };
+    setSocket(newSocket);
+    return () => {
+      newSocket.close();
+    };
   }, []);
 
-  let flyDie = [];
-  for (let i = 0; i < 8; i++) {
-    const randoDie = diceImages[Math.floor(Math.random() * diceImages.length)];
-    flyDie.push(randoDie);
-  }
+  const newFriend = async (user) => {
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+    if (!token) {
+      console.log("No token provided");
+      return;
+    }
+    if (friends.includes(user._id)) {
+      return;
+    } else {
+      try {
+        await addFriend({
+          variables: { userId: user._id, username: user.username },
+          context: {
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
+          },
+        });
+      } catch (err) {
+        console.error("An error occurred: ", err);
+      }
+    }
+  };
 
-  const dice = flyDie.map((src, index) => {
-    const isEven = index % 2 === 0;
-    return (
-      <div key={index} className="dice-wrapper">
-        <motion.img
-          src={src}
-          className="homedice"
-          initial={{
-            x: isEven ? -100 : window.innerWidth + 100,
-            y: isEven ? window.innerHeight + 100 : -100,
-          }}
-          animate={{
-            x: isEven
-              ? [-100, window.innerWidth, window.innerWidth / 2, -100]
-              : [window.innerWidth, -100, window.innerWidth / 2, window.innerWidth],
-            y: isEven
-              ? [window.innerHeight, window.innerHeight / 2, -100]
-              : [-100, window.innerHeight / 2, window.innerHeight],
-            rotate: [0, 360],
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 8,
-            ease: "linear",
-            delay: isEven ? 0 : 4,
-          }}
+  return (
+    <div className="landing-page">
+      <DiceAnimation />
+      <div className="challenges-column">
+        <h1>Challenges</h1>
+        <FriendListModal
+          friends={friends}
+          selectedFriend={selectedFriend}
+          setSelectedFriend={setSelectedFriend}
         />
+        <div id="challenges">
+          {challenges
+            .filter(
+              (msg) => msg.from === selectedFriend?._id || msg.from === "me"
+            )
+            .map((msg, index) => (
+              <p key={index}>
+                {msg.from === "me" ? "Me" : selectedFriend.username}: {msg.text}
+              </p>
+            ))}
+        </div>
       </div>
-    );
-  });
-
-  return <div className="dice-container">{dice}</div>;
+      <div className="users-column">
+        <h1>Users</h1>
+        <input
+          type="text"
+          placeholder="Search users..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        {usersLoading ? (
+          <div>Loading...</div>
+        ) : (
+          <div>
+            {filteredUsers.map((user) => (
+              <p key={user._id}>
+                {user.username} - {user.wins} wins
+                {Auth.loggedIn() ? (
+                  !friends.some((friend) => friend.username === user.username) ? (
+                    <button onClick={() => newFriend(user)}>Add Friend‽</button>
+                  ) : user.username === Auth.getProfile().data.username ? (
+                    <button disabled>I hope you're friends with yourself</button>
+                  ) : (
+                    <button disabled>Y'all be friends!</button>
+                  )
+                ) : null}
+              </p>
+            ))}
+          </div>
+        )}
+        {usersError && (
+          <div className="my-3 p-3 bg-danger text-white">
+            {usersError.message}
+          </div>
+        )}
+      </div>
+    </div>
+  );
 };
 
-export default Dice;
+export default LandingPage;

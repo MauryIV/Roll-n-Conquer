@@ -1,3 +1,38 @@
+.landing-page {
+  display: flex;
+  width: 100%;
+  padding: 20px;
+}
+
+.challenges-column, .users-column {
+display: flex;
+flex-direction: column;
+width: 50%;
+padding: 10px;
+}
+
+.dice-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.dice-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.homedice {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+}
+
 /* Roll CSS */
 .dice-roller {
   text-align: center;
