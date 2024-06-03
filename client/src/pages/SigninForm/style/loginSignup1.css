@@ -1,123 +1,125 @@
-/* Signup Form CSS */
-.signup-form-background {
-  position: relative;
-  background: linear-gradient(45deg, #48acf0, #80d6ff, #603696, #48acf0);
-  background-size: 400% 400%;
-  animation: gradientFlow 5s ease-in-out infinite;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10%;
-  height: auto;
-  width: 100%;
+/* Define common variables for colors and sizes */
+:root {
+  --primary-color: #48acf0;
+  --secondary-color: #80d6ff;
+  --accent-color: #603696;
+  --background-color: #0dab76;
+  --input-background: #26c5da;
+  --button-background: #2f243a;
+  --text-color: #0dab76;
+  --box-shadow-color: rgba(13, 171, 118, 0.5);
+  --hover-shadow-color: rgba(13, 171, 118, 0.8);
+  --container-padding: 2rem;
+  --container-margin-bottom: 250px;
+  --button-padding: 0.75rem;
+  --input-padding: 0.75rem;
+  --border-radius: 8px;
+  --shadow-inset: inset 0px -5px 10px 5px rgba(126, 56, 224, 0.15);
+  --shadow-outer: 0px 5px 25px rgba(255, 255, 255, 0.2);
 }
 
+/* Background animation */
 @keyframes gradientFlow {
-  0% {
+  0%, 100% {
     background-position: 0% 50%;
   }
   50% {
     background-position: 100% 50%;
   }
-  100% {
-    background-position: 0% 50%;
-  }
 }
 
-.signup-form-container {
+/* General container style */
+.auth-container,
+.signup-form-background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 10%;
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color), var(--primary-color));
+  background-size: 400% 400%;
+  animation: gradientFlow 5s ease-in-out infinite;
+  margin: 0;
+  height: auto;
+  font-family: "Vast Shadow", serif;
+}
+
+/* Form containers */
+.signup-form-container,
+.login-form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #0dab76;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: inset 0px -5px 10px 5px rgba(126, 56, 224, 0.15),
-    0px 5px 25px rgba(255, 255, 255, 0.2); /* Glowing shadow effect for the container */
+  background-color: var(--background-color);
+  padding: var(--container-padding);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-inset), var(--shadow-outer);
   height: auto;
-  margin: 2rem auto;
-  margin-bottom: 250px;
-  border-color: black;
+  margin: 2rem auto var(--container-margin-bottom);
   animation: fadeIn 1s ease-in-out;
 }
 
-.signup-form-container h1 {
+/* Title styles */
+.signup-form-container h1,
+.login-form h1 {
   margin-bottom: 2rem;
-  text-shadow: 0 0 5px #603696; /* Glowing shadow effect for the text */
+  text-shadow: 0 0 5px var(--accent-color);
+  text-align: center;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
+/* Form styles */
 .form {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-.form input {
+.form input,
+.form button,
+.login-button,
+.signup-button {
   margin-bottom: 1rem;
-  padding: 0.75rem;
+  padding: var(--input-padding);
+  border-radius: 4px;
+}
+
+.form input,
+.form-group input {
   border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #26c5da; /* Glowing background color for input fields */
-  box-shadow: 0 0 10px rgba(13, 171, 118, 0.5); /* Glowing shadow effect for input fields */
+  background-color: var(--input-background);
+  box-shadow: 0 0 10px var(--box-shadow-color);
 }
 
-.form button {
-  padding: 0.75rem;
-  background-color: #2f243a;
-  color: #0dab76;
+.form button,
+.login-button,
+.signup-button {
+  background-color: var(--button-background);
+  color: var(--text-color);
   border: none;
-  border-radius: 4px;
   cursor: pointer;
-  box-shadow: 0 0 10px rgba(13, 171, 118, 0.5); /* Glowing shadow effect for the button */
+  box-shadow: 0 0 10px var(--box-shadow-color);
 }
 
-.form button:hover {
-  background-color: #0056b3;
-  box-shadow: 0 0 20px rgba(13, 171, 118, 0.8); /* Increase shadow on hover for stronger glow */
+.form button:hover,
+.login-button:hover,
+.signup-button:hover {
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color), var(--primary-color));
+  background-size: 400% 400%;
+  animation: gradientFlow 1s cubic-bezier(0.25, 0.1, 0.25, 1);
+  box-shadow: 0 0 20px var(--hover-shadow-color);
 }
 
+/* Error text */
 .error-text {
   color: red;
   margin-top: 1rem;
 }
 
-/* LoginForm CSS */
-/* Signup Form CSS */
-.signup-form-background {
-  position: relative;
-  background: linear-gradient(45deg, #48acf0, #80d6ff, #603696, #48acf0);
-  background-size: 400% 400%;
-  animation: gradientFlow 5s ease-in-out infinite;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10%;
-  height: auto;
-  width: 100%;
-}
-
-@keyframes gradientFlow {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.login-form {
-  background: #0dab76;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: inset 0px -5px 10px 5px rgba(126, 56, 224, 0.2),
-    0px 5px 25px rgba(255, 255, 255, 0.2); /* Glowing shadow effect for the container */
-  margin-bottom: 250px;
-}
-
+/* Form group styles */
 .form-group {
   margin-bottom: 1rem;
 }
@@ -131,25 +133,7 @@
   width: 100%;
   padding: 0.5rem;
   border: 1px solid black;
-  border-radius: 4px;
-  background-color: #48acf0;
-}
-
-.login-button, .signup-button {
-  width: 100%;
-  padding: 0.75rem;
-  background-color: #603696;
-  color: #0dab76;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.login-button:hover, 
-.signup-button:hover {
-  background: linear-gradient(45deg, #48acf0, #80d6ff, #603696, #48acf0);
-  background-size: 400% 400%;
-  animation: gradientFlow 1s cubic-bezier(0.25, 0.1, 0.25, 1);
+  background-color: var(--primary-color);
 }
 
 /* Responsive Media Queries */
@@ -207,20 +191,4 @@
     padding: 0.4rem;
     font-size: 0.8rem;
   }
-}
-
-
-/* General container style */
-.auth-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: auto;
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(45deg, #48acf0, #80d6ff, #603696, #48acf0);
-  background-size: 400% 400%;
-  animation: gradientFlow 5s ease-in-out infinite;
-  font-family: "Vast Shadow", serif;
 }
