@@ -10,6 +10,9 @@
   padding: 10%;
   height: auto;
   width: 100%;
+  font-family: "Vast Shadow", serif;
+  text-shadow: 0 1px 1px #0dab76, 0 1px 1px #007bff, 0 1px 1px #0dab76;
+  
 }
 
 @keyframes gradientFlow {
@@ -24,11 +27,39 @@
   }
 }
 
+/* Apply animation to profile title */
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 .user-profile-container {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr; /* Custom column template */
   grid-template-rows: 2fr 1fr 3fr; /* Custom row template */
   gap: 20px; /* Adjust gap as needed */
+  
 
 }
 
@@ -42,6 +73,7 @@ h1 {
   align-items: center;
   width: 100%;
   padding: 20px;
+  text-shadow: 0 0 5px var(--accent-color);
 }
 
 .profile-title {
@@ -52,6 +84,8 @@ h1 {
   overflow: hidden; /* Hide overflow if text is too long */
   text-overflow: ellipsis; /* Add ellipsis if text is too long */
   margin-left: 400px;
+  
+  animation: slideIn 0.5s ease forwards; /* Apply slideIn animation */
 }
 
 .stats {
@@ -62,14 +96,28 @@ h1 {
 }
 
 .stat-item {
-  background-color: #fff; /* Adjust background color */
-  border: 1px solid #ccc; /* Adjust border style */
+  border: none; /* Adjust border style */
   padding: 20px; /* Adjust padding */
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center; /* Center text */
   font-size: 1.2em; /* Adjust font size */
+  animation: pulse 4s infinite alternate; /* Adjust animation duration */
+  text-shadow: 0 0 5px var(--accent-color);
+}
+
+/* Stagger the pulse animation for each stat item */
+.stat-item:nth-child(2) {
+  animation-delay: 0.5s; /* Delay the animation for the second stat item */
+}
+
+.stat-item:nth-child(3) {
+  animation-delay: 1s; /* Delay the animation for the third stat item */
+}
+
+.stat-item:nth-child(4) {
+  animation-delay: 1.5s; /* Delay the animation for the fourth stat item */
 }
 
 /* Grid Layouts */

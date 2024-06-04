@@ -8,6 +8,8 @@
   background: linear-gradient(45deg, #603696, #80d6ff, #0dab76, #007bff);
   background-size: 400% 400%;
   animation: gradientFlow 5s ease infinite;
+  font-family: "Vast Shadow", serif;
+  text-shadow: 0 2px 1px #0dab76, 0 3px 2px #007bff, 0 5px 3px #0dab76;
 }
 
 @keyframes gradientFlow {

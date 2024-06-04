@@ -51,7 +51,7 @@ const Leaderboard = () => {
   return (
     <div className="leaderboard">
       <div className="header">
-        <h1 className="glowing-header">🎲 Leaderboard 🎲</h1>
+        <h1 className="glowing-header">⚀⚁⚂⚃⚄⚅ Leaderboard ⚀⚁⚂⚃⚄⚅</h1>
         {/* <p className="glowing-header">🎲🎲</p> */}
       </div>
       <table>
