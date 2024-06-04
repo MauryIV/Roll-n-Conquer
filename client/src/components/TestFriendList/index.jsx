@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import Auth from "../../utils/auth";
 import "../../App.css";
 import "./friendlist.css";
+import { getUser } from "../../utils/userQueries";
 
-const FriendListModal = ({ friends, currentUser }) => {
+const FriendListModal = () => {
   const myModalRef = useRef(null);
 
   const [selectedFriend, setSelectedFriend] = useState(null);
@@ -13,6 +14,8 @@ const FriendListModal = ({ friends, currentUser }) => {
   const [challenges, setChallenges] = useState([]);
   const [challenge, setChallenge] = useState("");
   const [socket, setSocket] = useState(null);
+
+  const { friends } = getUser();
 
   // with WebSockets echo, we can confirm that messages are being sent
   // may want to look at the message being save to the db and parsed out after
