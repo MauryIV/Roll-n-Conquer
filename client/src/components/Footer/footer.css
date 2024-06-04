@@ -10,6 +10,7 @@
   width: 100%;
 }
 
+/* Adjustments for responsiveness */
 @media (max-width: 790px) {
   .footer {
     padding: 18px;
@@ -42,5 +43,12 @@
   .footer {
     padding: 10px;
     font-size: 11px;
+  }
+}
+
+@media (max-width: 320px) { /* For very small screens like older iPhones */
+  .footer {
+    padding: 8px;
+    font-size: 10px;
   }
 }
