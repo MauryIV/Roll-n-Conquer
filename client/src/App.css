@@ -15,9 +15,12 @@
 .card {
   height: 100%;
   min-width: 200px;
-  background: linear-gradient(45deg, #282c34, #eaeaea);
-  background-size: 400% 400%;
-  animation: gradientFlow 5s ease infinite;
+  /* background: linear-gradient(45deg, #282c34, #eaeaea); */
+  background-size: cover;
+  /* animation: gradientFlow 5s ease infinite; */
+  background-image: url('./assets/svgs/images/leaderboardDice1.jpg');
+  /* float: inherit; */
+  border-style: none;
 }
 
 @keyframes gradientFlow {

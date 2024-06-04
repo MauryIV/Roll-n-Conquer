@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "../App.css";
+import './Landing/style/landing1.css'
 import DiceAnimation from "../components/DiceAnimation";
 import { landing1 } from "./Landing/style";
 import FriendListModal from "../components/TestFriendList";

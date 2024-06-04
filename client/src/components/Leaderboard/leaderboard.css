@@ -2,7 +2,8 @@
 .leaderboard {
   text-align: center;
   padding: 10px;
-  border: 1px solid #ddd;
+  border: none;
+  margin-top: 150px;
 }
 
 @media (max-width: 500px) {
@@ -23,7 +24,7 @@
 }
 
 .header h1 {
-  color: white;
+  color: black;
   font-family: "Jacquard 12", system-ui;
   font-size: 36px;
   margin: 0;
@@ -43,7 +44,7 @@
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 10px;
+  margin-top: 25px;
 }
 
 th, td {
@@ -53,7 +54,7 @@ th, td {
 }
 
 th {
-  background-color: #ccbebeb2;
+  background-color: #ccbebe50;
 }
 
 @media (max-width: 768px) {

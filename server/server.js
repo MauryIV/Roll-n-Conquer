@@ -1,3 +1,9 @@
+// NOVU components
+const { notifRoute } = require("./novu/router/notif.js");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+
+
 const express = require('express');
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
@@ -6,6 +12,7 @@ const { authMiddleware } = require('./utils/auth');
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
 const WebSocket = require('ws');
+
 
 const webSocket = new WebSocket.Server({ port:8080 });
 
@@ -46,6 +53,13 @@ const startApolloServer = async () => {
   app.use('/graphql', expressMiddleware(server, {
     context: authMiddleware
   }));
+
+// NOVU notification
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+app.use(cors());
+app.use("/home", notifRoute);
+
 
   db.once('open', () => {
     app.listen(PORT, () => {
