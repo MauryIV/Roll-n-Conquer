@@ -29,7 +29,7 @@ const FriendListModal = () => {
     return (
         <>
             {/* Button trigger modal */}
-            <button type="button" className="btn btn-primary modal-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" className="btn modal-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Friends
             </button>
 

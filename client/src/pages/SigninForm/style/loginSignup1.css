@@ -29,8 +29,7 @@
 }
 
 /* General container style */
-.auth-container,
-.signup-form-background {
+.auth-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -51,12 +50,13 @@
   flex-direction: column;
   align-items: center;
   background-color: var(--background-color);
-  padding: var(--container-padding);
+  /* padding: var(--container-padding); */
   border-radius: var(--border-radius);
-  box-shadow: var(--shadow-inset), var(--shadow-outer);
+  /* box-shadow: var(--shadow-inset), var(--shadow-outer); */
   height: auto;
   margin: 2rem auto var(--container-margin-bottom);
   animation: fadeIn 1s ease-in-out;
+ 
 }
 
 /* Title styles */

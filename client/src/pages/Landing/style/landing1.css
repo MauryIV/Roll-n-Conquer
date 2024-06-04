@@ -1,8 +1,47 @@
 .landing-page {
-  display: flex;
+  position: relative; /* Ensure content is positioned relative to this container */
   width: 100%;
   padding: 20px;
+  overflow: hidden; /* Prevent any overflow from animations */
 }
+
+.landing-page::before,
+.landing-page::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  background-image: url('../../../assets/svgs/images/Interrobang3.png');
+  background-size: 200% 100%; /* Double the width for split image */
+  background-repeat: no-repeat;
+  z-index: -1; /* Ensure background is behind content */
+}
+
+.landing-page::before {
+  left: 0;
+  background-position: left;
+  animation: rotate 10s infinite linear normal; /* Rotate in normal direction */
+  transform-origin: right center; /* Rotate around the right edge */
+}
+
+.landing-page::after {
+  right: 0;
+  background-position: right;
+  animation: rotate 10s infinite linear reverse; /* Rotate in reverse direction */
+  transform-origin: left center; /* Rotate around the left edge */
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
 
 .challenges-column, .users-column {
 display: flex;
