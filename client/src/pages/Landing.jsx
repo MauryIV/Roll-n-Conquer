@@ -33,7 +33,7 @@ const LandingPage = () => {
   useEffect(() => {
     const newSocket = new WebSocket("ws://localhost:8080");
     newSocket.onopen = () => {
-      console.log("Connected to the server");
+      console.log("Connected to the client");
     };
     newSocket.onmessage = (event) => {
       console.log("Message received:", event.data);
