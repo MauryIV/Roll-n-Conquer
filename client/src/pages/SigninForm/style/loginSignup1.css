@@ -136,6 +136,12 @@
   background-color: var(--primary-color);
 }
 
+.check-mark{
+  color: #603696;
+  font-weight: 400;
+  margin-left: 6px;
+}
+
 /* Responsive Media Queries */
 @media (max-width: 1024px) {
   .signup-form-container, .login-form {
