@@ -1,5 +1,5 @@
 const User = require('./user');
-const Dice = require('./dice');
-const Friends = require('./friends')
+const Friends = require('./friends');
+const notIf = require('./notif');
 
-module.exports = { User, Dice, Friends };
+module.exports = { User, Friends, notIf };
