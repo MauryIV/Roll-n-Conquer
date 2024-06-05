@@ -58,6 +58,7 @@ nav {
   text-decoration-color: #0dab76;
 }
 
+/* Media Queries for Responsiveness */
 @media (max-width: 790px) {
   header h1 {
     font-size: x-large;
@@ -111,10 +112,17 @@ nav {
   }
   header h1 {
     font-size: smaller;
-    letter-spacing: 10px;
+    letter-spacing: 5px; /* Reduce letter spacing further */
+  }
+  .nav {
+    flex-direction: column; /* Stack navigation items vertically */
+  }
+  .nav-item {
+    margin: 0.5rem 0; /* Adjust margin for stacked items */
   }
   .nav-link {
     font-size: 12px;
     padding: 0.1rem;
+    letter-spacing: 1px; /* Reduce letter spacing for readability */
   }
 }
