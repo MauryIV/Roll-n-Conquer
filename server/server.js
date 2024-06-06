@@ -1,8 +1,3 @@
-// NOVU components
-const { notifRoute } = require("./novu/router/notif.js");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-
 
 const express = require('express');
 const { ApolloServer } = require('@apollo/server');
@@ -54,11 +49,7 @@ const startApolloServer = async () => {
     context: authMiddleware
   }));
 
-// NOVU notification
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-app.use(cors());
-app.use("/home", notifRoute);
+
 
 
   db.once('open', () => {
