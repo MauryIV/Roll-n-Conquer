@@ -5,13 +5,9 @@ import FriendListModal from '../../components/FriendList/FriendList';
 import { getUser } from "../../utils/userQueries";
 
 const UserProfile = ({ user }) => {
+  const { wins, losses, ties, streak, difference } = getUser();
   useEffect(() => {
     const layouts = ['layout1', 'layout2', 'layout3', 'layout4'];
-
-const { userinfo } = getUser();
-
-
-console.log(userinfo);
 
     // Select a random layout
     const randomLayout = layouts[Math.floor(Math.random() * layouts.length)];
@@ -24,6 +20,7 @@ console.log(userinfo);
     }
   }, []);
 
+
   return (
     <div className='user-profile-background'>
       <div className="user-profile-container">
@@ -31,11 +28,13 @@ console.log(userinfo);
         <div className="stats-container">
           <h1 className="profile-title">User Profile</h1>
           <div className="stats layout1">
-            <div className="stat-item stat-item1">W / L</div>
-            <div>{userinfo.wins}</div>
-            <div className="stat-item stat-item2">Win Streak</div>
+            <div className="stat-item stat-item1">W / L / T <br />
+            {wins}/{losses}/{ties}</div>
+            <div className="stat-item stat-item2">Win Streak <br />
+            {streak}</div>
             <div className="stat-item stat-item3">Daily Wins</div>
-            <div className="stat-item stat-item4">Largest Spread</div>
+            <div className="stat-item stat-item4">Largest Spread <br />
+            {difference}</div>
           </div>
         </div>
       </div>

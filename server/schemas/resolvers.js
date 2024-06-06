@@ -55,9 +55,9 @@ const resolvers = {
     },
 
     // record game outcome
-    recordOutcome: async (parent, { username, wins, losses, ties, streak, difference }) => {
+    recordOutcome: async (parent, { userId, wins, losses, ties, streak, difference }) => {
       const user = await User.findOneAndUpdate(
-        { _id: context.user._id },
+        { _id: userId },
         { $inc: { wins, losses, ties, streak, difference } }
       );
       return user;
