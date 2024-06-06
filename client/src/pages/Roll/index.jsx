@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../App.css";
 import { roll1, roll2, roll3, roll4 } from "./style";
+import FriendListModal from '../../components/FriendList/FriendList'
 
 const themes = [roll1, roll2, roll3, roll4];
 
@@ -88,9 +89,12 @@ const DiceRoller = () => {
 
   return (
     <div className="dice-roller">
+      
       <h1>Dice Roller</h1>
       <div className="dice-type-selector">
+     
         <h2>Select Dice Type: </h2>
+        
         <select
           value={diceType}
           disabled={rolling}
@@ -108,7 +112,9 @@ const DiceRoller = () => {
           <option value={100}>D100</option>
         </select>
       </div>
+      
       <div className={`roll-dice-container ${rollingAnimation}`}>
+      
         <img
           src={`../src/assets/svgs/sharpAlt2/d${diceType}.svg`}
           alt={`D${diceType}`}
