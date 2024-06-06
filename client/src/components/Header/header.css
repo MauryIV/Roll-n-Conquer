@@ -45,17 +45,21 @@ nav {
   letter-spacing: 2px;
 }
 
-.nav-link:hover {
+#custom-nav .nav-link:hover {
   background-color: #0dab76;
   color: white;
+  animation: gradientFlow 1s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-.nav-link.active {
+#custom-nav .nav-link:active {
   background-color: #0dab76;
   text-decoration-line: overline underline;
   text-decoration-style: double;
   text-decoration-thickness: 1px;
   text-decoration-color: #0dab76;
+  background-size: 400% 400%;
+  animation: gradientFlow 1s cubic-bezier(0.25, 0.1, 0.25, 1);
+  box-shadow: 0 0 20px var(--hover-shadow-color);
 }
 
 /* Media Queries for Responsiveness */
