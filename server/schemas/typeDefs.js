@@ -35,10 +35,7 @@ const typeDefs = `
         login(username: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
         addFriend(username: String!, wins: Int, losses: Int, ties: Int, streak: Int, difference: Int): User
-        recordWin(username: String!, wins: Int): User
-        recordLoss(username: String!, losses: Int): User
-        recordTie(username: String!, ties: Int): User
-        recordGap(username: String!, difference: Int): User
+        recordOutcome(userId: ID!, wins: Int, losses: Int, ties: Int, streak: Int, difference: Int): User
     }
 `;
 

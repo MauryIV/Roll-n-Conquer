@@ -33,13 +33,3 @@ export const GET_USERS = gql`
     }
   }
 `;
-
-export const WHAT_DICE = gql`
-  query PickDice($dicesize: Int, $diceimage: String) {
-    pickDice(dicesize: $dicesize, diceimage: $diceimage) {
-      _id
-      dicesize
-      diceimage
-    }
-  }
-`;

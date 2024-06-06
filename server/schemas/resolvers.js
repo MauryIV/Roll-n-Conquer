@@ -54,38 +54,11 @@ const resolvers = {
       throw AuthenticationError;
     },
 
-    // TODO: username or email?
-    recordWin: async (parent, { username, wins }) => {
+    // record game outcome
+    recordOutcome: async (parent, { username, wins, losses, ties, streak, difference }) => {
       const user = await User.findOneAndUpdate(
-        { username },
-        { $inc: { wins } }
-      );
-      return user;
-    },
-
-    // TODO: username or email?
-    recordLoss: async (parent, { username, losses }) => {
-      const user = await User.findOneAndUpdate(
-        { username },
-        { $inc: { losses } }
-      );
-      return user;
-    },
-
-    // TODO: username or email?
-    recordTie: async (parent, { username, ties }) => {
-      const user = await User.findOneAndUpdate(
-        { username },
-        { $inc: { ties } }
-      );
-      return user;
-    },
-
-    // TODO: username or email?
-    recordGap: async (parent, { username, difference }) => {
-      const user = await User.findOneAndUpdate(
-        { username },
-        { $inc: { difference } }
+        { _id: context.user._id },
+        { $inc: { wins, losses, ties, streak, difference } }
       );
       return user;
     },
