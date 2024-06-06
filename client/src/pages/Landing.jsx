@@ -9,6 +9,8 @@ import { getUser, getAll } from "../utils/userQueries";
 import { ADD_FRIEND } from "../utils/mutations";
 import Auth from "../utils/auth";
 import { useRandomTheme } from "../utils/helpers";
+import io from "socket.io-client";
+const socket = io("ws://localhost:3001");
 
 const themes = [landing1];
 
@@ -18,7 +20,6 @@ const LandingPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedFriend, setSelectedFriend] = useState(null);
   const [challenges, setChallenges] = useState([]);
-  const [socket, setSocket] = useState(null);
 
   const { loading: usersLoading, error: usersError, users } = getAll();
   const { friends } = getUser();
@@ -28,37 +29,30 @@ const LandingPage = () => {
     user.username.includes(searchQuery)
   );
 
-  // We are not receiving any messages though
-  // possibly parse out messages that are sent and saved to a DB
   useEffect(() => {
-    const newSocket = new WebSocket("ws://localhost:8080");
-    newSocket.onopen = () => {
-      console.log("Connected to the client");
-    };
-    newSocket.onmessage = (event) => {
-      console.log("Message received:", event.data);
-      if (event.data.startsWith("Echo: ")) {
-        const jsonStr = event.data.slice("Echo: ".length);
-        try {
-          const parsedMessage = JSON.parse(jsonStr);
-          setChallenges((prevChallenges) => [
-            ...prevChallenges,
-            {
-              from: parsedMessage.from,
-              text: parsedMessage.text,
-            },
-          ]);
-        } catch (error) {
-          console.error("Error parsing JSON:", error);
-        }
+    // messages
+    socket.on("message", (data) => {
+      const { from, to, text } = data;
+  // adding a class name
+      // shows message as sending user
+      if (from === Auth.getUsername()) {
+        const liSent = document.createElement('li');
+        liSent.className = 'sentMsg'
+        liSent.innerHTML = `<span>${text}</span>`
+        document.getElementById('convos').appendChild(liSent)
       }
-    };
-    newSocket.onclose = () => {
-      console.log("Disconnected from the server");
-    };
-    setSocket(newSocket);
+      // shows message to receiving user
+      if (to === Auth.getUsername()) {
+        const liReceived = document.createElement('li');
+        liReceived.className = 'receivedMsg';
+        liReceived.innerHTML = `<span>${text}</span>`
+        document.getElementById('convos').appendChild(liReceived)
+      } 
+    });
+
     return () => {
-      newSocket.close();
+      // Clean up the socket listener when the component unmounts
+      socket.off("message");
     };
   }, []);
 
@@ -97,16 +91,11 @@ const LandingPage = () => {
           selectedFriend={selectedFriend}
           setSelectedFriend={setSelectedFriend}
         />
+        <div id="convos">
+
+        </div>
         <div id="challenges">
-          {challenges
-            .filter(
-              (msg) => msg.from === selectedFriend?._id || msg.from === "me"
-            )
-            .map((msg, index) => (
-              <p key={index}>
-                {msg.from === "me" ? "Me" : selectedFriend.username}: {msg.text}
-              </p>
-            ))}
+
         </div>
       </div>
       <div className="users-column">
@@ -149,3 +138,38 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
+
+
+  // We are not receiving any messages though
+  // possibly parse out messages that are sent and saved to a DB
+  // useEffect(() => {
+  //   const newSocket = new WebSocket("ws://localhost:8080");
+  //   newSocket.onopen = () => {
+  //     console.log("Connected to the client");
+  //   };
+  //   newSocket.onmessage = (event) => {
+  //     console.log("Message received:", event.data);
+  //     if (event.data.startsWith("Echo: ")) {
+  //       const jsonStr = event.data.slice("Echo: ".length);
+  //       try {
+  //         const parsedMessage = JSON.parse(jsonStr);
+  //         setChallenges((prevChallenges) => [
+  //           ...prevChallenges,
+  //           {
+  //             from: parsedMessage.from,
+  //             text: parsedMessage.text,
+  //           },
+  //         ]);
+  //       } catch (error) {
+  //         console.error("Error parsing JSON:", error);
+  //       }
+  //     }
+  //   };
+  //   newSocket.onclose = () => {
+  //     console.log("Disconnected from the server");
+  //   };
+  //   setSocket(newSocket);
+  //   return () => {
+  //     newSocket.close();
+  //   };
+  // }, []);

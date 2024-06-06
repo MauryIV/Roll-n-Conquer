@@ -1,4 +1,3 @@
-
 const express = require('express');
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
@@ -6,23 +5,7 @@ const path = require('path');
 const { authMiddleware } = require('./utils/auth');
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
-const WebSocket = require('ws');
-
-
-const webSocket = new WebSocket.Server({ port:8080 });
-
-webSocket.on('connection', (socket) => {
-  console.log('Client connected');
-
-  socket.on('message', (message) => {
-    console.log('Received:', message);
-    socket.send(`Echo: ${message}`);
-  });
-
-  socket.on('close', () => {
-    console.log('Client disconnected');
-  });
-});
+const { Server } = require('socket.io');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -46,19 +29,50 @@ const startApolloServer = async () => {
   } 
 
   app.use('/graphql', expressMiddleware(server, {
-    context: authMiddleware
+    context: authMiddleware,
+    db
   }));
 
+  const expressServer = app.listen(PORT, () => {
+    console.log(`ExpressServer listening on port ${PORT}`)
+    console.log(`GraphQL at http://localhost:${PORT}/graphql`);
+  })
+  
+  const io = new Server(expressServer, { 
+    cors: {
+      origin: process.env.NODE_ENV === "production" ? false : ["http://localhost:3000", "10.0.0.199:3000"]
+    }
+  });
 
+  io.on('connection', (socket) => {
+    console.log('User connected');
 
-
-  db.once('open', () => {
-    app.listen(PORT, () => {
-      console.log('WebSocket server is running on ws://localhost:8080');
-      console.log(`API server running on port ${PORT}!`);
-      console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
+    socket.on('message', (data) => {
+      console.log('Message received: ', data);
+      io.emit('message', data);
     });
+
+    socket.on('disconnect', () => {
+      console.log('User disconnected');
+    });
+
+    // listen for activity ie. typing
+    // socket.on('activity', (name) => {
+    //   socket.broadcast.emit('activity', name)
+    // });
   });
 };
 
 startApolloServer();
+
+// NOVU components
+// const { notifRoute } = require("./novu/router/notif.js");
+// const bodyParser = require("body-parser");
+// const cors = require("cors");
+
+
+// NOVU notification
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+// app.use(cors());
+// app.use("/home", notifRoute);
