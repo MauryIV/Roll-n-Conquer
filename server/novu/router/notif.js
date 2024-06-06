@@ -1,8 +1,8 @@
-import express from "express";
-import { createNotif } from "../controller/notif.js";
+// const express = require("express");
+// const { createNotif } = require('../controllers/notif.js');
 
-// const router = express.Router();
+// // const router = express.Router();
 
-router.post('/', {createNotif});
+// router.post('/', {createNotif});
 
-export default router;
+// export default router;
