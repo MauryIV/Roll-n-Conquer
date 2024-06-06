@@ -20,5 +20,11 @@ export const getUser = () => {
     loading,
     error,
     friends: data?.me?.friendslist || [],
+    wins: data?.me?.wins,
+    losses: data?.me?.losses,
+    ties: data?.me?.ties,
+    streak: data?.me?.streak,
+    difference: data?.me?.difference
   };
 };
+

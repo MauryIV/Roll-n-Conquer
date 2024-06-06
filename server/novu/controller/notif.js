@@ -1,7 +1,7 @@
-const { inAppNotification } = require("../novu.js");
-const Notif = require("../../models/notif.js");
+import { inAppNotification } from "../novu.js";
+import Notif from "../model/notif.js";
 
-exports.moudule = createNotif = async (req, res) => {
+export const createNotif = async (req, res) => {
     const { description } = req.body
     const newNotif = new Notif({
         description
