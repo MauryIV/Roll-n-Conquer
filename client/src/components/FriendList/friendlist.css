@@ -1,28 +1,37 @@
 button {
-    margin: 5px;
-    padding: 10px 20px;
-    background-color: #2f243a;
-    color: #0dab76;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    box-shadow: 0 0 10px rgba(13, 171, 118, 0.5); /* Glowing shadow effect */
+  margin: 5px;
+  padding: 10px 20px;
+  background-color: #2f243a;
+  color: #0dab76;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(13, 171, 118, 0.5); /* Glowing shadow effect */
 }
 
 button:hover {
-    background-color: #0056b3;
-    box-shadow: 0 0 20px rgba(13, 171, 118, 0.8); 
-}
+  background-color: #0056b3;
 
+  background: linear-gradient(
+    45deg,
+    var(--primary-color),
+    var(--secondary-color),
+    var(--accent-color),
+    var(--primary-color)
+  );
+  background-size: 400% 400%;
+  animation: gradientFlow 1s cubic-bezier(0.25, 0.1, 0.25, 1);
+  box-shadow: 0 0 20px var(--hover-shadow-color);
+}
 
 /* this is not making my modal custom :(  */
 #modal-custom {
-    background-color: aqua;
+  background-color: aqua;
 }
 
 .modal-btn {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
 }

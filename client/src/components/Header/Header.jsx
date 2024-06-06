@@ -7,9 +7,9 @@ import './header.css';
 function Navigation() {
   const currentPage = useLocation().pathname;
   return (
-    <nav>
+    <nav id="custom-nav">
       <ul className='nav nav-tabs nav-justified'>
-        <li className='nav-item'>
+        <li id='custom-nav' className='nav-item'>
           <Link 
             to='/' 
             className={currentPage === '/' ? 'nav-link active' : 'nav-link'}
