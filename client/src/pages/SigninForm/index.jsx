@@ -31,6 +31,12 @@ const SigninForm = () => {
   const [login, { loginError }] = useMutation(LOGIN_USER);
   const [add, { addError }] = useMutation(ADD_USER);
 
+  const [lengthValid, setLengthValid] = useState(false);
+  const [lowercaseValid, setLowercaseValid] = useState(false);
+  const [uppercaseValid, setUppercaseValid] = useState(false);
+  const [numberValid, setNumberValid] = useState(false);
+  const [specialValid, setSpecialValid] = useState(false);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     switch (name) {
@@ -48,6 +54,11 @@ const SigninForm = () => {
         break;
       case "signupPassword":
         setSignupPassword(value);
+        setLengthValid(value.length >= 8);
+        setLowercaseValid(/[a-z]/.test(value));
+        setUppercaseValid(/[A-Z]/.test(value));
+        setNumberValid(/\d/.test(value));
+        setSpecialValid(/[@$!%*?&]/.test(value));
         break;
       default:
         break;
@@ -65,7 +76,7 @@ const SigninForm = () => {
     } else if (name === "signupUsername" && !value.trim()) {
       setErrorMessage("Invalid Username");
     } else if (name === "signupPassword" && !value.trim()) {
-      setErrorMessage("Invalid Password");
+      setErrorMessage("Invalid Password Password must be at least 8 characters long with at least one lowercase letter, one uppercase letter, one digit, and one special character (@$!%*?&)");
     } else {
       setErrorMessage("");
     }
@@ -127,12 +138,25 @@ const SigninForm = () => {
     setSignupEmail("");
     setSignupUsername("");
     setSignupPassword("");
+    setLengthValid(false);
+    setLowercaseValid(false);
+    setUppercaseValid(false);
+    setNumberValid(false);
+    setSpecialValid(false);
   };
 
   const toggleSignupForm = () => {
     setErrorMessage("");
     setSignupForm(!signupForm); // Toggle the signupForm state
   };
+
+  const isSignupButtonDisabled = !(
+    lengthValid &&
+    lowercaseValid &&
+    uppercaseValid &&
+    numberValid &&
+    specialValid
+  );
 
   return (
     <div className="auth-container">
@@ -171,7 +195,14 @@ const SigninForm = () => {
                 placeholder="Password"
                 required
               />
-              <button type="submit" className="signup-button">
+              <div id="passwordMessage">
+                <p className={lengthValid ? "valid" : "invalid"}>At least 8 characters {lengthValid && <span class="check-mark">✔ </span>}</p>
+                <p className={lowercaseValid ? "valid" : "invalid"}>At least one lowercase letter {lowercaseValid && <span class="check-mark">✔ </span>}</p>
+                <p className={uppercaseValid ? "valid" : "invalid"}>At least one uppercase letter {uppercaseValid && <span class="check-mark">✔ </span>}</p>
+                <p className={numberValid ? "valid" : "invalid"}>At least one number {numberValid && <span class="check-mark">✔ </span>}</p>
+                <p className={specialValid ? "valid" : "invalid"}>At least one special character (@$!%*?&) {specialValid && <span class="check-mark">✔ </span>}</p>
+              </div>
+              <button type="submit" className="signup-button" disabled={isSignupButtonDisabled}>
                 Signup!
               </button>
               <button

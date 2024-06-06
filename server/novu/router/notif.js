@@ -1,7 +1,7 @@
 import express from "express";
 import { createNotif } from "../controller/notif.js";
 
-const router = express.Router();
+// const router = express.Router();
 
 router.post('/', {createNotif});
 

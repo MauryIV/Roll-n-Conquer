@@ -5,6 +5,7 @@
   width: 100%;
   padding: 10%;
   height: auto;
+  width: 100%;
   background: linear-gradient(45deg, #603696, #80d6ff, #0dab76, #007bff);
   background-size: 400% 400%;
   animation: gradientFlow 5s ease infinite;
