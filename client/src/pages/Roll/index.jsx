@@ -10,6 +10,7 @@ const DiceRoller = () => {
   const [rollingAnimation, setAnimate] = useState("");
   const [numFlash, setNumFlash] = useState("‽");
   const [finalResult, setFinalResult] = useState(null);
+  const [buttonShake, setButtonShake] = useState(false);
 
   const loadRandomTheme = () => {
     const randomTheme = themes[Math.floor(Math.random() * themes.length)];
@@ -26,6 +27,7 @@ const DiceRoller = () => {
     if (rolling) return;
     setRolling(true);
     setAnimate("roll-animation");
+    
 
     let interval = setInterval(() => {
       setNumFlash(Math.floor(Math.random() * diceType) + 1);
@@ -88,7 +90,7 @@ const DiceRoller = () => {
     <div className="dice-roller">
       <h1>Dice Roller</h1>
       <div className="dice-type-selector">
-        <label>Select Dice Type: </label>
+        <h2>Select Dice Type: </h2>
         <select
           value={diceType}
           disabled={rolling}

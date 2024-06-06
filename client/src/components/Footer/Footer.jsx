@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer className="footer">
       <p>
-        Made with ‽ Tim, Vic, Maury, Hunter & Hinton | © {new Date().getFullYear()}
+        Made with ‽ by Tim, Vic, Maury, Hunter & Hinton | © {new Date().getFullYear()}
       </p>
     </footer>
   );
