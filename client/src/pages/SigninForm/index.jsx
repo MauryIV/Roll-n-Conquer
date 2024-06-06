@@ -172,7 +172,7 @@ const SigninForm = () => {
                 onChange={handleInputChange}
                 onBlur={handleInputBlur}
                 type="email"
-                placeholder="Email"
+                placeholder="Provide Your Email"
                 required
               />
               <label htmlFor="signupUsername">Username:</label>
@@ -182,7 +182,7 @@ const SigninForm = () => {
                 onChange={handleInputChange}
                 onBlur={handleInputBlur}
                 type="text"
-                placeholder="Username"
+                placeholder="Create Your Rando Status"
                 required
               />
               <label htmlFor="signupPassword">Password:</label>
@@ -192,7 +192,7 @@ const SigninForm = () => {
                 onChange={handleInputChange}
                 onBlur={handleInputBlur}
                 type="password"
-                placeholder="Password"
+                placeholder="Validate Your Rando Status"
                 required
               />
               <div id="passwordMessage">
@@ -233,7 +233,7 @@ const SigninForm = () => {
                 value={loginUsername}
                 onChange={handleInputChange}
                 onBlur={handleInputBlur}
-                placeholder="Username"
+                placeholder="Enter A Username"
                 required
               />
             </div>
@@ -245,7 +245,7 @@ const SigninForm = () => {
                 value={loginPassword}
                 onChange={handleInputChange}
                 onBlur={handleInputBlur}
-                placeholder="Password"
+                placeholder="Protect Your Randomness"
                 required
               />
             </div>

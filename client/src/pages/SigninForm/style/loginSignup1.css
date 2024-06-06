@@ -18,6 +18,9 @@
   --shadow-outer: 0px 5px 25px rgba(255, 255, 255, 0.2);
 }
 
+
+
+
 /* Background animation */
 @keyframes gradientFlow {
   0%, 100% {
@@ -41,6 +44,7 @@
   margin: 0;
   height: auto;
   font-family: "Vast Shadow", serif;
+  text-align: center;
 }
 
 /* Form containers */
@@ -127,6 +131,7 @@
 .form-group label {
   display: block;
   margin-bottom: 0.5rem;
+  text-align: center;
 }
 
 .form-group input {
@@ -198,3 +203,4 @@
     font-size: 0.8rem;
   }
 }
+

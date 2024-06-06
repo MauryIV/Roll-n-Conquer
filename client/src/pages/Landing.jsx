@@ -87,6 +87,7 @@ const LandingPage = () => {
   };
 
   return (
+    <div className="image-overlay">
     <div className="landing-page">
       <DiceAnimation />
       <div className="challenges-column">
@@ -142,6 +143,7 @@ const LandingPage = () => {
           </div>
         )}
       </div>
+    </div>
     </div>
   );
 };
