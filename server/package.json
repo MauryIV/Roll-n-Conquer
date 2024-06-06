@@ -8,6 +8,7 @@
     "seed": "node seeds/seed.js",
     "watch": "nodemon server.js && ws-server.js"
   },
+  "type": "module",
   "author": "",
   "license": "ISC",
   "dependencies": {
