@@ -19,7 +19,7 @@
   /* background: linear-gradient(45deg, #282c34, #eaeaea); */
   background-size: cover;
   /* animation: gradientFlow 5s ease infinite; */
-  background-image: url('./assets/svgs/images/leaderboardDice1.jpg');
+  background-image: url('./assets/images/leaderboardDice1.jpg');
   /* float: inherit; */
   border-style: none;
 }
