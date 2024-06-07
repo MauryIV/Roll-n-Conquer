@@ -40,7 +40,7 @@ const App = () => {
   return (
     <ApolloProvider client={client}>
       <Header />
-      <main className="main-container">
+      <main className="main-container vh-100">
         <div className="content-container">
           <div className="main-content">
             <Outlet />
