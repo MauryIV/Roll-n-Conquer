@@ -55,24 +55,7 @@ const startApolloServer = async () => {
     socket.on('disconnect', () => {
       console.log('User disconnected');
     });
-
-    // listen for activity ie. typing
-    // socket.on('activity', (name) => {
-    //   socket.broadcast.emit('activity', name)
-    // });
   });
 };
 
 startApolloServer();
-
-// NOVU components
-// const { notifRoute } = require("./novu/router/notif.js");
-// const bodyParser = require("body-parser");
-// const cors = require("cors");
-
-
-// NOVU notification
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-// app.use(cors());
-// app.use("/home", notifRoute);

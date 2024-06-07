@@ -30,7 +30,7 @@ input {
   top: 0;
   bottom: 0;
   width: 50%;
-  background-image: url('../../../assets/svgs/images/Interrobang3.png');
+  background-image: url('../../../assets/images/Interrobang3.png');
   background-size: 50% 50%; /* Double the width for split image */
   background-repeat: no-repeat;
   z-index: -1; /* Ensure background is behind content */

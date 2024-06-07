@@ -11,7 +11,33 @@ export const GET_ME = gql`
       losses
       ties
       streak
-      difference
+      daily
+      challenges {
+        _id
+        userOne
+        userTwo
+        d4One
+        d6One
+        d8One
+        d10One
+        d12One
+        d20One
+        d100One
+        d4Two
+        d6Two
+        d8Two
+        d10Two
+        d12Two
+        d20Two
+        d100Two
+      }
+      messages {
+        _id
+        userOne
+        userTwo
+        msgOne
+        msgTwo
+      }
       friendslist {
         _id
         username
@@ -29,7 +55,37 @@ export const GET_USERS = gql`
       losses
       ties
       streak
-      difference
+      daily
+      challenges {
+        _id
+        userOne
+        userTwo
+        d4One
+        d6One
+        d8One
+        d10One
+        d12One
+        d20One
+        d100One
+        d4Two
+        d6Two
+        d8Two
+        d10Two
+        d12Two
+        d20Two
+        d100Two
+      }
+      messages {
+        _id
+        userOne
+        userTwo
+        msgOne
+        msgTwo
+      }
+      friendslist {
+        _id
+        username
+      }
     }
   }
 `;
