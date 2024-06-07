@@ -1,127 +1,62 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Auth from "../../utils/auth";
 import "../../App.css";
 import "./friendlist.css";
-import { getUser, getAll } from "../../utils/userQueries";
+import { getUser } from "../../utils/userQueries";
+import io from "socket.io-client";
+const socket = io("ws://localhost:3001");
 
-const FriendListModal = ({ }) => {
+const FriendListModal = () => {
   const myModalRef = useRef(null);
+
   const [selectedFriend, setSelectedFriend] = useState(null);
-  const [challengeSent, setChallengeSent] = useState(false);
   const [message, setMessage] = useState("");
   const [messageSent, setMessageSent] = useState(false);
-  const [challenges, setChallenges] = useState([]);
-  const [challenge, setChallenge] = useState("");
-  const [socket, setSocket] = useState(null);
-  const { friends } = getUser();
-  // with WebSockets echo, we can confirm that messages are being sent
-  // may want to look at the message being save to the db and parsed out after
-  useEffect(() => {
-    const newSocket = new WebSocket("ws://localhost:8080");
-    newSocket.onopen = () => {
-      console.log("Connected to the server");
-    };
-    newSocket.onmessage = (event) => {
-      console.log("Message sent:", event.data);
-      if (event.data.startsWith("Echo: ")) {
-        const jsonStr = event.data.slice("Echo: ".length);
-        try {
-          const parsedMessage = JSON.parse(jsonStr);
-          setChallenges((prevChallenges) => [
-            ...prevChallenges,
-            {
-              from: parsedMessage.from,
-              text: parsedMessage.text,
-            },
-          ]);
-        } catch (error) {
-          console.error("Error parsing JSON:", error);
-        }
-      }
-    };
-    newSocket.onclose = () => {
-      console.log("Disconnected from the server");
-    };
-    newSocket.onerror = (error) => {
-      console.error("WebSocket error:", error);
-    };
-    setSocket(newSocket);
-    return () => {
-      newSocket.close();
-    };
-  }, []);
+  const [challengeSent, setChallengeSent] = useState(false);
 
-  const handleChallenge = (friend) => {
-    setSelectedFriend(friend);
-    setChallengeSent(true);
-    sendChallenge("Challenge message", friend.username);
-  };
+  const { friends, challenges, messages } = getUser();
 
   const handleMessage = () => {
-    if (selectedFriend) {
+    if (selectedFriend && message) {
       sendMessage(message, selectedFriend.username);
       setMessage("");
       setMessageSent(true);
+      setTimeout(() => {
+        setMessageSent(false);
+      }, 2000);
     } else {
-      console.warn("No friend selected to send the message to.");
-    }
-
-  };
-
-  // use logic to have dice roll happen
-  const sendChallenge = (text, selectedFriendUsername) => {
-    const trimmedText = text.toString().trim();
-    console.log("Sending challenge:", trimmedText, selectedFriendUsername);
-
-    if (socket && trimmedText && selectedFriendUsername) {
-      socket.send(
-        JSON.stringify({
-          from: Auth.getUsername(),
-          to: selectedFriendUsername,
-          text: trimmedText,
-        })
-      );
-      setChallenges((prevChallenges) => [
-        ...prevChallenges,
-        {
-          from: Auth.getUsername(),
-          to: selectedFriendUsername,
-          text: trimmedText,
-        },
-      ]);
-      setChallenge("");
-    } else {
-      console.warn("Unable to send challenge:", {
-        socket,
-        trimmedText,
-        selectedFriendUsername,
-      });
+      console.log("Invalid message");
     }
   };
 
-  const sendMessage = (text, selectedFriendUsername) => {
+  const sendMessage = (text, selectedFriend) => {
     const trimmedText = text.toString().trim();
-    console.log("Sending message:", trimmedText, selectedFriendUsername);
+    console.log("Sending message:", trimmedText, selectedFriend);
+    socket.emit("message", {
+      from: Auth.getUsername(),
+      to: selectedFriend,
+      text: trimmedText,
+    });
+  };
 
-    if (socket && trimmedText && selectedFriendUsername) {
-      socket.send(
-        JSON.stringify({
-          from: Auth.getUsername(),
-          to: selectedFriendUsername,
-          text: trimmedText,
-        })
-      );
-      setChallenges((prevChallenges) => [
-        ...prevChallenges,
-        { from: "me", text: trimmedText },
-      ]);
+  const handleChallenge = (selectedFriend) => {
+    if (selectedFriend) {
+      sendChallenge(selectedFriend.username);
+      setChallengeSent(true);
+      setTimeout(() => {
+        setChallengeSent(false);
+      }, 2000);
     } else {
-      console.warn("Unable to send message:", {
-        socket,
-        trimmedText,
-        selectedFriendUsername,
-      });
+      console.log("Unable to send challenge");
     }
+  };
+
+  const sendChallenge = (selectedFriendUsername) => {
+    console.log("Sending challenge to ", selectedFriendUsername);
+    socket.emit("challenge", {
+      from: Auth.getUsername(),
+      to: selectedFriend,
+    });
   };
 
   return (
@@ -177,11 +112,10 @@ const FriendListModal = ({ }) => {
                             className="btn btn-primary"
                             onClick={handleMessage}
                           >
-                            Send Message
+                            {messageSent && selectedFriend === friend
+                              ? "Message Sent"
+                              : "Send Message"}
                           </button>
-                          {messageSent && (
-                            <p className="mt-2 text-success">Message sent!</p>
-                          )}
                         </div>
                       )}
                     </div>
