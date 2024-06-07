@@ -1,5 +1,7 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
+const messageSchema = require('./Messages');
+const challengeSchema = require('./Challenges');
 const friendsSchema = require('./friends');
 
 var validateEmail = function (email) {
@@ -42,10 +44,8 @@ const userSchema = new Schema (
       type: Number,
       default: 0
     },
-    difference: {
-      type: Number,
-      default: 0
-    },
+    challenges: [challengeSchema],
+    messages: [messageSchema],
     friendslist: [friendsSchema]
   },
   {

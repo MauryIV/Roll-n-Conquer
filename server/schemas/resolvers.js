@@ -1,4 +1,4 @@
-const { User, Dice } = require("../models");
+const { User } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
 
 const resolvers = {
@@ -12,10 +12,6 @@ const resolvers = {
     },
     users: async () => {
       return await User.find({}).sort({ wins: -1 });
-    },
-    pickDice: async (parent, { dice }) => {
-      const diceData = await Dice.findAll({dicesize: dice });
-      return diceData;
     }
   },
   
@@ -41,9 +37,9 @@ const resolvers = {
       return { token, user };
     },
 
-    addFriend: async (parent, { username, wins, losses, ties, streak, difference }, context) => {
+    addFriend: async (parent, { username, wins, losses, ties, streak }, context) => {
       if (context.user) {
-        const friend = { username, wins, losses, ties, streak, difference };
+        const friend = { username, wins, losses, ties, streak };
         const friendlyUser = await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { friendslist: friend } },
@@ -54,14 +50,51 @@ const resolvers = {
       throw AuthenticationError;
     },
 
-    // record game outcome
-    recordOutcome: async (parent, { username, wins, losses, ties, streak, difference }) => {
-      const user = await User.findOneAndUpdate(
-        { _id: context.user._id },
-        { $inc: { wins, losses, ties, streak, difference } }
-      );
-      return user;
+    recordStats: async (parent, { wins, losses, ties, streak, daily }, context) => {
+      if (context.user) {
+        // Build the increment object dynamically based on provided arguments
+        const incrementFields = {};
+        if (wins !== undefined) incrementFields.wins = wins;
+        if (losses !== undefined) incrementFields.losses = losses;
+        if (ties !== undefined) incrementFields.ties = ties;
+        if (streak !== undefined) incrementFields.streak = streak;
+        if (daily !== undefined) incrementFields.daily = daily;
+        let userStats = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $inc: incrementFields },
+          { new: true }
+        );
+        return userStats;
+      }
+      throw AuthenticationError;
     },
+
+    addChallenge: async (parent, { userOne, userTwo, d4One, d6One, d8One, d10One, d12One, d20One, d100One, d4Two, d6Two, d8Two, d10Two, d12Two, d20Two, d100Two }, context) => {
+      if (context.user) {
+        const challenge = { userOne, userTwo, d4One, d6One, d8One, d10One, d12One, d20One, d100One, d4Two, d6Two, d8Two, d10Two, d12Two, d20Two, d100Two };
+        const userChallenge = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { challenges: challenge } },
+          { new: true }
+        ).populate("challenges");
+        return userChallenge;
+      }
+      throw AuthenticationError;
+    },
+
+    addMessage: async (parent, { userOne, userTwo, msgOne, msgTwo }, context) => {
+      if (context.user) {
+        const message = { userOne, userTwo, msgOne, msgTwo };
+        const userMsg = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { messages: message } },
+          { new: true }
+        ).populate("messages");
+        return userMsg;
+      }
+      throw AuthenticationError;
+    },
+
   }
 };
 

@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import "../App.css";
-import './Landing/style/landing1.css'
+import "./Landing/style/landing1.css";
 import DiceAnimation from "../components/DiceAnimation";
 import { landing1 } from "./Landing/style";
-import FriendListModal from "../components/TestFriendList";
+import FriendListModal from "../components/FriendList/FriendList";
 import { useMutation } from "@apollo/client";
 import { getUser, getAll } from "../utils/userQueries";
 import { ADD_FRIEND } from "../utils/mutations";
@@ -19,10 +19,10 @@ const LandingPage = () => {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedFriend, setSelectedFriend] = useState(null);
-  const [challenges, setChallenges] = useState([]);
+  const [addedFriends, setAddedFriends] = useState([]);
 
   const { loading: usersLoading, error: usersError, users } = getAll();
-  const { friends } = getUser();
+  const { friends, challenges, messages } = getUser();
   const [addFriend] = useMutation(ADD_FRIEND);
 
   const filteredUsers = users.filter((user) =>
@@ -33,30 +33,46 @@ const LandingPage = () => {
     // messages
     socket.on("message", (data) => {
       const { from, to, text } = data;
-  // adding a class name
       // shows message as sending user
       if (from === Auth.getUsername()) {
-        const liSent = document.createElement('li');
-        liSent.className = 'sentMsg'
-        liSent.innerHTML = `<span>${text}</span>`
-        document.getElementById('convos').appendChild(liSent)
+        const liSent = document.createElement("li");
+        liSent.className = "sentMsg";
+        liSent.innerHTML = `<span>${text}</span>`;
+        document.getElementById("convos").appendChild(liSent);
       }
       // shows message to receiving user
       if (to === Auth.getUsername()) {
-        const liReceived = document.createElement('li');
-        liReceived.className = 'receivedMsg';
-        liReceived.innerHTML = `<span>${text}</span>`
-        document.getElementById('convos').appendChild(liReceived)
-      } 
+        const liReceived = document.createElement("li");
+        liReceived.className = "receivedMsg";
+        liReceived.innerHTML = `<span>${text}</span>`;
+        document.getElementById("convos").appendChild(liReceived);
+      }
+    });
+
+    // challenges
+    socket.on("challenge", (data) => {
+      const { from, to } = data;
+      const li = document.createElement("li");
+      li.className = "challengeMsg";
+      // shows challenge from sending user
+      if (from === Auth.getUsername()) {
+        li.innerHTML = `<span>Challenge sent to ${to}!</span>`;
+      }
+      // shows challenge to receiving user
+      if (to === Auth.getUsername()) {
+        li.innerHTML = `<span>Challenge received from ${from}!</span>`;
+      }
+      document.getElementById("battles").appendChild(li);
     });
 
     return () => {
-      // Clean up the socket listener when the component unmounts
+      // Clean up the socket listeners when the component unmounts
       socket.off("message");
+      socket.off("challenge");
     };
   }, []);
 
-  const newFriend = async (user) => {
+  const handleAddFriend = async (user) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
     if (!token) {
       console.log("No token provided");
@@ -74,6 +90,7 @@ const LandingPage = () => {
             },
           },
         });
+        setAddedFriends([...addedFriends, user.username]);
       } catch (err) {
         console.error("An error occurred: ", err);
       }
@@ -82,94 +99,62 @@ const LandingPage = () => {
 
   return (
     <div className="image-overlay">
-    <div className="landing-page">
-      <DiceAnimation />
-      <div className="challenges-column">
-        <h1>Challenges</h1>
-        <FriendListModal
-          friends={friends}
-          selectedFriend={selectedFriend}
-          setSelectedFriend={setSelectedFriend}
-        />
-        <div id="convos">
-
+      <div className="landing-page">
+        <DiceAnimation />
+        <div className="challenges-column">
+          <FriendListModal
+            friends={friends}
+            selectedFriend={selectedFriend}
+            setSelectedFriend={setSelectedFriend}
+          />
+          <h1>Challenges</h1>
+          <div id="battles"></div>
+          <h1>Messages</h1>
+          <div id="convos"></div>
         </div>
-        <div id="challenges">
-
+        <div className="users-column">
+          <h1>Users</h1>
+          <input
+            type="text"
+            placeholder="Search users..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          {usersLoading ? (
+            <div>Loading...</div>
+          ) : (
+            <div>
+              {filteredUsers.map((user) => (
+                <p key={user._id}>
+                  {user.username} - {user.wins} wins
+                  {Auth.loggedIn() ? (
+                    !friends.some(
+                      (friend) => friend.username === user.username
+                    ) && !addedFriends.includes(user.username) ? (
+                      <button onClick={() => handleAddFriend(user)}>
+                        Add Friend‽
+                      </button>
+                    ) : user.username === Auth.getProfile().data.username ? (
+                      <button disabled>
+                        I hope you're friends with yourself
+                      </button>
+                    ) : (
+                      <button disabled>Y'all be friends!</button>
+                    )
+                  ) : null}
+                </p>
+              ))}
+            </div>
+          )}
+          {usersError && (
+            <div className="my-3 p-3 bg-danger text-white">
+              {usersError.message}
+            </div>
+          )}
         </div>
       </div>
-      <div className="users-column">
-        <h1>Users</h1>
-        <input
-          type="text"
-          placeholder="Search users..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-        {usersLoading ? (
-          <div>Loading...</div>
-        ) : (
-          <div>
-            {filteredUsers.map((user) => (
-              <p key={user._id}>
-                {user.username} - {user.wins} wins
-                {Auth.loggedIn() ? (
-                  !friends.some((friend) => friend.username === user.username) ? (
-                    <button onClick={() => newFriend(user)}>Add Friend‽</button>
-                  ) : user.username === Auth.getProfile().data.username ? (
-                    <button disabled>I hope you're friends with yourself</button>
-                  ) : (
-                    <button disabled>Y'all be friends!</button>
-                  )
-                ) : null}
-              </p>
-            ))}
-          </div>
-        )}
-        {usersError && (
-          <div className="my-3 p-3 bg-danger text-white">
-            {usersError.message}
-          </div>
-        )}
-      </div>
-    </div>
     </div>
   );
 };
 
 export default LandingPage;
-
-
-  // We are not receiving any messages though
-  // possibly parse out messages that are sent and saved to a DB
-  // useEffect(() => {
-  //   const newSocket = new WebSocket("ws://localhost:8080");
-  //   newSocket.onopen = () => {
-  //     console.log("Connected to the client");
-  //   };
-  //   newSocket.onmessage = (event) => {
-  //     console.log("Message received:", event.data);
-  //     if (event.data.startsWith("Echo: ")) {
-  //       const jsonStr = event.data.slice("Echo: ".length);
-  //       try {
-  //         const parsedMessage = JSON.parse(jsonStr);
-  //         setChallenges((prevChallenges) => [
-  //           ...prevChallenges,
-  //           {
-  //             from: parsedMessage.from,
-  //             text: parsedMessage.text,
-  //           },
-  //         ]);
-  //       } catch (error) {
-  //         console.error("Error parsing JSON:", error);
-  //       }
-  //     }
-  //   };
-  //   newSocket.onclose = () => {
-  //     console.log("Disconnected from the server");
-  //   };
-  //   setSocket(newSocket);
-  //   return () => {
-  //     newSocket.close();
-  //   };
-  // }, []);
