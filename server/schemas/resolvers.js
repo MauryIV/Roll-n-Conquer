@@ -11,7 +11,7 @@ const resolvers = {
       return userData;
     },
     users: async () => {
-      return await User.find({}).sort({ wins: -1 });
+      return await User.find({}).sort({ daily: -1 });
     }
   },
   

@@ -10,6 +10,7 @@ input {
 .landing-page {
   position: relative; /* Ensure content is positioned relative to this container */
   width: 100%;
+  min-height: 100%;
   padding: 20px;
   overflow: hidden; /* Prevent any overflow from animations */
   font-family: "Vast Shadow", serif;
