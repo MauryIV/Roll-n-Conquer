@@ -41,7 +41,7 @@ const App = () => {
     <ApolloProvider client={client}>
       <Header />
       <main className="main-container vh-100">
-        <div className="content-container">
+        <div className="content-container vh-100">
           <div className="main-content">
             <Outlet />
             {location.pathname !== "/" && (
