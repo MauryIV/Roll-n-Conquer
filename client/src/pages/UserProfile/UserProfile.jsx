@@ -8,10 +8,10 @@ const UserProfile = ({ user }) => {
   useEffect(() => {
     const layouts = ['layout1', 'layout2', 'layout3', 'layout4'];
 
-const { userinfo } = getUser();
+//const { userinfo } = getUser();
 
 
-console.log(userinfo);
+// console.log(userinfo);
 
     // Select a random layout
     const randomLayout = layouts[Math.floor(Math.random() * layouts.length)];
@@ -32,7 +32,7 @@ console.log(userinfo);
           <h1 className="profile-title">User Profile</h1>
           <div className="stats layout1">
             <div className="stat-item stat-item1">W / L</div>
-            <div>{userinfo.wins}</div>
+            {/* <div>{userinfo.wins}</div> */}
             <div className="stat-item stat-item2">Win Streak</div>
             <div className="stat-item stat-item3">Daily Wins</div>
             <div className="stat-item stat-item4">Largest Spread</div>
