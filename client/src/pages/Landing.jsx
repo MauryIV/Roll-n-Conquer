@@ -20,14 +20,24 @@ const LandingPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedFriend, setSelectedFriend] = useState(null);
   const [addedFriends, setAddedFriends] = useState([]);
+  const [displayCount, setDisplayCount] = useState(10);
 
   const { loading: usersLoading, error: usersError, users } = getAll();
   const { friends, challenges, messages } = getUser();
   const [addFriend] = useMutation(ADD_FRIEND);
 
-  const filteredUsers = users.filter((user) =>
-    user.username.includes(searchQuery)
-  );
+  // for user render
+  const filteredUsers = users.filter(user =>
+    user.username.toLowerCase().includes(searchQuery.toLowerCase())
+  ).slice(0, displayCount);
+
+  const handleLoadMore = () => {
+    setDisplayCount(displayCount + 10);
+  };
+
+  useEffect(() => {
+    setDisplayCount(10);
+  }, [searchQuery]);
 
   useEffect(() => {
     // messages
@@ -126,7 +136,7 @@ const LandingPage = () => {
             <div>
               {filteredUsers.map((user) => (
                 <p key={user._id}>
-                  {user.username} - {user.wins} wins
+                  {user.username} - {user.daily} daily wins
                   {Auth.loggedIn() ? (
                     !friends.some(
                       (friend) => friend.username === user.username
@@ -144,6 +154,9 @@ const LandingPage = () => {
                   ) : null}
                 </p>
               ))}
+              {displayCount < users.length && (
+                <button onClick={handleLoadMore}>Load More</button>
+              )}
             </div>
           )}
           {usersError && (
