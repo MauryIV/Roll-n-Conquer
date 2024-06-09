@@ -40,7 +40,7 @@ const startApolloServer = async () => {
   
   const io = new Server(expressServer, { 
     cors: {
-      origin: process.env.NODE_ENV === "production" ? false : ["http://localhost:3000", "10.0.0.199:3000"]
+      origin: process.env.NODE_ENV === "production" ? "https://roll-n-conquer.onrender.com" : ["http://localhost:3000", "10.0.0.199:3000"]
     }
   });
 

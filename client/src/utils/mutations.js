@@ -28,7 +28,7 @@ export const ADD_USER = gql`
 
 export const ADD_FRIEND = gql`
   mutation AddFriend($username: String!, $wins: Int, $losses: Int, $ties: Int, $streak: Int, $daily: Int) {
-    addFriend(username: $username, wins: $wins, losses: $losses, ties: $ties, streak: $streak, daily: $daily) {
+    addFriend(username: $username, wins: $wins, losses: $losses, ties: $ties, streak: $streak, daily: $daily, dailyWins: $dailyWins) {
       _id
       username
       wins
@@ -36,19 +36,31 @@ export const ADD_FRIEND = gql`
       ties
       streak
       daily
+      dailyWins
     }
   }
 `;
 
 export const RECORD_STATS = gql`
   mutation RecordStats($username: String!, $wins: Int, $losses: Int, $ties: Int, $streak: Int, $daily: Int) {
-    recordStats(username: $username, wins: $wins, losses: $losses, ties: $ties, streak: $streak, daily: $daily) {
+    recordStats(username: $username, wins: $wins, losses: $losses, ties: $ties, streak: $streak, daily: $daily, dailyWins: $dailyWins) {
       _id
       username
       wins
       losses
       ties
       streak
+      daily
+      dailyWins
+    }
+  }
+`;
+
+export const UPDATE_DAILY = gql`
+  mutation UpdateDaily($daily: Int!) {
+    updateDaily(daily: $daily) {
+      _id
+      username
       daily
     }
   }

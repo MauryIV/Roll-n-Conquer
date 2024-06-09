@@ -26,10 +26,12 @@ const LandingPage = () => {
   const { friends, challenges, messages } = getUser();
   const [addFriend] = useMutation(ADD_FRIEND);
 
-  // for user render
-  const filteredUsers = users.filter(user =>
-    user.username.toLowerCase().includes(searchQuery.toLowerCase())
-  ).slice(0, displayCount);
+  // for rendering users list, organized by daily wins, with search bar
+  const filteredUsers = users
+    .filter((user) =>
+      user.username.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+    .slice(0, displayCount);
 
   const handleLoadMore = () => {
     setDisplayCount(displayCount + 10);
@@ -134,26 +136,28 @@ const LandingPage = () => {
             <div>Loading...</div>
           ) : (
             <div>
-              {filteredUsers.map((user) => (
-                <p key={user._id}>
-                  {user.username} - {user.daily} daily wins
-                  {Auth.loggedIn() ? (
-                    !friends.some(
-                      (friend) => friend.username === user.username
-                    ) && !addedFriends.includes(user.username) ? (
-                      <button onClick={() => handleAddFriend(user)}>
-                        Add Friend‽
-                      </button>
-                    ) : user.username === Auth.getProfile().data.username ? (
-                      <button disabled>
-                        I hope you're friends with yourself
-                      </button>
-                    ) : (
-                      <button disabled>Y'all be friends!</button>
-                    )
-                  ) : null}
-                </p>
-              ))}
+              {filteredUsers
+                .sort((a, b) => b.dailyWins - a.dailyWins)
+                .map((user) => (
+                  <p key={user._id}>
+                    {user.username} - {user.dailyWins} daily wins
+                    {Auth.loggedIn() ? (
+                      !friends.some(
+                        (friend) => friend.username === user.username
+                      ) && !addedFriends.includes(user.username) ? (
+                        <button onClick={() => handleAddFriend(user)}>
+                          Add Friend‽
+                        </button>
+                      ) : user.username === Auth.getProfile().data.username ? (
+                        <button disabled>
+                          I hope you're friends with yourself
+                        </button>
+                      ) : (
+                        <button disabled>Y'all be friends!</button>
+                      )
+                    ) : null}
+                  </p>
+                ))}
               {displayCount < users.length && (
                 <button onClick={handleLoadMore}>Load More</button>
               )}
