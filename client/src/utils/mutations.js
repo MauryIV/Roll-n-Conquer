@@ -57,8 +57,8 @@ export const RECORD_STATS = gql`
 `;
 
 export const UPDATE_DAILY = gql`
-  mutation UpdateDaily($daily: Int!) {
-    updateDaily(daily: $daily) {
+  mutation UpdateDaily {
+    updateDaily {
       _id
       username
       daily
