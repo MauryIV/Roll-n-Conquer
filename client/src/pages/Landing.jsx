@@ -12,6 +12,8 @@ import { useRandomTheme } from "../utils/helpers";
 import io from "socket.io-client";
 const socket = io("ws://localhost:3001");
 
+import Navbar from './Navbar/Navbar';
+
 const themes = [landing1];
 
 const LandingPage = () => {
@@ -111,6 +113,7 @@ const LandingPage = () => {
 
   return (
     <div className="image-overlay">
+      <Navbar socket={socket} />
       <div className="landing-page">
         <DiceAnimation />
         <div className="challenges-column">
