@@ -41,14 +41,27 @@ const startApolloServer = async () => {
   const io = new Server(expressServer, { 
     cors: {
       origin: process.env.NODE_ENV === "production" ? "https://roll-n-conquer.onrender.com" : ["http://localhost:3000", "10.0.0.199:3000"],
-      methods: ["GET", "POST", "PUT", "DELETE"],
       allowedHeaders: ["Content-Type", "Authorization", "X-Auth-Token"],
-      credentials: true
     }
   });
+//notification socket
+  const getUser = (username) => {
+    return onlineUsers.find((user) => user.username === username);
+  };
+//end notification socket
 
   io.on('connection', (socket) => {
     console.log('User connected');
+
+    //notification socket
+    socket.on("sendNotification", ({ senderName, receiverName, type }) => {
+      const receiver = getUser(receiverName);
+      io.to(receiver.socketId).emit("getNotification", {
+        senderName,
+        type,
+      });
+    });
+    // end notification socket
 
     socket.on('message', (data) => {
       console.log('Message received: ', data);
