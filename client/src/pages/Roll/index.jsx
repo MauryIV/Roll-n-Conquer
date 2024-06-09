@@ -12,7 +12,8 @@ const DiceRoller = () => {
   const [numFlash, setNumFlash] = useState("‽");
   const [finalResult, setFinalResult] = useState(null);
   const [buttonShake, setButtonShake] = useState(false);
-
+  const [challengeRoll, setChallengeRoll] = useState(false);
+  const [dailyRoll, setDailyRoll] = useState(false)
   const loadRandomTheme = () => {
     const randomTheme = themes[Math.floor(Math.random() * themes.length)];
     const styleElement = document.createElement("style");
@@ -23,6 +24,18 @@ const DiceRoller = () => {
   useEffect(() => {
     loadRandomTheme();
   }, []);
+
+  useEffect(() => {
+    if(dailyRoll){
+      setDiceType(100);
+      setNumFlash("‽")
+      console.log('daily roll activated')
+    }
+  }, [dailyRoll]);
+
+  const handleDailyRollClick = () => {
+    setDailyRoll(true);
+  };
 
   const rollDice = () => {
     if (rolling) return;
@@ -38,6 +51,7 @@ const DiceRoller = () => {
       clearInterval(interval);
       setRolling(false);
       setAnimate("");
+      setDailyRoll(false)
       const finalRoll = Math.floor(Math.random() * diceType) + 1;
       setNumFlash(finalRoll);
       // Use this for the Current users roll value to be passed into the challenge roll
@@ -101,18 +115,28 @@ const DiceRoller = () => {
             setNumFlash("‽");
           }}
         >
-          <option value={4}>D4</option>
-          <option value={6}>D6</option>
-          <option value={8}>D8</option>
-          <option value={10}>D10</option>
-          <option value={12}>D12</option>
-          <option value={20}>D20</option>
-          <option value={100}>D100</option>
+          {dailyRoll ? (
+            <option value={100}>D100</option>
+          ) : (
+            <>
+              <option value={4}>D4</option>
+              <option value={6}>D6</option>
+              <option value={8}>D8</option>
+              <option value={10}>D10</option>
+              <option value={12}>D12</option>
+              <option value={20}>D20</option>
+              <option value={100}>D100</option>
+            </>
+          )}
         </select>
       </div>
       
       <div className={`roll-dice-container ${rollingAnimation}`}>
-      
+        {!rolling && (
+          <button className="daily-btn" onClick={handleDailyRollClick}>
+            Daily Roll
+          </button>
+        )}
         <img
           src={`../src/assets/svgs/sharpAlt2/d${diceType}.svg`}
           alt={`D${diceType}`}
@@ -134,7 +158,7 @@ const DiceRoller = () => {
           </div>
         )}
       </div>
-      <button className="die-btn" onClick={rollDice} disabled={rolling}>
+      <button className="die-btn" onClick={rollDice} >
         Roll Dice
       </button>
     </div>
