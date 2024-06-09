@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import './userProfile.css';
 import FriendListModal from '../../components/FriendList/FriendList';
 import { getUser } from "../../utils/userQueries";
+import auth from "../../utils/auth";
 
 const UserProfile = ({ user }) => {
   const { wins, losses, ties, streak, difference } = getUser();
@@ -26,15 +27,17 @@ const UserProfile = ({ user }) => {
         <FriendListModal />
         <div className="stats-container">
           <h1 className="profile-title">User Profile</h1>
-          <div className="stats layout1">
-            <div className="stat-item stat-item1">W / L / T <br />
-            {wins}/{losses}/{ties}</div>
-            <div className="stat-item stat-item2">Win Streak <br />
-            {streak}</div>
-            <div className="stat-item stat-item3">Daily Wins</div>
-            <div className="stat-item stat-item4">Largest Spread <br />
-            {difference}</div>
-          </div>
+          {!auth.loggedIn() ? (<></>) : (
+            <div className="stats layout1">
+              <div className="stat-item stat-item1">W / L / T <br />
+              {wins}/{losses}/{ties}</div>
+              <div className="stat-item stat-item2">Win Streak <br />
+              {streak}</div>
+              <div className="stat-item stat-item3">Daily Wins</div>
+              <div className="stat-item stat-item4">Largest Spread <br />
+              {difference}</div>
+            </div>
+          )}
         </div>
       </div>
     </div>

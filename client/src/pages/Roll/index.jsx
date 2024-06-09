@@ -59,8 +59,6 @@ const DiceRoller = () => {
     }, 6000);
   };
 
-  console.log(finalResult);
-
   const diceNums = {
     4: {
       paddingBottom: "40px",

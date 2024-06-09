@@ -12,6 +12,7 @@ export const GET_ME = gql`
       ties
       streak
       daily
+      dailyWins
       challenges {
         _id
         userOne
@@ -56,6 +57,7 @@ export const GET_USERS = gql`
       ties
       streak
       daily
+      dailyWins
       challenges {
         _id
         userOne

@@ -1,4 +1,4 @@
-button {
+.btn {
   margin: 5px;
   padding: 10px 20px;
   background-color: #2f243a;
@@ -9,7 +9,7 @@ button {
   box-shadow: 0 0 10px rgba(13, 171, 118, 0.5); /* Glowing shadow effect */
 }
 
-button:hover {
+.btn:hover {
   background-color: #0056b3;
 
   background: linear-gradient(

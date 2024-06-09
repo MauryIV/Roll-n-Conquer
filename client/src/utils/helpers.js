@@ -21,3 +21,29 @@ export const useRandomTheme = (themes) => {
     loadRandomTheme();
   }, []);
 };
+
+// daily resets
+function msUntilMidnight() {
+  const now = new Date();
+  const midnight = new Date();
+  midnight.setHours(24, 0, 0, 0);
+  return midnight - now;
+}
+
+const theDailyReset = () => {
+  setTimeout(() => {
+    dailyReset();
+    console.log('Daily reset function executed at', new Date());
+  
+    // Schedule subsequent executions every 24 hours
+    setInterval(dailyReset, 24 * 60 * 60 * 1000);
+  }, msUntilMidnight());
+}
+
+export const dailyReset = () => {
+  const now = new Date();
+  console.log(now)
+  // leaderboard shows days winners
+}
+
+theDailyReset();

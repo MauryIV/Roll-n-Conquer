@@ -40,8 +40,8 @@ const App = () => {
   return (
     <ApolloProvider client={client}>
       <Header />
-      <main className="main-container">
-        <div className="content-container">
+      <main className="main-container vh-100">
+        <div className="content-container vh-100">
           <div className="main-content">
             <Outlet />
             {location.pathname !== "/" && (

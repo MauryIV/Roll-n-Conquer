@@ -20,14 +20,26 @@ const LandingPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedFriend, setSelectedFriend] = useState(null);
   const [addedFriends, setAddedFriends] = useState([]);
+  const [displayCount, setDisplayCount] = useState(10);
 
   const { loading: usersLoading, error: usersError, users } = getAll();
   const { friends, challenges, messages } = getUser();
   const [addFriend] = useMutation(ADD_FRIEND);
 
-  const filteredUsers = users.filter((user) =>
-    user.username.includes(searchQuery)
-  );
+  // for rendering users list, organized by daily wins, with search bar
+  const filteredUsers = users
+    .filter((user) =>
+      user.username.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+    .slice(0, displayCount);
+
+  const handleLoadMore = () => {
+    setDisplayCount(displayCount + 10);
+  };
+
+  useEffect(() => {
+    setDisplayCount(10);
+  }, [searchQuery]);
 
   useEffect(() => {
     // messages
@@ -124,26 +136,31 @@ const LandingPage = () => {
             <div>Loading...</div>
           ) : (
             <div>
-              {filteredUsers.map((user) => (
-                <p key={user._id}>
-                  {user.username} - {user.wins} wins
-                  {Auth.loggedIn() ? (
-                    !friends.some(
-                      (friend) => friend.username === user.username
-                    ) && !addedFriends.includes(user.username) ? (
-                      <button onClick={() => handleAddFriend(user)}>
-                        Add Friend‽
-                      </button>
-                    ) : user.username === Auth.getProfile().data.username ? (
-                      <button disabled>
-                        I hope you're friends with yourself
-                      </button>
-                    ) : (
-                      <button disabled>Y'all be friends!</button>
-                    )
-                  ) : null}
-                </p>
-              ))}
+              {filteredUsers
+                .sort((a, b) => b.dailyWins - a.dailyWins)
+                .map((user) => (
+                  <p key={user._id}>
+                    {user.username} - {user.dailyWins} daily wins
+                    {Auth.loggedIn() ? (
+                      !friends.some(
+                        (friend) => friend.username === user.username
+                      ) && !addedFriends.includes(user.username) ? (
+                        <button onClick={() => handleAddFriend(user)}>
+                          Add Friend‽
+                        </button>
+                      ) : user.username === Auth.getProfile().data.username ? (
+                        <button disabled>
+                          I hope you're friends with yourself
+                        </button>
+                      ) : (
+                        <button disabled>Y'all be friends!</button>
+                      )
+                    ) : null}
+                  </p>
+                ))}
+              {displayCount < users.length && (
+                <button onClick={handleLoadMore}>Load More</button>
+              )}
             </div>
           )}
           {usersError && (

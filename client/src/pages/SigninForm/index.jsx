@@ -76,7 +76,7 @@ const SigninForm = () => {
     } else if (name === "signupUsername" && !value.trim()) {
       setErrorMessage("Invalid Username");
     } else if (name === "signupPassword" && !value.trim()) {
-      setErrorMessage("Invalid Password Password must be at least 8 characters long with at least one lowercase letter, one uppercase letter, one digit, and one special character (@$!%*?&)");
+      setErrorMessage("Invalid Password");
     } else {
       setErrorMessage("");
     }
@@ -213,12 +213,11 @@ const SigninForm = () => {
                 Signup Already?
               </button>
             </form>
-            {addError ||
-              (errorMessage && (
-                <div className="error-text">
-                  <p>{signupError ? signupError.message : errorMessage}</p>
-                </div>
-              ))}
+            {(addError || errorMessage) && (
+              <div className="error-text">
+                <p>{addError ? addError.message : errorMessage}</p>
+              </div>
+            )}
           </div>
         </div>
       ) : (
