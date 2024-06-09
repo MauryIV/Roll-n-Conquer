@@ -26,5 +26,6 @@ export const getUser = () => {
     losses: data?.me?.losses,
     ties: data?.me?.ties,
     streak: data?.me?.streak,
+    dailyWins: data?.me?.dailyWins
   };
 };

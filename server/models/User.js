@@ -48,6 +48,10 @@ const userSchema = new Schema (
       type: Number,
       default: 0
     },
+    dailyWins: {
+      type: Number,
+      default: 0
+    },
     challenges: [challengeSchema],
     messages: [messageSchema],
     friendslist: [friendsSchema]

@@ -11,7 +11,7 @@ const resolvers = {
       return userData;
     },
     users: async () => {
-      return await User.find({}).sort({ daily: -1 });
+      return await User.find({});
     }
   },
   
@@ -37,9 +37,9 @@ const resolvers = {
       return { token, user };
     },
 
-    addFriend: async (parent, { username, wins, losses, ties, streak }, context) => {
+    addFriend: async (parent, { username, wins, losses, ties, streak, dailyWins }, context) => {
       if (context.user) {
-        const friend = { username, wins, losses, ties, streak };
+        const friend = { username, wins, losses, ties, streak, dailyWins };
         const friendlyUser = await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { friendslist: friend } },
@@ -50,7 +50,7 @@ const resolvers = {
       throw AuthenticationError;
     },
 
-    recordStats: async (parent, { wins, losses, ties, streak, daily }, context) => {
+    recordStats: async (parent, { wins, losses, ties, streak, dailyWins }, context) => {
       if (context.user) {
         // Build the increment object dynamically based on provided arguments
         const incrementFields = {};
@@ -58,10 +58,22 @@ const resolvers = {
         if (losses !== undefined) incrementFields.losses = losses;
         if (ties !== undefined) incrementFields.ties = ties;
         if (streak !== undefined) incrementFields.streak = streak;
-        if (daily !== undefined) incrementFields.daily = daily;
+        if (dailyWins !== undefined) incrementFields.dailyWins = dailyWins;
         let userStats = await User.findOneAndUpdate(
           { _id: context.user._id },
           { $inc: incrementFields },
+          { new: true }
+        );
+        return userStats;
+      }
+      throw AuthenticationError;
+    },
+
+    updateDaily: async (parent, { daily }, context) => {
+      if (context.user) {
+        let userStats = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { daily: daily },
           { new: true }
         );
         return userStats;
