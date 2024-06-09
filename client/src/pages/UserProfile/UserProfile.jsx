@@ -4,6 +4,7 @@ import FriendListModal from '../../components/FriendList/FriendList';
 import { getUser } from "../../utils/userQueries";
 import auth from "../../utils/auth";
 
+
 const UserProfile = ({ user }) => {
   const { wins, losses, ties, streak, difference } = getUser();
   useEffect(() => {
