@@ -34,7 +34,6 @@ const DiceRoller = () => {
   }, [dailyRoll]);
 
   const handleDailyRollClick = () => {
-    console.log("Daily Roll button clicked");
     setDailyRoll(true);
   };
 
@@ -52,6 +51,7 @@ const DiceRoller = () => {
       clearInterval(interval);
       setRolling(false);
       setAnimate("");
+      setDailyRoll(false)
       const finalRoll = Math.floor(Math.random() * diceType) + 1;
       setNumFlash(finalRoll);
       // Use this for the Current users roll value to be passed into the challenge roll
@@ -132,7 +132,11 @@ const DiceRoller = () => {
       </div>
       
       <div className={`roll-dice-container ${rollingAnimation}`}>
-      <button className="daily-btn" onClick={handleDailyRollClick}>Daily Roll</button>
+        {!rolling && (
+          <button className="daily-btn" onClick={handleDailyRollClick}>
+            Daily Roll
+          </button>
+        )}
         <img
           src={`../src/assets/svgs/sharpAlt2/d${diceType}.svg`}
           alt={`D${diceType}`}

@@ -1,5 +1,6 @@
 /* Roll CSS */
 .dice-roller {
+  position: relative;
   text-align: center;
   background-color: #603696;
   width: 100%;
