@@ -1,11 +1,71 @@
+import { useEffect, useState } from "react";
 import { getAll } from "../../utils/userQueries";
+import { useMutation } from "@apollo/client";
+import { UPDATE_DAILY } from "../../utils/mutations";
 import "../../App.css";
 import "./leaderboard.css";
 
 const Leaderboard = () => {
-  const { loading: usersLoading, error: usersError, users } = getAll();
+  const [dailyRank, setDailyRank] = useState([]);
+  const [usersLoading, setUsersLoading] = useState(true);
+  const [usersError, setUsersError] = useState(null);
 
-  const sortedUsers = [...users].sort((a, b) => b.daily - a.daily).slice(0, 10);
+  const { loading, error, data: userData } = getAll();
+  const [updateDaily] = useMutation(UPDATE_DAILY);
+
+  useEffect(() => {
+    const dailyReset = async () => {
+      try {
+        const now = new Date();
+        console.log(now);
+
+        const users = userData ? [...userData.users] : [];
+
+        const rank = [...users]
+          .sort((a, b) => b.daily - a.daily)
+          .slice(0, 10);
+
+        console.log("Top 10 Users:", rank);
+
+        // resets users daily
+        const resetUsers = users.map((user) => ({
+          _id: user._id,
+          username: user.username,
+          daily: 0,
+        }));
+
+        console.log("Reset Users", resetUsers);
+
+        // Update each user's daily value using the mutation
+        const response = await updateDaily({
+          variables: { userUpdates: resetUsers },
+          optimisticResponse: {
+            __typename: "Mutation",
+            updateDaily: resetUsers.map((user) => ({
+              __typename: "User",
+              _id: user._id,
+              username: user.username,
+              daily: 0,
+            })),
+          },
+        });
+        console.log("Mutation Response:", response);
+
+        // gives us users daily
+        setDailyRank(rank);
+        setUsersLoading(false);
+      } catch (error) {
+        setUsersError(error);
+        setUsersLoading(false);
+      }
+    };
+
+    const interval = setInterval(() => {
+      dailyReset();
+    }, 24 * 60 * 60 * 1000);
+
+    return () => clearInterval(interval);
+  }, [userData, updateDaily, loading, error]);
 
   const bgShades = [
     "#ece8f2",
@@ -52,7 +112,7 @@ const Leaderboard = () => {
               </tr>
             </thead>
             <tbody>
-              {sortedUsers.map((user, index) => (
+              {dailyRank.map((user, index) => (
                 <tr
                   key={user._id}
                   style={{

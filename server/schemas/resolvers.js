@@ -69,16 +69,14 @@ const resolvers = {
       throw AuthenticationError;
     },
 
-    updateDaily: async (parent, { daily }, context) => {
-      if (context.user) {
-        let userStats = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { daily: daily },
-          { new: true }
-        );
-        return userStats;
+    updateDaily: async () => {
+      try {
+        await User.updateMany({}, { daily: 0 });
+        const users = await User.find();
+        return users;
+      } catch (error) {
+        throw new Error("Failed to reset daily values for all users");
       }
-      throw AuthenticationError;
     },
 
     addChallenge: async (parent, { userOne, userTwo, d4One, d6One, d8One, d10One, d12One, d20One, d100One, d4Two, d6Two, d8Two, d10Two, d12Two, d20Two, d100Two }, context) => {
