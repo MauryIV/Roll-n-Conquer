@@ -7,6 +7,7 @@ export const getAll = () => {
   return {
     loading,
     error,
+    data,
     users: data?.users || [],
   };
 };
