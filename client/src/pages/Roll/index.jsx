@@ -4,7 +4,7 @@ import { roll1, roll2, roll3, roll4 } from "./style";
 import FriendListModal from '../../components/FriendList/FriendList'
 import auth from "../../utils/auth";
 import { useQuery, useMutation } from "@apollo/client";
-import { RECORD_STATS, UPDATE_DAILY } from "../../utils/mutations";
+import { RECORD_STATS, ADD_CHALLENGE } from "../../utils/mutations";
 import { getUser } from "../../utils/userQueries";
 
 const themes = [roll1, roll2, roll3, roll4];
@@ -18,9 +18,15 @@ const DiceRoller = () => {
   const [buttonShake, setButtonShake] = useState(false);
   const [challengeRoll, setChallengeRoll] = useState(false);
   const [dailyRoll, setDailyRoll] = useState(false)
+  const [selectedFriend, setSelectedFriend] = useState("");
 
-  const [recordDaily, { error }] = useMutation(RECORD_STATS)
-  const { daily } = getUser();
+  const [recordDaily] = useMutation(RECORD_STATS)
+  const [addChallenge] = useMutation(ADD_CHALLENGE)
+  const { daily, friends, challenges } = getUser();
+
+  const token = auth.loggedIn() ? auth.getToken() : null;
+  const userId = auth.getUserId()
+  const name = auth.getUsername()
   
   const loadRandomTheme = () => {
     const randomTheme = themes[Math.floor(Math.random() * themes.length)];
@@ -42,6 +48,15 @@ const DiceRoller = () => {
     }
   }, [dailyRoll]);
 
+  useEffect(() => {
+    if(challengeRoll){
+      console.log("challenge roll activated")
+    }
+  }, [challengeRoll]);
+
+  const handleChallengeRollClick = () => {
+    setChallengeRoll(true);
+  }
   const handleDailyRollClick = () => {
     setDailyRoll(true);
   };
@@ -67,9 +82,7 @@ const DiceRoller = () => {
       setNumFlash(finalRoll);
       // Use this for the Current users roll value to be passed into the challenge roll
       if (dailyRoll) {
-      const token = auth.loggedIn() ? auth.getToken() : null;
-      const userId = auth.getUserId()
-      const name = auth.getUsername()
+
       if (!token) {
         return false;
       }
@@ -88,6 +101,24 @@ const DiceRoller = () => {
       } catch (error) {
         console.error("Error updating daily roll: ", error)
       }
+       } else if (challengeRoll){
+        if(!token){
+          return false;
+        }
+        setChallengeRoll(false);
+        setFinalResult(finalRoll)
+        console.log("challengeRoll: ", finalRoll)
+        try{
+          await addChallenge({ variables: { userOne: name, userTwo: selectedFriend, [`d{diceType}one`]: finalRoll},
+            context: {
+              headers: {
+                authorization: `Bearer ${token}`,
+              },
+            },
+          })
+        } catch (error) {
+          console.error("Error sending challenge: ")
+        }
        } else {
         setFinalResult(finalRoll)
        }
@@ -164,14 +195,43 @@ const DiceRoller = () => {
             </>
           )}
         </select>
+        {challengeRoll && (
+          <> 
+            <select
+              className="mx-2"
+              value={selectedFriend}
+              onChange={(e) => setSelectedFriend(e.target.value)}
+              disabled={rolling || !friends.length}
+            >
+              {friends.map((friend, index) => (
+                <option key={index} value={friend.username}>{friend.username}</option>
+              ))}
+            </select>
+          </>   
+        )}
       </div>
       
       <div className={`roll-dice-container ${rollingAnimation}`}>
         {!rolling && (
-          <button className="daily-btn" onClick={handleDailyRollClick} disabled={daily !== 0}>
-            Daily Roll
-          </button>
+          <>
+          <div className="row row-button">
+            <div className="col">
+              <button className="challenge-btn" onClick={handleChallengeRollClick}>Challenge a friend</button>
+            </div>
+            <div className="col">
+              <button className="your-challenge-btn">View Challenges</button>
+            </div>
+            <div className="col">
+              <button className="daily-btn" onClick={handleDailyRollClick} disabled={daily !== 0}>
+              Daily Roll
+              </button>
+            </div>
+          </div>
+          </>
         )}
+        
+        {/* view challenges modal */}
+
         <img
           src={`../src/assets/svgs/sharpAlt2/d${diceType}.svg`}
           alt={`D${diceType}`}
