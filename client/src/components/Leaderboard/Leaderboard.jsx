@@ -10,18 +10,21 @@ const Leaderboard = () => {
   const [usersLoading, setUsersLoading] = useState(true);
   const [usersError, setUsersError] = useState(null);
 
-  const { loading, error, data: userData } = getAll();
+  const { loading, error, data: userData, refetch } = getAll();
   const [updateDaily] = useMutation(UPDATE_DAILY);
   const [recordDailywin] = useMutation(RECORD_STATS);
 
   useEffect(() => {
     const dailyReset = async () => {
       try {
-        const users = userData ? [...userData.users] : [];
+        if (!userData) return;
 
+        const users = [...userData.users];
         const rank = [...users]
           .sort((a, b) => b.daily - a.daily)
           .slice(0, 10);
+
+        const todaysWinner = rank[0];
 
         // resets users daily
         const resetUsers = users.map((user) => ({
@@ -31,7 +34,7 @@ const Leaderboard = () => {
         }));
 
         // Update each user's daily value using the mutation
-        const response = await updateDaily({
+        await updateDaily({
           variables: { userUpdates: resetUsers },
           optimisticResponse: {
             __typename: "Mutation",
@@ -44,13 +47,16 @@ const Leaderboard = () => {
           },
         });
 
-        // const dailyWin = await recordDailywin({
-        //   variables: { updateWins: dailyRank[0]}
-        // })
+        if (todaysWinner) {
+          await recordDailywin({
+            variables: { _id: todaysWinner._id, username: todaysWinner.username, dailyWins: 1 },
+          });
+        }
 
         // gives us users daily
         setDailyRank(rank);
         setUsersLoading(false);
+        refetch();
       } catch (error) {
         setUsersError(error);
         setUsersLoading(false);
@@ -59,10 +65,10 @@ const Leaderboard = () => {
 
     const interval = setInterval(() => {
       dailyReset();
-    }, 5 * 60 * 1000);
+    }, 60 * 1000);
 
     return () => clearInterval(interval);
-  }, [userData, updateDaily, recordDailywin, loading, error]);
+  }, [userData, updateDaily, recordDailywin, loading, error, refetch]);
 
   const bgShades = [
     "#ece8f2",

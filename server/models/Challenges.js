@@ -66,6 +66,10 @@ const challengeSchema = new Schema (
       type: Number,
       default: null
     },
+    status: {
+      type: String,
+      default: 'pending'
+    },
   },
 );
 
