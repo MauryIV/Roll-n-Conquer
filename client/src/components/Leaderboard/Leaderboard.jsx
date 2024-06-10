@@ -17,16 +17,11 @@ const Leaderboard = () => {
   useEffect(() => {
     const dailyReset = async () => {
       try {
-        const now = new Date();
-        console.log(now);
-
         const users = userData ? [...userData.users] : [];
 
         const rank = [...users]
           .sort((a, b) => b.daily - a.daily)
           .slice(0, 10);
-
-        console.log("Top 10 Users:", rank);
 
         // resets users daily
         const resetUsers = users.map((user) => ({
@@ -34,8 +29,6 @@ const Leaderboard = () => {
           username: user.username,
           daily: 0,
         }));
-
-        console.log("Reset Users", resetUsers);
 
         // Update each user's daily value using the mutation
         const response = await updateDaily({
@@ -50,7 +43,6 @@ const Leaderboard = () => {
             })),
           },
         });
-        console.log("Mutation Response:", response);
 
         // const dailyWin = await recordDailywin({
         //   variables: { updateWins: dailyRank[0]}
@@ -67,8 +59,8 @@ const Leaderboard = () => {
 
     const interval = setInterval(() => {
       dailyReset();
-    // }, 24 * 60 * 60 * 1000);
-    }, 36000);
+    }, 5 * 60 * 1000);
+
     return () => clearInterval(interval);
   }, [userData, updateDaily, recordDailywin, loading, error]);
 
