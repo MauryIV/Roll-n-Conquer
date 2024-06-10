@@ -6,7 +6,7 @@ import auth from "../../utils/auth";
 
 
 const UserProfile = ({ user }) => {
-  const { wins, losses, ties, streak, difference } = getUser();
+  const { wins, losses, ties, streak, difference, dailyWins } = getUser();
   useEffect(() => {
     const layouts = ['layout1', 'layout2', 'layout3', 'layout4'];
 
@@ -34,7 +34,8 @@ const UserProfile = ({ user }) => {
               {wins}/{losses}/{ties}</div>
               <div className="stat-item stat-item2">Win Streak <br />
               {streak}</div>
-              <div className="stat-item stat-item3">Daily Wins</div>
+              <div className="stat-item stat-item3">Daily Wins <br />
+              {dailyWins}</div>
               <div className="stat-item stat-item4">Largest Spread <br />
               {difference}</div>
             </div>
