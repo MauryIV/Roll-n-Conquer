@@ -233,7 +233,8 @@ const DiceRoller = () => {
         {/* view challenges modal */}
 
         <img
-          src={`../src/assets/svgs/sharpAlt2/d${diceType}.svg`}
+          // src={`../src/assets/svgs/sharpAlt2/d${diceType}.svg`}
+          src={`/images/sharpAlt2/d${diceType}.svg`}
           alt={`D${diceType}`}
           className={`dice`}
         />
