@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getAll } from "../../utils/userQueries";
 import { useMutation } from "@apollo/client";
-import { UPDATE_DAILY } from "../../utils/mutations";
+import { UPDATE_DAILY, RECORD_STATS } from "../../utils/mutations";
 import "../../App.css";
 import "./leaderboard.css";
 
@@ -12,6 +12,7 @@ const Leaderboard = () => {
 
   const { loading, error, data: userData } = getAll();
   const [updateDaily] = useMutation(UPDATE_DAILY);
+  const [recordDailywin] = useMutation(RECORD_STATS);
 
   useEffect(() => {
     const dailyReset = async () => {
@@ -51,6 +52,10 @@ const Leaderboard = () => {
         });
         console.log("Mutation Response:", response);
 
+        // const dailyWin = await recordDailywin({
+        //   variables: { updateWins: dailyRank[0]}
+        // })
+
         // gives us users daily
         setDailyRank(rank);
         setUsersLoading(false);
@@ -62,10 +67,10 @@ const Leaderboard = () => {
 
     const interval = setInterval(() => {
       dailyReset();
-    }, 24 * 60 * 60 * 1000);
-
+    // }, 24 * 60 * 60 * 1000);
+    }, 36000);
     return () => clearInterval(interval);
-  }, [userData, updateDaily, loading, error]);
+  }, [userData, updateDaily, recordDailywin, loading, error]);
 
   const bgShades = [
     "#ece8f2",
