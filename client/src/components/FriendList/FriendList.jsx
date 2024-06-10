@@ -3,8 +3,8 @@ import Auth from "../../utils/auth";
 import "../../App.css";
 import "./friendlist.css";
 import { getUser } from "../../utils/userQueries";
-import io from "socket.io-client";
-const socket = io("ws://localhost:3001");
+// import io from "socket.io-client";
+// const socket = io("ws://localhost:3001");
 
 const FriendListModal = () => {
   const myModalRef = useRef(null);
@@ -29,35 +29,35 @@ const FriendListModal = () => {
     }
   };
 
-  const sendMessage = (text, selectedFriend) => {
-    const trimmedText = text.toString().trim();
-    console.log("Sending message:", trimmedText, selectedFriend);
-    socket.emit("message", {
-      from: Auth.getUsername(),
-      to: selectedFriend,
-      text: trimmedText,
-    });
-  };
+  // const sendMessage = (text, selectedFriend) => {
+  //   const trimmedText = text.toString().trim();
+  //   console.log("Sending message:", trimmedText, selectedFriend);
+  //   socket.emit("message", {
+  //     from: Auth.getUsername(),
+  //     to: selectedFriend,
+  //     text: trimmedText,
+  //   });
+  // };
 
-  const handleChallenge = (selectedFriend) => {
-    if (selectedFriend) {
-      sendChallenge(selectedFriend.username);
-      setChallengeSent(true);
-      setTimeout(() => {
-        setChallengeSent(false);
-      }, 2000);
-    } else {
-      console.log("Unable to send challenge");
-    }
-  };
+  // const handleChallenge = (selectedFriend) => {
+  //   if (selectedFriend) {
+  //     sendChallenge(selectedFriend.username);
+  //     setChallengeSent(true);
+  //     setTimeout(() => {
+  //       setChallengeSent(false);
+  //     }, 2000);
+  //   } else {
+  //     console.log("Unable to send challenge");
+  //   }
+  // };
 
-  const sendChallenge = (selectedFriendUsername) => {
-    console.log("Sending challenge to ", selectedFriendUsername);
-    socket.emit("challenge", {
-      from: Auth.getUsername(),
-      to: selectedFriend,
-    });
-  };
+  // const sendChallenge = (selectedFriendUsername) => {
+  //   console.log("Sending challenge to ", selectedFriendUsername);
+  //   socket.emit("challenge", {
+  //     from: Auth.getUsername(),
+  //     to: selectedFriend,
+  //   });
+  // };
 
   return (
     <>

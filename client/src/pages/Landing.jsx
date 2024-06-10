@@ -4,15 +4,14 @@ import "./Landing/style/landing1.css";
 import DiceAnimation from "../components/DiceAnimation";
 import { landing1 } from "./Landing/style";
 import FriendListModal from "../components/FriendList/FriendList";
+import Navbar from "../components/Navbar/Navbar";
 import { useMutation } from "@apollo/client";
 import { getUser, getAll } from "../utils/userQueries";
 import { ADD_FRIEND } from "../utils/mutations";
 import Auth from "../utils/auth";
 import { useRandomTheme } from "../utils/helpers";
-import io from "socket.io-client";
-const socket = io("ws://localhost:3001");
-
-import Navbar from './Navbar/Navbar';
+// import io from "socket.io-client";
+// const socket = io("ws://localhost:3001");
 
 const themes = [landing1];
 
@@ -43,48 +42,48 @@ const LandingPage = () => {
     setDisplayCount(10);
   }, [searchQuery]);
 
-  useEffect(() => {
-    // messages
-    socket.on("message", (data) => {
-      const { from, to, text } = data;
-      // shows message as sending user
-      if (from === Auth.getUsername()) {
-        const liSent = document.createElement("li");
-        liSent.className = "sentMsg";
-        liSent.innerHTML = `<span>${text}</span>`;
-        document.getElementById("convos").appendChild(liSent);
-      }
-      // shows message to receiving user
-      if (to === Auth.getUsername()) {
-        const liReceived = document.createElement("li");
-        liReceived.className = "receivedMsg";
-        liReceived.innerHTML = `<span>${text}</span>`;
-        document.getElementById("convos").appendChild(liReceived);
-      }
-    });
+  // useEffect(() => {
+  //   // messages
+  //   socket.on("message", (data) => {
+  //     const { from, to, text } = data;
+  //     // shows message as sending user
+  //     if (from === Auth.getUsername()) {
+  //       const liSent = document.createElement("li");
+  //       liSent.className = "sentMsg";
+  //       liSent.innerHTML = `<span>${text}</span>`;
+  //       document.getElementById("convos").appendChild(liSent);
+  //     }
+  //     // shows message to receiving user
+  //     if (to === Auth.getUsername()) {
+  //       const liReceived = document.createElement("li");
+  //       liReceived.className = "receivedMsg";
+  //       liReceived.innerHTML = `<span>${text}</span>`;
+  //       document.getElementById("convos").appendChild(liReceived);
+  //     }
+  //   });
 
-    // challenges
-    socket.on("challenge", (data) => {
-      const { from, to } = data;
-      const li = document.createElement("li");
-      li.className = "challengeMsg";
-      // shows challenge from sending user
-      if (from === Auth.getUsername()) {
-        li.innerHTML = `<span>Challenge sent to ${to}!</span>`;
-      }
-      // shows challenge to receiving user
-      if (to === Auth.getUsername()) {
-        li.innerHTML = `<span>Challenge received from ${from}!</span>`;
-      }
-      document.getElementById("battles").appendChild(li);
-    });
+  //   // challenges
+  //   socket.on("challenge", (data) => {
+  //     const { from, to } = data;
+  //     const li = document.createElement("li");
+  //     li.className = "challengeMsg";
+  //     // shows challenge from sending user
+  //     if (from === Auth.getUsername()) {
+  //       li.innerHTML = `<span>Challenge sent to ${to}!</span>`;
+  //     }
+  //     // shows challenge to receiving user
+  //     if (to === Auth.getUsername()) {
+  //       li.innerHTML = `<span>Challenge received from ${from}!</span>`;
+  //     }
+  //     document.getElementById("battles").appendChild(li);
+  //   });
 
-    return () => {
-      // Clean up the socket listeners when the component unmounts
-      socket.off("message");
-      socket.off("challenge");
-    };
-  }, []);
+  //   return () => {
+  //     // Clean up the socket listeners when the component unmounts
+  //     socket.off("message");
+  //     socket.off("challenge");
+  //   };
+  // }, []);
 
   const handleAddFriend = async (user) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -113,15 +112,15 @@ const LandingPage = () => {
 
   return (
     <div className="image-overlay">
-      <Navbar socket={socket} />
       <div className="landing-page">
         <DiceAnimation />
-        <div className="challenges-column">
+        <Navbar className/>
           <FriendListModal
             friends={friends}
             selectedFriend={selectedFriend}
             setSelectedFriend={setSelectedFriend}
           />
+        <div className="challenges-column">
           <h1>Challenges</h1>
           <div id="battles"></div>
           <h1>Messages</h1>
