@@ -28,7 +28,7 @@
   font-family: "Jacquard 12", system-ui;
   font-size: 36px;
   margin: 0;
-  animation: glow 1.5s infinite alternate; /* Add a glow effect animation */
+  animation: glow 1.5s infinite alternate; Add a glow effect animation
 }
 
 @keyframes glow {
@@ -92,7 +92,7 @@ th {
 }
 
 /* Glowing Header with Dice Animation */
-.glowing-header {
+/* .glowing-header {
   position: relative;
   display: inline-block;
 }
@@ -125,7 +125,7 @@ th {
   100% {
     transform: rotate(360deg);
   }
-}
+} */
 
 @media (max-width: 768px) {
   .glowing-header::before,
