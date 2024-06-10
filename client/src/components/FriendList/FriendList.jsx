@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
+import { useMutation } from "@apollo/client";
 import Auth from "../../utils/auth";
 import "../../App.css";
 import "./friendlist.css";
 import { getUser } from "../../utils/userQueries";
-// import io from "socket.io-client";
-// const socket = io("ws://localhost:3001");
+import { ADD_CHALLENGE, ADD_MESSAGE } from "../../utils/mutations";
 
 const FriendListModal = () => {
   const myModalRef = useRef(null);
@@ -15,48 +15,29 @@ const FriendListModal = () => {
   const [challengeSent, setChallengeSent] = useState(false);
 
   const { friends, challenges, messages } = getUser();
+  const [addMessage] = useMutation(ADD_MESSAGE);
 
-  const handleMessage = () => {
-    if (selectedFriend && message) {
-      sendMessage(message, selectedFriend.username);
-      setMessage("");
-      setMessageSent(true);
-      setTimeout(() => {
-        setMessageSent(false);
-      }, 2000);
-    } else {
-      console.log("Invalid message");
-    }
-  };
-
-  // const sendMessage = (text, selectedFriend) => {
-  //   const trimmedText = text.toString().trim();
-  //   console.log("Sending message:", trimmedText, selectedFriend);
-  //   socket.emit("message", {
-  //     from: Auth.getUsername(),
-  //     to: selectedFriend,
-  //     text: trimmedText,
-  //   });
-  // };
-
-  // const handleChallenge = (selectedFriend) => {
-  //   if (selectedFriend) {
-  //     sendChallenge(selectedFriend.username);
-  //     setChallengeSent(true);
-  //     setTimeout(() => {
-  //       setChallengeSent(false);
-  //     }, 2000);
+  // const handleMessage = () => {
+  //   if (selectedFriend && message) {
+  //     addMessage({
+  //       variables: {
+  //         userOne: Auth.getProfile().data.username,
+  //         userTwo: selectedFriend.username,
+  //         msgOne: message,
+  //         msgTwo: "",
+  //       },
+  //     })
+  //       .then(() => {
+  //         setMessage("");
+  //         setMessageSent(true);
+  //         setTimeout(() => {
+  //           setMessageSent(false);
+  //         }, 2000);
+  //       })
+  //       .catch((err) => console.error(err));
   //   } else {
-  //     console.log("Unable to send challenge");
+  //     console.log("Invalid message");
   //   }
-  // };
-
-  // const sendChallenge = (selectedFriendUsername) => {
-  //   console.log("Sending challenge to ", selectedFriendUsername);
-  //   socket.emit("challenge", {
-  //     from: Auth.getUsername(),
-  //     to: selectedFriend,
-  //   });
   // };
 
   return (
@@ -120,7 +101,11 @@ const FriendListModal = () => {
                       )}
                     </div>
                     <div className="col row">
-                      <button type="button" className="btn btn-primary col">
+                      {/* <button
+                        type="button"
+                        className="btn btn-primary col"
+                        onClick={() => handleProfileView(friend)}
+                      >
                         Profile
                       </button>
                       <button
@@ -129,7 +114,7 @@ const FriendListModal = () => {
                         onClick={() => setSelectedFriend(friend)}
                       >
                         Message
-                      </button>
+                      </button> */}
                       <button
                         type="button"
                         className="btn btn-danger col"
@@ -162,3 +147,37 @@ const FriendListModal = () => {
 };
 
 export default FriendListModal;
+
+
+// import io from "socket.io-client";
+// const socket = io("ws://localhost:3001");
+
+// const sendMessage = (text, selectedFriend) => {
+//   const trimmedText = text.toString().trim();
+//   console.log("Sending message:", trimmedText, selectedFriend);
+//   socket.emit("message", {
+//     from: Auth.getUsername(),
+//     to: selectedFriend,
+//     text: trimmedText,
+//   });
+// };
+
+// const handleChallenge = (selectedFriend) => {
+//   if (selectedFriend) {
+//     sendChallenge(selectedFriend.username);
+//     setChallengeSent(true);
+//     setTimeout(() => {
+//       setChallengeSent(false);
+//     }, 2000);
+//   } else {
+//     console.log("Unable to send challenge");
+//   }
+// };
+
+// const sendChallenge = (selectedFriendUsername) => {
+//   console.log("Sending challenge to ", selectedFriendUsername);
+//   socket.emit("challenge", {
+//     from: Auth.getUsername(),
+//     to: selectedFriend,
+//   });
+// };
