@@ -7,15 +7,15 @@ import Notification from "../../assets/svgs/notification.svg";
 import Message from "../../assets/svgs/message.svg";
 
 
-const Navbar = ({ socket }) => {
+const Navbar = () => {
     const [notifications, setNotifications] = useState([]);
     const [open, setOpen] = useState(false);
 
-    useEffect(() => {
-        socket.on("getNotification", (data) => {
-            setNotifications((prev) => [...prev, data]);
-        });
-    }, [socket]);
+    // useEffect(() => {
+    //     socket.on("getNotification", (data) => {
+    //         setNotifications((prev) => [...prev, data]);
+    //     });
+    // }, [socket]);
 
     const displayNotification = ({ senderName, type }) => {
         let action;
