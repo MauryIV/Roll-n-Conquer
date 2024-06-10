@@ -36,8 +36,6 @@ const UserProfile = ({ user }) => {
               {streak}</div>
               <div className="stat-item stat-item3">Daily Wins <br />
               {dailyWins}</div>
-              <div className="stat-item stat-item4">Largest Spread <br />
-              {difference}</div>
             </div>
           )}
         </div>

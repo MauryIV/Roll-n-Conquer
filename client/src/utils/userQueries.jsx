@@ -3,11 +3,12 @@ import { useQuery } from "@apollo/client";
 import { GET_USERS, GET_ME } from "./queries";
 
 export const getAll = () => {
-  const { loading, error, data } = useQuery(GET_USERS);
+  const { loading, error, data, refetch } = useQuery(GET_USERS);
   return {
     loading,
     error,
     data,
+    refetch,
     users: data?.users || [],
   };
 };

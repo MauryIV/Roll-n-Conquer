@@ -68,8 +68,6 @@ export const UPDATE_DAILY = gql`
 export const ADD_CHALLENGE = gql`
   mutation AddChallenge($userOne: String!, $userTwo: String!, $d4One: Int, $d6One: Int, $d8One: Int, $d10One: Int, $d12One: Int, $d20One: Int, $d100One: Int, $d4Two: Int, $d6Two: Int, $d8Two: Int, $d10Two: Int, $d12Two: Int, $d20Two: Int, $d100Two: Int) {
     addChallenge(userOne: $userOne, userTwo: $userTwo, d4One: $d4One, d6One: $d6One, d8One: $d8One, d10One: $d10One, d12One: $d12One, d20One: $d20One, d100One: $d100One, d4Two: $d4Two, d6Two: $d6Two, d8Two: $d8Two, d10Two: $d10Two, d12Two: $d12Two, d20Two: $d20Two, d100Two: $d100Two) {
-      _id
-      username
       challenges {
         _id
         userOne
@@ -88,6 +86,34 @@ export const ADD_CHALLENGE = gql`
         d12Two
         d20Two
         d100Two
+        status
+      }
+    }
+  }
+`;
+
+export const UPDATE_CHALLENGE = gql`
+  mutation UpdateChallenge($userOne: String!, $userTwo: String!, $d4One: Int, $d6One: Int, $d8One: Int, $d10One: Int, $d12One: Int, $d20One: Int, $d100One: Int, $d4Two: Int, $d6Two: Int, $d8Two: Int, $d10Two: Int, $d12Two: Int, $d20Two: Int, $d100Two: Int, $status: String!) {
+    updateChallenge(userOne: $userOne, userTwo: $userTwo, d4One: $d4One, d6One: $d6One, d8One: $d8One, d10One: $d10One, d12One: $d12One, d20One: $d20One, d100One: $d100One, d4Two: $d4Two, d6Two: $d6Two, d8Two: $d8Two, d10Two: $d10Two, d12Two: $d12Two, d20Two: $d20Two, d100Two: $d100Two, status: $status) {
+      challenges {
+        _id
+        userOne
+        userTwo
+        d4One
+        d6One
+        d8One
+        d10One
+        d12One
+        d20One
+        d100One
+        d4Two
+        d6Two
+        d8Two
+        d10Two
+        d12Two
+        d20Two
+        d100Two
+        status
       }
     }
   }
@@ -108,3 +134,30 @@ export const ADD_MESSAGE = gql`
     }
   }
 `;
+
+// Need to update to this
+
+
+// export const RECORD_STATS = gql`
+//   mutation RecordStats($username: String!, $wins: Int, $losses: Int, $ties: Int, $streak: Int, $dailyWins: Int) {
+//     recordStats(username: $username, wins: $wins, losses: $losses, ties: $ties, streak: $streak, dailyWins: $dailyWins) {
+//       _id
+//       username
+//       wins
+//       losses
+//       ties
+//       streak
+//       dailyWins
+//     }
+//   }
+// `;
+
+// export const RECORD_DAILY = gql`
+//   mutation RecordDaily($username: String!, $daily: Int) {
+//     recordDaily(username: $username, daily: $daily) {
+//       _id
+//       username
+//       daily
+//     }
+//   }
+// `;

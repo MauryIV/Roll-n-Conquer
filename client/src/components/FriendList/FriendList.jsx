@@ -5,9 +5,11 @@ import "../../App.css";
 import "./friendlist.css";
 import { getUser } from "../../utils/userQueries";
 import { ADD_CHALLENGE, ADD_MESSAGE } from "../../utils/mutations";
+import { useNavigate } from "react-router-dom";
 
 const FriendListModal = () => {
   const myModalRef = useRef(null);
+  const navigate = useNavigate();
 
   const [selectedFriend, setSelectedFriend] = useState(null);
   const [message, setMessage] = useState("");
@@ -16,6 +18,26 @@ const FriendListModal = () => {
 
   const { friends, challenges, messages } = getUser();
   const [addMessage] = useMutation(ADD_MESSAGE);
+  const [addChallenge] = useMutation(ADD_CHALLENGE);
+
+  const handleChallenge = (friend) => {
+    const currentUser = Auth.getUsername();
+
+    addChallenge({
+      variables: {
+        userOne: currentUser,
+        userTwo: friend.username,
+      },
+    })
+      .then(() => {
+        setChallengeSent(true);
+        setTimeout(() => {
+          setChallengeSent(false);
+        }, 2000);
+        navigate("/roll");
+      })
+      .catch((err) => console.error(err));
+  };
 
   // const handleMessage = () => {
   //   if (selectedFriend && message) {
