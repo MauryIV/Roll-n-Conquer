@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import "../../App.css";
 import { roll1, roll2, roll3, roll4 } from "./style";
 import FriendListModal from '../../components/FriendList/FriendList'
+import auth from "../../utils/auth";
+import { useQuery, useMutation } from "@apollo/client";
+import { RECORD_STATS, UPDATE_DAILY } from "../../utils/mutations";
+import { getUser } from "../../utils/userQueries";
 
 const themes = [roll1, roll2, roll3, roll4];
 
@@ -14,13 +18,17 @@ const DiceRoller = () => {
   const [buttonShake, setButtonShake] = useState(false);
   const [challengeRoll, setChallengeRoll] = useState(false);
   const [dailyRoll, setDailyRoll] = useState(false)
+
+  const [recordDaily, { error }] = useMutation(RECORD_STATS)
+  const { daily } = getUser();
+  
   const loadRandomTheme = () => {
     const randomTheme = themes[Math.floor(Math.random() * themes.length)];
     const styleElement = document.createElement("style");
     styleElement.textContent = randomTheme;
     document.head.appendChild(styleElement);
   };
-
+ 
   useEffect(() => {
     loadRandomTheme();
   }, []);
@@ -30,12 +38,15 @@ const DiceRoller = () => {
       setDiceType(100);
       setNumFlash("‽")
       console.log('daily roll activated')
+      
     }
   }, [dailyRoll]);
 
   const handleDailyRollClick = () => {
     setDailyRoll(true);
   };
+
+
 
   const rollDice = () => {
     if (rolling) return;
@@ -47,15 +58,39 @@ const DiceRoller = () => {
       setNumFlash(Math.floor(Math.random() * diceType) + 1);
     }, 72);
 
-    setTimeout(() => {
+    setTimeout(async () => {
       clearInterval(interval);
       setRolling(false);
       setAnimate("");
-      setDailyRoll(false)
+      
       const finalRoll = Math.floor(Math.random() * diceType) + 1;
       setNumFlash(finalRoll);
       // Use this for the Current users roll value to be passed into the challenge roll
+      if (dailyRoll) {
+      const token = auth.loggedIn() ? auth.getToken() : null;
+      const userId = auth.getUserId()
+      const name = auth.getUsername()
+      if (!token) {
+        return false;
+      }
+      setDailyRoll(false);
       setFinalResult(finalRoll);
+      console.log("dailyRoll: ", finalRoll)
+      try {
+        await recordDaily({variables: {username: name, daily: finalRoll},
+          context: {
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
+          },
+        })
+        console.log("dailyRoll updated: ", finalRoll)
+      } catch (error) {
+        console.error("Error updating daily roll: ", error)
+      }
+       } else {
+        setFinalResult(finalRoll)
+       }
     }, 6000);
   };
 
@@ -133,7 +168,7 @@ const DiceRoller = () => {
       
       <div className={`roll-dice-container ${rollingAnimation}`}>
         {!rolling && (
-          <button className="daily-btn" onClick={handleDailyRollClick}>
+          <button className="daily-btn" onClick={handleDailyRollClick} disabled={daily !== 0}>
             Daily Roll
           </button>
         )}
