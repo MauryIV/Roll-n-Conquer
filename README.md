@@ -34,7 +34,11 @@ Can be used for reference if others want to implent them in their own project.
 
 <a id="Visuals"></a>
 ## Visuals
-NA
+![Screenshot 2024-06-10 at 8 04 05 PM](https://github.com/MauryIV/Roll-n-Conquer/assets/146037880/410bb397-0047-40df-8456-d97537e2fd33)
+![Screenshot 2024-06-10 at 8 04 58 PM](https://github.com/MauryIV/Roll-n-Conquer/assets/146037880/cd75bfdb-61f7-4cde-82e1-a7580b96618c)
+![Screenshot 2024-06-10 at 8 05 11 PM](https://github.com/MauryIV/Roll-n-Conquer/assets/146037880/bae107e9-3080-4c40-8833-7366aae8d0b2)
+![Screenshot 2024-06-09 at 9 54 15 PM](https://github.com/MauryIV/Roll-n-Conquer/assets/146037880/783b53b7-1005-4a6f-89f8-07b444019230)
+![Screenshot 2024-06-10 at 8 05 30 PM](https://github.com/MauryIV/Roll-n-Conquer/assets/146037880/6695bf2f-f7a5-43c2-b845-6380d8d75c3f)
 
 <a id="tests"></a>
 ## Tests
