@@ -1,54 +1,69 @@
-# Яoll-n-Conquer
+<a id="title"></a>
+# Roll-N-Conquer 
+
+<a id="description"></a>
+## Description
+This is a website where a user can create a profile and roll a die, challenging other users and sending messages to them as well. The site also has daily users roll a daily D100 to challenge all other users and then shows the top rolls on the leaderboard.
 
 ## Table of Contents
-1. Description
-2. User Story
-3. Application Screenshot
-4. Installation
-5. Contributors
-6. Future Development
+- [Title](#title)
+- [Description](#description)
+- [Badges](#badges)
+- [Visuals](#visuals)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Tests](#tests)
+- [Questions](#questions)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [Authors and Acknowledgment](#acknowledgment)
+- [License](#license)
+- [Project Status](#status)
 
-## Description
-Roll-n-Conquer is a daily dice roll game with many more options of play. Sign up and roll once a day
-to get the best roll of the day, roll against your friends, or roll just to make a decision in your
-day to day life. You can post your results and see other users posted results. Those results can then
-be voted on. Your profile will display your Win stats and past rolls.
+<a id="badges"></a>
+## Badges
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-## User Story
-
-- choose a real dice size (ie 6, 20, 100) with image
-- rolling dice will show number as animation on dice image
-- what is the challenge : select type of challenge
-	roll against site (once a day - minimum number of participants to win)
-	custom match
-	defined matches
-- daily winner (at a certain time of day)
-- user profile
-	w v l
-	wins streak
-	daily wins
-	largest spread
-- either roll dice to determine who goes first or allow opponent picks dice size (handicaping)
-- vs computer
-- vs person
-
-## Application Screenshot
-
+<a id="installation"></a>
 ## Installation
+This code uses Node and MongoDB. User will need to install all the dependencies listed in package.json as well.
 
-## Contributors
- Justin Hinton, Tim Lewis, Vic Huracàn Swain, Maury Hughes and Justin Hunter
+<a id="usage"></a>
+## Usage
+Can be used for reference if others want to implent them in their own project.
 
+<a id="Visuals"></a>
+## Visuals
+NA
 
+<a id="tests"></a>
+## Tests
+Testing was in GraphQL and localhosts.
 
- 
-## Future Development 
+<a id="questions"></a>
+## Questions
+If you have any questions about the contents. Please feel free to reach out!
+Here is our githubs: [Github](https://github.com/MauryIV, https://github.com/VicSwain, https://github.com/EnchantedMoth, https://github.com/justin-hunter1, https://github.com/codegawd777).
 
-MVP +
-site theme random daily
-stripe
+<a id="roadmap"></a>
+## Roadmap
+Including messaging and more randomization.
 
-(ice box)
-social proposed challenges
-vs random oppenent online that this time
-pwa
+<a id="contributing"></a>
+## Contributing
+Always open to contributions.
+
+<a id="acknowledgment"></a>
+## Authors and Acknowledgment
+All code written by Maury Hughes IV, Vic Swain, Tim Lewis, Justin Hunter, and Justin Hinton.
+
+<a id="license"></a>
+## License
+MIT License © 2024 Maury Hughes IV, Vic Swain, Tim Lewis, Justin Hunter, Justin Hinton
+Please refer to this link, [License: MIT](https://opensource.org/licenses/MIT) for more information.
+
+<a id="status"></a>
+## Project Status
+In Progress
+
+[back to top](#title)
