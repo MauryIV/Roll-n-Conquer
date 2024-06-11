@@ -70,9 +70,11 @@ const DiceRoller = () => {
   }, [challengeRoll]);
 
   const handleChallengeRollClick = () => {
+    setNumFlash("‽");
     setChallengeRoll(true);
   };
   const handleDailyRollClick = () => {
+    setNumFlash("‽");
     setDailyRoll(true);
   };
 
@@ -82,6 +84,7 @@ const DiceRoller = () => {
 
   
   const handleViewChallengesClick = async () => {
+    setNumFlash("‽");
     console.log(challenges);
     if (!challenges.length) {
       console.log("No challenges available.");
