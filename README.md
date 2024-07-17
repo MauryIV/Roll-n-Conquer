@@ -47,7 +47,7 @@ Testing was in GraphQL and localhosts.
 <a id="questions"></a>
 ## Questions
 If you have any questions about the contents. Please feel free to reach out!
-Here is our githubs: [Github](https://github.com/MauryIV, https://github.com/VicSwain, https://github.com/EnchantedMoth, https://github.com/justin-hunter1, https://github.com/codegawd777).
+Here is our githubs: [Maury's Github](https://github.com/MauryIV), [Vic's Github](https://github.com/VicSwain), [Tim's Github](https://github.com/EnchantedMoth), [Hunter's Github](https://github.com/justin-hunter1), [Hinton's Github](https://github.com/codegawd777).
 
 <a id="roadmap"></a>
 ## Roadmap
