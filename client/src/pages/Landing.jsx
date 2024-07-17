@@ -13,8 +13,6 @@ import { useRandomTheme } from "../utils/helpers";
 const themes = [landing1];
 
 const LandingPage = () => {
-  useRandomTheme(themes);
-
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedFriend, setSelectedFriend] = useState(null);
   const [addedFriends, setAddedFriends] = useState([]);
@@ -24,6 +22,8 @@ const LandingPage = () => {
   const { friends, challenges, messages } = getUser();
   const [addFriend] = useMutation(ADD_FRIEND);
 
+  useRandomTheme(themes);
+  
   // for rendering users list, organized by daily wins, with search bar
   const filteredUsers = users
     .filter((user) =>
