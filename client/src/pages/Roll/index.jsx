@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "../../App.css";
+import "./style/rollMain.css";
 import { roll1, roll2, roll3, roll4 } from "./style";
 import auth from "../../utils/auth";
 import { useMutation } from "@apollo/client";
@@ -10,6 +11,7 @@ import {
   UPDATE_CHALLENGE
 } from "../../utils/mutations";
 import { getUser } from "../../utils/userQueries";
+import { useRandomTheme } from "../../utils/helpers";
 
 const themes = [roll1, roll2, roll3, roll4];
 
@@ -36,16 +38,7 @@ const DiceRoller = () => {
   const userId = auth.getUserId();
   const name = auth.getUsername();
 
-  const loadRandomTheme = () => {
-    const randomTheme = themes[Math.floor(Math.random() * themes.length)];
-    const styleElement = document.createElement("style");
-    styleElement.textContent = randomTheme;
-    document.head.appendChild(styleElement);
-  };
-
-  useEffect(() => {
-    loadRandomTheme();
-  }, []);
+  useRandomTheme(themes);
 
   // this is so the challenge default is the user at index 0
   useEffect(() => {

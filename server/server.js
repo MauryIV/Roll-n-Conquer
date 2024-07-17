@@ -5,7 +5,6 @@ const path = require('path');
 const { authMiddleware } = require('./utils/auth');
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
-// const { Server } = require('socket.io');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -39,36 +38,6 @@ const startApolloServer = async () => {
       console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
     });
   });
-
-  // app.use('/graphql', expressMiddleware(server, {
-  //   context: authMiddleware,
-  //   db
-  // }));
-
-  // const expressServer = app.listen(PORT, () => {
-  //   console.log(`ExpressServer listening on port ${PORT}`)
-  //   console.log(`GraphQL at http://localhost:${PORT}/graphql`);
-  // })
-  
-  // const io = new Server(expressServer, { 
-  //   cors: {
-  //     origin: process.env.NODE_ENV === "production" ? "https://roll-n-conquer.onrender.com" : ["http://localhost:3000", "10.0.0.199:3000"],
-  //     allowedHeaders: ["Content-Type", "Authorization", "X-Auth-Token"],
-  //   }
-  // });
-
-  // io.on('connection', (socket) => {
-  //   console.log('User connected');
-
-  //   socket.on('message', (data) => {
-  //     console.log('Message received: ', data);
-  //     io.emit('message', data);
-  //   });
-
-  //   socket.on('disconnect', () => {
-  //     console.log('User disconnected');
-  //   });
-  // });
 };
 
 startApolloServer();

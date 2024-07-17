@@ -1,26 +1,15 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { validateEmail, validatePassword } from "../../utils/helpers";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER, ADD_USER } from "../../utils/mutations";
 import "../../App.css";
 import Auth from "../../utils/auth";
-
+import { useRandomTheme } from "../../utils/helpers";
 import { loginSignup1 } from "./style";
 
 const themes = [loginSignup1];
 
-const loadRandomTheme = () => {
-  const randomTheme = themes[Math.floor(Math.random() * themes.length)];
-  const styleElement = document.createElement("style");
-  styleElement.textContent = randomTheme;
-  document.head.appendChild(styleElement);
-};
-
 const SigninForm = () => {
-  useEffect(() => {
-    loadRandomTheme();
-  }, []);
-
   const [signupForm, setSignupForm] = useState(false);
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
@@ -36,6 +25,8 @@ const SigninForm = () => {
   const [uppercaseValid, setUppercaseValid] = useState(false);
   const [numberValid, setNumberValid] = useState(false);
   const [specialValid, setSpecialValid] = useState(false);
+
+  useRandomTheme(themes);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
