@@ -23,7 +23,6 @@ export const getUser = () => {
     error,
     friends: data?.me?.friendslist || [],
     challenges: data?.me?.challenges || [],
-    messages: data?.me?.messages || [],
     wins: data?.me?.wins,
     losses: data?.me?.losses,
     ties: data?.me?.ties,

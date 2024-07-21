@@ -1,6 +1,5 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
-const messageSchema = require('./Messages');
 const challengeSchema = require('./Challenges');
 const friendsSchema = require('./friends');
 
@@ -53,7 +52,6 @@ const userSchema = new Schema (
       default: 0
     },
     challenges: [challengeSchema],
-    messages: [messageSchema],
     friendslist: [friendsSchema]
   },
   {

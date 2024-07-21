@@ -4,7 +4,7 @@ import Auth from "../../utils/auth";
 import "../../App.css";
 import "./friendlist.css";
 import { getUser } from "../../utils/userQueries";
-import { ADD_CHALLENGE, ADD_MESSAGE } from "../../utils/mutations";
+import { ADD_CHALLENGE } from "../../utils/mutations";
 import { useNavigate } from "react-router-dom";
 
 const FriendListModal = () => {
@@ -12,12 +12,9 @@ const FriendListModal = () => {
   const navigate = useNavigate();
 
   const [selectedFriend, setSelectedFriend] = useState(null);
-  const [message, setMessage] = useState("");
-  const [messageSent, setMessageSent] = useState(false);
   const [challengeSent, setChallengeSent] = useState(false);
 
-  const { friends, challenges, messages } = getUser();
-  const [addMessage] = useMutation(ADD_MESSAGE);
+  const { friends, challenges } = getUser();
   const [addChallenge] = useMutation(ADD_CHALLENGE);
 
   const handleChallenge = (friend) => {
@@ -39,44 +36,10 @@ const FriendListModal = () => {
       .catch((err) => console.error(err));
   };
 
-  // const handleMessage = () => {
-  //   if (selectedFriend && message) {
-  //     addMessage({
-  //       variables: {
-  //         userOne: Auth.getProfile().data.username,
-  //         userTwo: selectedFriend.username,
-  //         msgOne: message,
-  //         msgTwo: "",
-  //       },
-  //     })
-  //       .then(() => {
-  //         setMessage("");
-  //         setMessageSent(true);
-  //         setTimeout(() => {
-  //           setMessageSent(false);
-  //         }, 2000);
-  //       })
-  //       .catch((err) => console.error(err));
-  //   } else {
-  //     console.log("Invalid message");
-  //   }
-  // };
-
   return (
     <>
-      {/* Button trigger modal */}
-      <button
-        type="button"
-        className="btn btn-primary modal-btn"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
-      >
-        Friends
-      </button>
-
-      {/* Modal */}
       <div
-        className="modal fade"
+        className="modal"
         id="exampleModal"
         tabIndex="-1"
         aria-labelledby="exampleModalLabel"
@@ -100,43 +63,15 @@ const FriendListModal = () => {
               {friends.map((friend, index) => (
                 <div className="card m-1" key={index}>
                   <div className="card-body row">
-                    <div className="col">
-                      <h4>{friend.username}</h4>
-                      {selectedFriend === friend && !challengeSent && (
-                        <div>
-                          <textarea
-                            className="form-control mb-2"
-                            placeholder="Type your message here"
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
-                          ></textarea>
-                          <button
-                            type="button"
-                            className="btn btn-primary"
-                            onClick={handleMessage}
-                          >
-                            {messageSent && selectedFriend === friend
-                              ? "Message Sent"
-                              : "Send Message"}
-                          </button>
-                        </div>
-                      )}
-                    </div>
+                    <h4>{friend.username}</h4>
                     <div className="col row">
-                      {/* <button
+                      <button
                         type="button"
                         className="btn btn-primary col"
                         onClick={() => handleProfileView(friend)}
                       >
                         Profile
                       </button>
-                      <button
-                        type="button"
-                        className="btn btn-secondary col"
-                        onClick={() => setSelectedFriend(friend)}
-                      >
-                        Message
-                      </button> */}
                       <button
                         type="button"
                         className="btn btn-danger col"
@@ -169,20 +104,6 @@ const FriendListModal = () => {
 };
 
 export default FriendListModal;
-
-
-// import io from "socket.io-client";
-// const socket = io("ws://localhost:3001");
-
-// const sendMessage = (text, selectedFriend) => {
-//   const trimmedText = text.toString().trim();
-//   console.log("Sending message:", trimmedText, selectedFriend);
-//   socket.emit("message", {
-//     from: Auth.getUsername(),
-//     to: selectedFriend,
-//     text: trimmedText,
-//   });
-// };
 
 // const handleChallenge = (selectedFriend) => {
 //   if (selectedFriend) {
