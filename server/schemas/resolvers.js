@@ -115,33 +115,6 @@ const resolvers = {
         throw new Error("Failed to update challenge");
       }
     },
-
-    addMessage: async (
-      parent,
-      { userOne, userTwo, msgOne, msgTwo },
-      context
-    ) => {
-      if (context.user) {
-        // Update sender's messages
-        const senderMsg = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { username: userOne },
-          { $addToSet: { messages: message } },
-          { new: true }
-        ).populate("messages");
-
-        // Update recipient's messages
-        const recipientMsg = await User.findOneAndUpdate(
-          { username: userTwo },
-          { $addToSet: { messages: message } },
-          { new: true }
-        ).populate("messages");
-
-        // Return both sender's and recipient's updated messages
-        return { senderMsg, recipientMsg };
-      }
-      throw AuthenticationError;
-    },
   },
 };
 

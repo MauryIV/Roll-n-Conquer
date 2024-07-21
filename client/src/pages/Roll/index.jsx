@@ -10,6 +10,7 @@ import {
   ADD_CHALLENGE,
   UPDATE_CHALLENGE
 } from "../../utils/mutations";
+import FriendListModal from "../../components/FriendList/FriendList";
 import { getUser } from "../../utils/userQueries";
 import { useRandomTheme } from "../../utils/helpers";
 
@@ -23,10 +24,10 @@ const DiceRoller = () => {
   const [rollingAnimation, setAnimate] = useState("");
   const [numFlash, setNumFlash] = useState("‽");
   const [finalResult, setFinalResult] = useState(null);
-  const [buttonShake, setButtonShake] = useState(false);
   const [challengeRoll, setChallengeRoll] = useState(false);
   const [challengeRebuttal, setChallengeRebuttal] = useState("");
   const [dailyRoll, setDailyRoll] = useState(false);
+  const [friendList, setFriendList] = useState(false);
   const [selectedFriend, setSelectedFriend] = useState("");
 
   // const [recordDaily] = useMutation(RECORD_DAILY);
@@ -39,14 +40,6 @@ const DiceRoller = () => {
   const name = auth.getUsername();
 
   useRandomTheme(themes);
-
-  // this is so the challenge default is the user at index 0
-  useEffect(() => {
-    if (friends.length > 0) {
-      const username = friends[0].username;
-      setSelectedFriend(username);
-    }
-  }, [friends]);
 
   useEffect(() => {
     if (dailyRoll) {
@@ -65,10 +58,13 @@ const DiceRoller = () => {
   const handleChallengeRollClick = () => {
     setNumFlash("‽");
     setChallengeRoll(true);
+    setDailyRoll(false);
+    setFriendList(true);
   };
   const handleDailyRollClick = () => {
     setNumFlash("‽");
     setDailyRoll(true);
+    setChallengeRoll(false);
   };
 
 
@@ -78,6 +74,7 @@ const DiceRoller = () => {
   
   const handleViewChallengesClick = async () => {
     setNumFlash("‽");
+    setFriendList(true);
     console.log(challenges);
     if (!challenges.length) {
       console.log("No challenges available.");
@@ -163,7 +160,6 @@ const DiceRoller = () => {
 
   const rollDice = () => {
     if (rolling) return;
-    console.log(diceType);
     setRolling(true);
     setAnimate("roll-animation");
 
@@ -177,14 +173,16 @@ const DiceRoller = () => {
       setAnimate("");
 
       const finalRoll = Math.floor(Math.random() * diceType) + 1;
-      setNumFlash(finalRoll);
       // Use this for the Current users roll value to be passed into the challenge roll
+      setNumFlash(finalRoll);
+      setFinalResult(finalRoll);
+
+      // Daily Roll
       if (dailyRoll) {
         if (!token) {
           return false;
         }
         setDailyRoll(false);
-        setFinalResult(finalRoll);
         console.log("dailyRoll: ", finalRoll);
         try {
           await recordStats({
@@ -199,14 +197,14 @@ const DiceRoller = () => {
         } catch (error) {
           console.error("Error updating daily roll: ", error);
         }
+      } 
 
-        // Challenge Roll
-      } else if (challengeRoll) {
+      // Challenge Roll
+      if (challengeRoll) {
         if (!token) {
           return false;
         }
-        setChallengeRoll(false);
-        setFinalResult(finalRoll);
+        setChallengeRoll(false);;
         console.log("challengeRoll: ", finalRoll);
         const challengeVariables = {
           userOne: name,
@@ -227,8 +225,6 @@ const DiceRoller = () => {
         } catch (error) {
           console.error("Error sending challenge: ", error);
         }
-      } else {
-        setFinalResult(finalRoll);
       }
     }, 6000);
   };
@@ -276,6 +272,11 @@ const DiceRoller = () => {
   return (
     <div className="dice-roller">
       <h1>Dice Roller</h1>
+      <FriendListModal
+        friends={friends}
+        selectedFriend={selectedFriend}
+        setSelectedFriend={setSelectedFriend}
+      />
       <div className="dice-type-selector">
         <h2>Select Dice Type: </h2>
 
@@ -327,16 +328,11 @@ const DiceRoller = () => {
                 <button
                   className="challenge-btn"
                   onClick={handleChallengeRollClick}
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
                 >
                   Challenge a friend
                 </button>
-              </div>
-              <div className="col">
-                <button 
-                  className="your-challenge-btn"
-                  onClick={handleViewChallengesClick}
-                >
-                  View Challenges</button>
               </div>
               <div className="col">
                 <button
@@ -347,6 +343,15 @@ const DiceRoller = () => {
                   Daily Roll
                 </button>
               </div>
+              <div className="col">
+                <button 
+                  className="your-challenge-btn"
+                  onClick={handleViewChallengesClick}
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  View Challenges</button>
+              </div>
             </div>
           </>
         )}
@@ -354,7 +359,6 @@ const DiceRoller = () => {
         {/* view challenges modal */}
 
         <img
-          // src={`../src/assets/svgs/sharpAlt2/d${diceType}.svg`}
           src={`/images/sharpAlt2/d${diceType}.svg`}
           alt={`D${diceType}`}
           className={`dice`}

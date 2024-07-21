@@ -119,22 +119,6 @@ export const UPDATE_CHALLENGE = gql`
   }
 `;
 
-export const ADD_MESSAGE = gql`
-  mutation AddMessage($userOne: String!, $userTwo: String!, $msgOne: String, $msgTwo: String) {
-    addMessage(userOne: $userOne, userTwo: $userTwo, msgOne: $msgOne, msgTwo: $msgTwo) {
-      _id
-      username
-      messages {
-        _id
-        userOne
-        userTwo
-        msgOne
-        msgTwo
-      }
-    }
-  }
-`;
-
 // Need to update to this
 
 

@@ -77,13 +77,6 @@ export const GET_USERS = gql`
         d20Two
         d100Two
       }
-      messages {
-        _id
-        userOne
-        userTwo
-        msgOne
-        msgTwo
-      }
       friendslist {
         _id
         username

@@ -10,7 +10,6 @@
     "daily": 7,
     "dailyWins": 1,
     "challenges": [],
-    "messages": [],
     "friendslist": []
   },
   {
@@ -24,7 +23,6 @@
     "daily": 5,
     "dailyWins": 2,
     "challenges": [],
-    "messages": [],
     "friendslist": []
   },
   {
@@ -38,7 +36,6 @@
     "daily": 10,
     "dailyWins": 0,
     "challenges": [],
-    "messages": [],
     "friendslist": []
   },
   {
@@ -52,7 +49,6 @@
     "daily": 8,
     "dailyWins": 1,
     "challenges": [],
-    "messages": [],
     "friendslist": []
   },
   {
@@ -66,7 +62,6 @@
     "daily": 4,
     "dailyWins": 3,
     "challenges": [],
-    "messages": [],
     "friendslist": []
   },
   {
@@ -80,7 +75,6 @@
     "daily": 6,
     "dailyWins": 0,
     "challenges": [],
-    "messages": [],
     "friendslist": []
   },
   {
@@ -94,7 +88,6 @@
     "daily": 9,
     "dailyWins": 2,
     "challenges": [],
-    "messages": [],
     "friendslist": []
   },
   {
@@ -108,7 +101,6 @@
     "daily": 2,
     "dailyWins": 1,
     "challenges": [],
-    "messages": [],
     "friendslist": []
   },
   {
@@ -122,7 +114,6 @@
     "daily": 8,
     "dailyWins": 0,
     "challenges": [],
-    "messages": [],
     "friendslist": []
   },
   {
@@ -136,7 +127,6 @@
     "daily": 6,
     "dailyWins": 2,
     "challenges": [],
-    "messages": [],
     "friendslist": []
   },
   {
@@ -150,7 +140,6 @@
     "daily": 7,
     "dailyWins": 1,
     "challenges": [],
-    "messages": [],
     "friendslist": []
   },
   {
@@ -164,7 +153,6 @@
     "daily": 9,
     "dailyWins": 3,
     "challenges": [],
-    "messages": [],
     "friendslist": []
   },
   {
@@ -178,7 +166,6 @@
     "daily": 4,
     "dailyWins": 0,
     "challenges": [],
-    "messages": [],
     "friendslist": []
   },
   {
@@ -192,7 +179,6 @@
     "daily": 10,
     "dailyWins": 2,
     "challenges": [],
-    "messages": [],
     "friendslist": []
   },
   {
@@ -206,7 +192,6 @@
     "daily": 3,
     "dailyWins": 1,
     "challenges": [],
-    "messages": [],
     "friendslist": []
   },
   {
@@ -220,7 +205,6 @@
     "daily": 7,
     "dailyWins": 0,
     "challenges": [],
-    "messages": [],
     "friendslist": []
   },
   {
@@ -234,7 +218,6 @@
     "daily": 5,
     "dailyWins": 2,
     "challenges": [],
-    "messages": [],
     "friendslist": []
   },
   {
@@ -248,7 +231,6 @@
     "daily": 9,
     "dailyWins": 1,
     "challenges": [],
-    "messages": [],
     "friendslist": []
   },
   {
@@ -262,7 +244,6 @@
     "daily": 8,
     "dailyWins": 2,
     "challenges": [],
-    "messages": [],
     "friendslist": []
   },
   {
@@ -276,7 +257,6 @@
     "daily": 7,
     "dailyWins": 1,
     "challenges": [],
-    "messages": [],
     "friendslist": []
   },
   {
@@ -290,7 +270,6 @@
     "daily": 6,
     "dailyWins": 0,
     "challenges": [],
-    "messages": [],
     "friendslist": []
   },
   {
@@ -304,7 +283,6 @@
     "daily": 4,
     "dailyWins": 2,
     "challenges": [],
-    "messages": [],
     "friendslist": []
   },
   {
@@ -318,7 +296,6 @@
     "daily": 9,
     "dailyWins": 1,
     "challenges": [],
-    "messages": [],
     "friendslist": []
   },
   {
@@ -332,7 +309,6 @@
     "daily": 7,
     "dailyWins": 0,
     "challenges": [],
-    "messages": [],
     "friendslist": []
   },
   {
@@ -346,7 +322,6 @@
     "daily": 5,
     "dailyWins": 2,
     "challenges": [],
-    "messages": [],
     "friendslist": []
   }
 ]
