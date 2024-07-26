@@ -16,12 +16,17 @@ export const getAll = () => {
 export const getUser = () => {
   const currentId = Auth.getUserId();
   const { loading, error, data } = useQuery(GET_ME, {
-    variables: { userId: currentId }
+    variables: { userId: currentId },
+    context: {
+      headers: {
+        authorization: `Bearer ${Auth.getToken()}`,
+      },
+    },
   });
   return {
     loading,
     error,
-    friends: data?.me?.friendslist || [],
+    friends: data?.me || [],
     challenges: data?.me?.challenges || [],
     wins: data?.me?.wins,
     losses: data?.me?.losses,
