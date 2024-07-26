@@ -4,16 +4,22 @@ const { signToken, AuthenticationError } = require("../utils/auth");
 const resolvers = {
   Query: {
     me: async (parent, { userId }) => {
-      const userData = await User.findOne({ _id: userId }).populate(
-        "friendslist"
-      );
+      const userData = await User.findOne({ _id: userId })
+        .populate("challenges")
+        .populate("friendslist.friendId");
       if (!userData) {
         throw new AuthenticationError("Not logged in");
       }
       return userData;
     },
     users: async () => {
-      return await User.find({});
+      try {
+        const users = await User.find({});
+        return users;
+      } catch (error) {
+        console.error("Error fetching users:", error);
+        throw new Error("Failed to fetch users");
+      }
     },
   },
 
@@ -39,24 +45,24 @@ const resolvers = {
       return { token, user };
     },
 
-    addFriend: async (
-      parent,
-      { username, wins, losses, ties, streak, dailyWins },
-      context
-    ) => {
+    addFriend: async (parent, { friendId }, context) => {
       if (context.user) {
-        const friend = { username, wins, losses, ties, streak, dailyWins };
+        const friend = { friendId };
         const friendlyUser = await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { friendslist: friend } },
           { new: true }
-        ).populate("friendslist");
+        ).populate("friendslist.friendId");
         return friendlyUser;
       }
       throw AuthenticationError;
     },
 
-    recordStats: async (parent, { wins, losses, ties, streak, dailyWins, daily }, context) => {
+    recordStats: async (
+      parent,
+      { wins, losses, ties, streak, dailyWins, daily },
+      context
+    ) => {
       if (context.user) {
         const updateFields = { wins, losses, ties, streak, dailyWins, daily };
         let userStats = await User.findOneAndUpdate(
@@ -79,8 +85,46 @@ const resolvers = {
       }
     },
 
-    addChallenge: async (parent, { userOne, userTwo, d4One, d6One, d8One, d10One, d12One, d20One, d100One, d4Two, d6Two, d8Two, d10Two, d12Two, d20Two, d100Two }) => {
-      const challenge = { userOne, userTwo, d4One, d6One,  d8One, d10One, d12One, d20One, d100One, d4Two, d6Two, d8Two, d10Two, d12Two, d20Two, d100Two, status: "pending" };
+    addChallenge: async (
+      parent,
+      {
+        userOne,
+        userTwo,
+        d4One,
+        d6One,
+        d8One,
+        d10One,
+        d12One,
+        d20One,
+        d100One,
+        d4Two,
+        d6Two,
+        d8Two,
+        d10Two,
+        d12Two,
+        d20Two,
+        d100Two,
+      }
+    ) => {
+      const challenge = {
+        userOne,
+        userTwo,
+        d4One,
+        d6One,
+        d8One,
+        d10One,
+        d12One,
+        d20One,
+        d100One,
+        d4Two,
+        d6Two,
+        d8Two,
+        d10Two,
+        d12Two,
+        d20Two,
+        d100Two,
+        status: "pending",
+      };
       const updateUserTwo = await User.findOneAndUpdate(
         { username: userTwo },
         { $push: { challenges: challenge } },
@@ -93,7 +137,27 @@ const resolvers = {
       return challenge;
     },
 
-    updateChallenge: async (parent, { userOne, userTwo, d4One, d6One, d8One, d10One, d12One, d20One, d100One, d4Two, d6Two, d8Two, d10Two, d12Two, d20Two, d100Two }) => {
+    updateChallenge: async (
+      parent,
+      {
+        userOne,
+        userTwo,
+        d4One,
+        d6One,
+        d8One,
+        d10One,
+        d12One,
+        d20One,
+        d100One,
+        d4Two,
+        d6Two,
+        d8Two,
+        d10Two,
+        d12Two,
+        d20Two,
+        d100Two,
+      }
+    ) => {
       try {
         // Find the index of the challenge in the challenges array
         const userTwoDoc = await User.findOne({ username: userTwo });
@@ -102,13 +166,32 @@ const resolvers = {
         }
 
         const challengeIndex = 0;
-        
+
         // Update the challenge at the found index
-        userTwoDoc.challenges[challengeIndex] = {...userTwoDoc.challenges[challengeIndex], userOne, userTwo, d4One, d6One, d8One, d10One, d12One, d20One, d100One, d4Two, d6Two, d8Two, d10Two, d12Two, d20Two, d100Two, status: "completed" };
-      
+        userTwoDoc.challenges[challengeIndex] = {
+          ...userTwoDoc.challenges[challengeIndex],
+          userOne,
+          userTwo,
+          d4One,
+          d6One,
+          d8One,
+          d10One,
+          d12One,
+          d20One,
+          d100One,
+          d4Two,
+          d6Two,
+          d8Two,
+          d10Two,
+          d12Two,
+          d20Two,
+          d100Two,
+          status: "completed",
+        };
+
         // Save the updated user document
         await userTwoDoc.save();
-      
+
         return userTwoDoc.challenges[challengeIndex];
       } catch (error) {
         console.error("Error updating challenge: ", error.message);
@@ -120,8 +203,7 @@ const resolvers = {
 
 module.exports = resolvers;
 
-
-// Need to update to this 
+// Need to update to this
 
 // recordStats: async (parent, { _id, wins, losses, ties, streak, dailyWins }, context) => {
 //   if (context.user) {

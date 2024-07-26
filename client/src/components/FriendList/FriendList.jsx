@@ -19,7 +19,7 @@ const FriendListModal = () => {
 
   const handleChallenge = (friend) => {
     const currentUser = Auth.getUsername();
-
+    setSelectedFriend(friend);
     addChallenge({
       variables: {
         userOne: currentUser,

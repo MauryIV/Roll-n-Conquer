@@ -19,16 +19,18 @@ const LandingPage = () => {
   const [displayCount, setDisplayCount] = useState(10);
 
   const { loading: usersLoading, error: usersError, users } = getAll();
-  const { friends, challenges, messages } = getUser();
+  const { friends, challenges } = getUser();
+  console.log(friends)
   const [addFriend] = useMutation(ADD_FRIEND);
 
   useRandomTheme(themes);
-  
+
   // for rendering users list, organized by daily wins, with search bar
   const filteredUsers = users
     .filter((user) =>
       user.username.toLowerCase().includes(searchQuery.toLowerCase())
     )
+    .sort((a, b) => b.dailyWins - a.dailyWins)
     .slice(0, displayCount);
 
   const handleLoadMore = () => {
@@ -45,19 +47,20 @@ const LandingPage = () => {
       console.log("No token provided");
       return;
     }
-    if (friends.includes(user._id)) {
+    if (friends.some((friend) => friend.friendId === user._id)) {
+      console.log("Already friends with this user");
       return;
     } else {
       try {
         await addFriend({
-          variables: { userId: user._id, username: user.username },
+          variables: { friendId: user._id },
           context: {
             headers: {
               authorization: `Bearer ${token}`,
             },
           },
         });
-        setAddedFriends([...addedFriends, user.username]);
+        setAddedFriends((prevAddedFriends) => [...prevAddedFriends, user.username]);
       } catch (err) {
         console.error("An error occurred: ", err);
       }
@@ -81,37 +84,35 @@ const LandingPage = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          {usersLoading ? (
+          {/* {usersLoading ? (
             <div>Loading...</div>
           ) : (
             <div className="py-4">
-              {filteredUsers
-                .sort((a, b) => b.dailyWins - a.dailyWins)
-                .map((user) => (
-                  <p key={user._id}>
-                    {user.username} - {user.dailyWins} daily wins
-                    {Auth.loggedIn() ? (
-                      !friends.some(
-                        (friend) => friend.username === user.username
-                      ) && !addedFriends.includes(user.username) ? (
-                        <button onClick={() => handleAddFriend(user)}>
-                          Add Friend‽
-                        </button>
-                      ) : user.username === Auth.getProfile().data.username ? (
-                        <button disabled>
-                          I hope you're friends with yourself
-                        </button>
-                      ) : (
-                        <button disabled>Y'all be friends!</button>
-                      )
-                    ) : null}
-                  </p>
-                ))}
+              {filteredUsers.map((user) => (
+                <p key={user._id}>
+                  {user.username} - {user.dailyWins} daily wins
+                  {Auth.loggedIn() ? (
+                    !friends.some(
+                      (friend) => friend.friendId === user._id
+                    ) && !addedFriends.includes(user.friendId) ? (
+                      <button onClick={() => handleAddFriend(user)}>
+                        Add Friend‽
+                      </button>
+                    ) : user.username === Auth.getProfile().data.username ? (
+                      <button disabled>
+                        I hope you're friends with yourself
+                      </button>
+                    ) : (
+                      <button disabled>Y'all be friends!</button>
+                    )
+                  ) : null}
+                </p>
+              ))}
               {displayCount < users.length && (
                 <button onClick={handleLoadMore}>Load More</button>
               )}
             </div>
-          )}
+          )} */}
           {usersError && (
             <div className="my-3 p-3 bg-danger text-white">
               {usersError.message}

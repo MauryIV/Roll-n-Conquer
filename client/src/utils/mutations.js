@@ -20,6 +20,7 @@ export const ADD_USER = gql`
       user {
         _id
         username
+        password
         email
       }
     }
@@ -27,15 +28,16 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_FRIEND = gql`
-  mutation AddFriend($username: String!, $wins: Int, $losses: Int, $ties: Int, $streak: Int, $dailyWins: Int) {
-    addFriend(username: $username, wins: $wins, losses: $losses, ties: $ties, streak: $streak, dailyWins: $dailyWins) {
+  mutation AddFriend($friendId: ID!) {
+    addFriend(friendId: $friendId) {
       _id
       username
-      wins
-      losses
-      ties
-      streak
-      dailyWins
+      friendslist {
+        friendId {
+          _id
+          username
+        }
+      }
     }
   }
 `;
