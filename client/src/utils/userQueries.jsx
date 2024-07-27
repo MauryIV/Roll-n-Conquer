@@ -26,7 +26,7 @@ export const getUser = () => {
   return {
     loading,
     error,
-    friends: data?.me || [],
+    friends: data?.me?.friendslist || [],
     challenges: data?.me?.challenges || [],
     wins: data?.me?.wins,
     losses: data?.me?.losses,

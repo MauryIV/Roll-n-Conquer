@@ -20,7 +20,6 @@ const LandingPage = () => {
 
   const { loading: usersLoading, error: usersError, users } = getAll();
   const { friends, challenges } = getUser();
-  console.log(friends)
   const [addFriend] = useMutation(ADD_FRIEND);
 
   useRandomTheme(themes);
@@ -84,7 +83,7 @@ const LandingPage = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          {/* {usersLoading ? (
+          {usersLoading ? (
             <div>Loading...</div>
           ) : (
             <div className="py-4">
@@ -93,7 +92,7 @@ const LandingPage = () => {
                   {user.username} - {user.dailyWins} daily wins
                   {Auth.loggedIn() ? (
                     !friends.some(
-                      (friend) => friend.friendId === user._id
+                      (friend) => friend.friendId._id === user._id
                     ) && !addedFriends.includes(user.friendId) ? (
                       <button onClick={() => handleAddFriend(user)}>
                         Add Friend‽
@@ -112,7 +111,7 @@ const LandingPage = () => {
                 <button onClick={handleLoadMore}>Load More</button>
               )}
             </div>
-          )} */}
+          )}
           {usersError && (
             <div className="my-3 p-3 bg-danger text-white">
               {usersError.message}
