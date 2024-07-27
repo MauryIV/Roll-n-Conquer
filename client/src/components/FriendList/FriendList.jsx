@@ -63,7 +63,7 @@ const FriendListModal = () => {
               {friends.map((friend, index) => (
                 <div className="card m-1" key={index}>
                   <div className="card-body row">
-                    <h4>{friend.username}</h4>
+                    <h4>{friend.friendId.username}</h4>
                     <div className="col row">
                       <button
                         type="button"
