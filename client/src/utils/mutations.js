@@ -42,11 +42,11 @@ export const ADD_FRIEND = gql`
   }
 `;
 
+
 export const RECORD_STATS = gql`
-  mutation RecordStats($username: String!, $wins: Int, $losses: Int, $ties: Int, $streak: Int, $daily: Int, $dailyWins: Int) {
-    recordStats(username: $username, wins: $wins, losses: $losses, ties: $ties, streak: $streak, daily: $daily, dailyWins: $dailyWins) {
+  mutation RecordStats($wins: Int, $losses: Int, $ties: Int, $streak: Int, $daily: Int, $dailyWins: Int) {
+    recordStats(wins: $wins, losses: $losses, ties: $ties, streak: $streak, daily: $daily, dailyWins: $dailyWins) {
       _id
-      username
       wins
       losses
       ties
@@ -120,30 +120,3 @@ export const UPDATE_CHALLENGE = gql`
     }
   }
 `;
-
-// Need to update to this
-
-
-// export const RECORD_STATS = gql`
-//   mutation RecordStats($username: String!, $wins: Int, $losses: Int, $ties: Int, $streak: Int, $dailyWins: Int) {
-//     recordStats(username: $username, wins: $wins, losses: $losses, ties: $ties, streak: $streak, dailyWins: $dailyWins) {
-//       _id
-//       username
-//       wins
-//       losses
-//       ties
-//       streak
-//       dailyWins
-//     }
-//   }
-// `;
-
-// export const RECORD_DAILY = gql`
-//   mutation RecordDaily($username: String!, $daily: Int) {
-//     recordDaily(username: $username, daily: $daily) {
-//       _id
-//       username
-//       daily
-//     }
-//   }
-// `;

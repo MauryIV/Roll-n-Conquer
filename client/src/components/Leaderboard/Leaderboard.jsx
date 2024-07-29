@@ -6,22 +6,18 @@ import "../../App.css";
 import "./leaderboard.css";
 
 const pullRankInfo = (users) => {
-  // Sort users by their daily value and get the top 10
   const rank = [...users].sort((a, b) => b.daily - a.daily).slice(0, 10);
   const todaysWinner = rank[0];
   return { rank, todaysWinner };
 };
 
-const resetUsersDailyRolls = async (users, updateDaily, recordDailywin, todaysWinner) => {
+const resetUsersDailyRolls = async (playedUsers, updateDaily, recordDailywin, todaysWinner) => {
   try {
-    // Reset the daily values for all users
-    const resetUsers = users.map((user) => ({
+    const resetUsers = playedUsers.map((user) => ({
       _id: user._id,
-      username: user.username,
       daily: 0,
     }));
 
-    // Update each user's daily value using the mutation
     await updateDaily({
       variables: { userUpdates: resetUsers },
       optimisticResponse: {
@@ -29,7 +25,6 @@ const resetUsersDailyRolls = async (users, updateDaily, recordDailywin, todaysWi
         updateDaily: resetUsers.map((user) => ({
           __typename: "User",
           _id: user._id,
-          username: user.username,
           daily: 0,
         })),
       },
@@ -37,7 +32,7 @@ const resetUsersDailyRolls = async (users, updateDaily, recordDailywin, todaysWi
 
     if (todaysWinner) {
       await recordDailywin({
-        variables: { _id: todaysWinner._id, username: todaysWinner.username, dailyWins: todaysWinner.dailyWins + 1 },
+        variables: { _id: todaysWinner._id, dailyWins: todaysWinner.dailyWins + 1 },
       });
     }
   } catch (error) {
@@ -50,7 +45,6 @@ const Leaderboard = () => {
   const [updateDaily] = useMutation(UPDATE_DAILY);
   const [recordDailywin] = useMutation(RECORD_STATS);
 
-  // Initialize state with a function to pull rank info if userData is already available
   const initialRank = userData ? pullRankInfo(userData.users).rank : [];
   const [dailyRank, setDailyRank] = useState(initialRank);
   const [usersLoading, setUsersLoading] = useState(!userData);
@@ -60,14 +54,12 @@ const Leaderboard = () => {
     const dailyReset = async () => {
       try {
         if (!userData) return;
-
         const users = [...userData.users];
-        const { rank, todaysWinner } = pullRankInfo(users);
+        const playedUsers = users.filter(user => user.daily > 0);
+        const { rank, todaysWinner } = pullRankInfo(playedUsers);
 
-        // Reset users' daily values and record the daily win for the top user
-        await resetUsersDailyRolls(users, updateDaily, recordDailywin, todaysWinner);
+        await resetUsersDailyRolls(playedUsers, updateDaily, recordDailywin, todaysWinner);
 
-        // Update the state with the new rank
         setDailyRank(rank);
         setUsersLoading(false);
       } catch (error) {

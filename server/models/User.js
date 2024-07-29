@@ -12,11 +12,11 @@ const userSchema = new Schema (
     username: {
       type: String,
       required: true,
-      unique: true
+      unique: true,
     },
     password: {
       type: String,
-      required: true
+      required: true,
     },
     email: {
       type: String,
@@ -28,27 +28,27 @@ const userSchema = new Schema (
     },
     wins: { 
       type: Number,
-      default: 0
+      default: 0,
     },
     losses: {
       type: Number,
-      default: 0
+      default: 0,
     },
     ties: {
       type: Number,
-      default: 0
+      default: 0,
     },
     streak: {
       type: Number,
-      default: 0
+      default: 0,
     },
     daily: {
       type: Number,
-      default: 0
+      default: 0,
     },
     dailyWins: {
       type: Number,
-      default: 0
+      default: 0,
     },
     challenges: [challengeSchema],
     friendslist: [
@@ -66,7 +66,6 @@ const userSchema = new Schema (
   }
 );
 
-// hash user password
 userSchema.pre('save', async function (next) {
   if (this.isNew || this.isModified('password')) {
     const saltRounds = 10;
@@ -76,7 +75,6 @@ userSchema.pre('save', async function (next) {
   }
 );
 
-// custom method to compare and validate password for logging in
 userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
