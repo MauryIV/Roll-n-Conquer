@@ -202,37 +202,3 @@ const resolvers = {
 };
 
 module.exports = resolvers;
-
-// Need to update to this
-
-// recordStats: async (parent, { _id, wins, losses, ties, streak, dailyWins }, context) => {
-//   if (context.user) {
-//     // Build the increment object dynamically based on provided arguments
-//     const incrementFields = {};
-//     if (wins !== undefined) incrementFields.wins = wins;
-//     if (losses !== undefined) incrementFields.losses = losses;
-//     if (ties !== undefined) incrementFields.ties = ties;
-//     if (streak !== undefined) incrementFields.streak = streak;
-//     if (dailyWins !== undefined) incrementFields.dailyWins = dailyWins;
-//     let userStats = await User.findOneAndUpdate(
-//       { _id: _id },
-//       { $inc: incrementFields },
-//       { new: true }
-//     );
-//     return userStats;
-//   }
-//   throw AuthenticationError;
-// },
-
-// recordDaily: async (parent, { daily }, context) => {
-//   if (context.user) {
-//     const updateFields = { daily };
-//     let userStats = await User.findOneAndUpdate(
-//       { _id: context.user._id },
-//       updateFields,
-//       { new: true }
-//     );
-//     return userStats;
-//   }
-//   throw AuthenticationError;
-// },

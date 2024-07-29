@@ -1,10 +1,9 @@
-/* Footer CSS */
 .footer {
   background-color: #282c34;
   color: #0dab76;
   padding: 20px;
   text-align: center;
-  position: sticky;
+  position:fixed;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -16,7 +15,6 @@
   text-shadow: 0 0.5px 0.25px #0dab76, 0 0.75px 0.5px #007bff;
 }
 
-/* Adjustments for responsiveness */
 @media (max-width: 790px) {
   .footer {
     padding: 18px;
@@ -52,7 +50,7 @@
   }
 }
 
-@media (max-width: 320px) { /* For very small screens like older iPhones */
+@media (max-width: 320px) {
   .footer {
     padding: 8px;
     font-size: 10px;

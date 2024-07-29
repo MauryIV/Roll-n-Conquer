@@ -1,26 +1,22 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import './userProfile.css';
 import FriendListModal from '../../components/FriendList/FriendList';
 import { getUser } from "../../utils/userQueries";
 import auth from "../../utils/auth";
 
-
 const UserProfile = ({ user }) => {
-  const { wins, losses, ties, streak, difference, dailyWins } = getUser();
+  const { wins, losses, ties, streak, dailyWins } = getUser();
   useEffect(() => {
     const layouts = ['layout1', 'layout2', 'layout3', 'layout4'];
 
-    // Select a random layout
     const randomLayout = layouts[Math.floor(Math.random() * layouts.length)];
 
-    // Apply the random layout to the stats container
     const statsContainer = document.querySelector('.stats');
     if (statsContainer) {
       statsContainer.classList.remove('layout1', 'layout2', 'layout3', 'layout4');
       statsContainer.classList.add(randomLayout);
     }
   }, []);
-
 
   return (
     <div className='user-profile-background'>

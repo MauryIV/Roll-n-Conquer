@@ -6,7 +6,6 @@ import auth from "../../utils/auth";
 import { useMutation } from "@apollo/client";
 import {
   RECORD_STATS,
-  // RECORD_DAILY,
   ADD_CHALLENGE,
   UPDATE_CHALLENGE
 } from "../../utils/mutations";
@@ -30,14 +29,12 @@ const DiceRoller = () => {
   const [friendList, setFriendList] = useState(false);
   const [selectedFriend, setSelectedFriend] = useState("");
 
-  // const [recordDaily] = useMutation(RECORD_DAILY);
   const [recordStats] = useMutation(RECORD_STATS);
   const [addChallenge] = useMutation(ADD_CHALLENGE);
   const [updateChallenge] = useMutation(UPDATE_CHALLENGE);
 
   const token = auth.loggedIn() ? auth.getToken() : null;
   const userId = auth.getUserId();
-  const name = auth.getUsername();
 
   useRandomTheme(themes);
 
@@ -173,11 +170,9 @@ const DiceRoller = () => {
       setAnimate("");
 
       const finalRoll = Math.floor(Math.random() * diceType) + 1;
-      // Use this for the Current users roll value to be passed into the challenge roll
       setNumFlash(finalRoll);
       setFinalResult(finalRoll);
 
-      // Daily Roll
       if (dailyRoll) {
         if (!token) {
           return false;
@@ -186,20 +181,18 @@ const DiceRoller = () => {
         console.log("dailyRoll: ", finalRoll);
         try {
           await recordStats({
-            variables: { username: name, daily: finalRoll },
+            variables: { _id: userId, daily: finalRoll },
             context: {
               headers: {
                 authorization: `Bearer ${token}`,
               },
             },
           });
-          console.log("dailyRoll updated: ", finalRoll);
         } catch (error) {
           console.error("Error updating daily roll: ", error);
         }
       } 
 
-      // Challenge Roll
       if (challengeRoll) {
         if (!token) {
           return false;
@@ -207,7 +200,7 @@ const DiceRoller = () => {
         setChallengeRoll(false);;
         console.log("challengeRoll: ", finalRoll);
         const challengeVariables = {
-          userOne: name,
+          userOne: userId,
           userTwo: selectedFriend,
         };
 
@@ -311,8 +304,8 @@ const DiceRoller = () => {
               disabled={rolling || !friends.length}
             >
               {friends.map((friend, index) => (
-                <option key={index} value={friend.username}>
-                  {friend.username}
+                <option key={index} value={friend.friendId.username}>
+                  {friend.friendId.username}
                 </option>
               ))}
             </select>
@@ -330,6 +323,7 @@ const DiceRoller = () => {
                   onClick={handleChallengeRollClick}
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
+                  disabled={!auth.loggedIn()}
                 >
                   Challenge a friend
                 </button>
@@ -349,6 +343,7 @@ const DiceRoller = () => {
                   onClick={handleViewChallengesClick}
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
+                  disabled={!auth.loggedIn()}
                 >
                   View Challenges</button>
               </div>
