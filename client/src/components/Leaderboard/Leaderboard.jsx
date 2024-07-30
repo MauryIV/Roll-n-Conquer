@@ -15,6 +15,7 @@ const resetUsersDailyRolls = async (playedUsers, updateDaily, recordDailywin, to
   try {
     const resetUsers = playedUsers.map((user) => ({
       _id: user._id,
+      username: user.username,
       daily: 0,
     }));
 
@@ -25,6 +26,7 @@ const resetUsersDailyRolls = async (playedUsers, updateDaily, recordDailywin, to
         updateDaily: resetUsers.map((user) => ({
           __typename: "User",
           _id: user._id,
+          username: user.username,
           daily: 0,
         })),
       },
@@ -50,6 +52,8 @@ const Leaderboard = () => {
   const [usersLoading, setUsersLoading] = useState(!userData);
   const [usersError, setUsersError] = useState(null);
 
+  // issue here where the initial leaderboard load doesn't share correct information unless on landing page before.
+  // will revisit but need to step away for a bit
   useEffect(() => {
     const dailyReset = async () => {
       try {
@@ -70,7 +74,7 @@ const Leaderboard = () => {
 
     const interval = setInterval(() => {
       dailyReset();
-    }, 20 * 1000);
+    }, 24 * 60 * 60 * 1000);
 
     return () => clearInterval(interval);
   }, [userData, updateDaily, recordDailywin, loading, error]);
