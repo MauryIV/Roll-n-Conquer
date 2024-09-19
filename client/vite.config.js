@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+require('dotenv').config();
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -10,7 +11,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       "/graphql": {
-        target: "http://localhost:3001",
+        target: process.env.GRAPHQL_URI || "http://localhost:3001",
         changeOrigin: true,
         secure: false,
       },

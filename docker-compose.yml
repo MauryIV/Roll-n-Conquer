@@ -1,0 +1,51 @@
+---
+services:
+  mongodb:
+    image: mongo:6.0.15
+    environment:
+      - MONGO_INITDB_DATABASE=roll-n-conquer
+    volumes:
+      - mongodata:/data/db
+    networks:
+      roll-n-conquer:
+        aliases:
+          - mongodb
+
+  server:
+    image: roll-n-conquer-server:latest
+    build: 
+      context: server
+      dockerfile: Dockerfile
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017/roll-n-conquer
+    networks:
+      roll-n-conquer:
+        aliases:
+          - server
+    depends_on:
+      - mongodb
+
+  client:
+    image: roll-n-conquer-client:latest
+    build: 
+      context: client
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - GRAPHQL_URI="http://server:3001"
+    volumes:
+      - ./client/src:/app/src
+    networks:
+      roll-n-conquer:
+        aliases:
+          - client
+    depends_on:
+      - server
+
+volumes:
+  mongodata:
+
+networks:
+  roll-n-conquer:
+    driver: bridge
